@@ -46,6 +46,10 @@ namespace ns{
     }
 }
 
+std::vector<SceneObject> currentScene;              //lista de objetos que representa a cena atual
+std::vector<bool>        currentSceneBoolVariables; //lista das variáveis da cena (usada para programar as funções da cena)
+
+
 
 // Função que computa as normais de um ObjModel, caso elas não tenham sido
 // especificadas dentro do arquivo ".obj"
@@ -312,6 +316,12 @@ void DrawVirtualObject(SceneObject objToDraw)
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 
+void DrawScene(){
+    for(unsigned int i = 0; i<currentScene.size(); i++){
+            DrawVirtualObject(currentScene[i]);
+       }
+}
+
 void MoveObject(glm::vec4 movementVector, SceneObject* objToBeMoved){
     objToBeMoved->model *= Matrix_Translate(movementVector.x, movementVector.y, movementVector.z);
 }
@@ -387,7 +397,13 @@ GLuint CreateNewTexture(const char* textureFileName, WrapMode wrapMode, std::vec
 }
 
 
-std::function FunctionMapping(const char* functionName){
+#include "Scene0Functions.h"
+std::function<void(std::vector<bool>&, std::vector<SceneObject>&, int callerIndex)> FunctionMapping(const char* functionName){
+
+    if(strcmp(functionName, "SphereOnClick") == 0) return SphereOnClick;
+    if(strcmp(functionName, "SphereOnMouseOver") == 0) return SphereOnMouseOver;
+
+
     return NULL;
 }
 
@@ -395,7 +411,7 @@ std::function FunctionMapping(const char* functionName){
 
 
 
-void WriteSceneToFile(std::vector<ns::SceneObjectOnDisc> objsList, const char* newSceneFilename){
+void WriteSceneToFile(std::vector<ns::SceneObjectOnDisc> objsList, std::vector<bool> currentSceneBoolVariables, const char* newSceneFilename){
 
     json codificado;
     for(unsigned int i = 0; i < objsList.size(); i++){
@@ -409,41 +425,41 @@ void WriteSceneToFile(std::vector<ns::SceneObjectOnDisc> objsList, const char* n
 
 }
 
-void SaveScene(std::vector<SceneObject> scene, const char* filename){
+void SaveScene(const char* filename){
     std::vector<ns::SceneObjectOnDisc> objsListToWrite;
 
-    for(unsigned int i = 0; i<scene.size(); i++){
+    for(unsigned int i = 0; i<currentScene.size(); i++){
         ns::SceneObjectOnDisc curObj;
 
         for(unsigned int j = 0; j < 16; j++){
-            curObj.model.push_back(((float*)glm::value_ptr(scene[i].model))[j]);
+            curObj.model.push_back(((float*)glm::value_ptr(currentScene[i].model))[j]);
         }
 
-        std::vector<float> blockMovementAux {scene[i].blockMovement.x, scene[i].blockMovement.y, scene[i].blockMovement.z};
-        std::vector<float> velocityAux {scene[i].velocity.x, scene[i].velocity.y, scene[i].velocity.z, scene[i].velocity.w};
+        std::vector<float> blockMovementAux {currentScene[i].blockMovement.x, currentScene[i].blockMovement.y, currentScene[i].blockMovement.z};
+        std::vector<float> velocityAux {currentScene[i].velocity.x, currentScene[i].velocity.y, currentScene[i].velocity.z, currentScene[i].velocity.w};
 
         curObj.blockMovement =          blockMovementAux;
         curObj.velocity =               velocityAux;
 
-        curObj.active =                 scene[i].active;
-        curObj.decelerationRate =       scene[i].decelerationRate;
-        curObj.textureWrapMode =        scene[i].textureWrapMode;
-        curObj.thisColliderType =       scene[i].thisColliderType;
-        curObj.thisCollisionType =      scene[i].thisCollisionType;
+        curObj.active =                 currentScene[i].active;
+        curObj.decelerationRate =       currentScene[i].decelerationRate;
+        curObj.textureWrapMode =        currentScene[i].textureWrapMode;
+        curObj.thisColliderType =       currentScene[i].thisColliderType;
+        curObj.thisCollisionType =      currentScene[i].thisCollisionType;
 
-        curObj.objFilename =            std::string(scene[i].objFilename);
-        curObj.textureFilename =        std::string(scene[i].textureFilename);
-        curObj.fragmentShaderFilename = std::string(scene[i].fragmentShaderFilename);
-        curObj.vertexShaderFilename =   std::string(scene[i].vertexShaderFilename);
-        curObj.onClickName =            std::string(scene[i].onClickName);
-        curObj.onMouseOverName =        std::string(scene[i].onMouseOverName);
+        curObj.objFilename =            std::string(currentScene[i].objFilename);
+        curObj.textureFilename =        std::string(currentScene[i].textureFilename);
+        curObj.fragmentShaderFilename = std::string(currentScene[i].fragmentShaderFilename);
+        curObj.vertexShaderFilename =   std::string(currentScene[i].vertexShaderFilename);
+        curObj.onClickName =            std::string(currentScene[i].onClickName);
+        curObj.onMouseOverName =        std::string(currentScene[i].onMouseOverName);
 
         printf("salvou %s com textura %s\n", curObj.objFilename.c_str(), curObj.textureFilename.c_str());
 
         objsListToWrite.push_back(curObj);
     }
 
-    WriteSceneToFile(objsListToWrite, filename);
+    WriteSceneToFile(objsListToWrite, currentSceneBoolVariables, filename);
 
 }
 
@@ -519,4 +535,99 @@ std::vector<SceneObject> LoadScene(const char* sceneFilename){
 void OpenScene(const char* filename){
     currentScene = LoadScene(filename);
     currentSceneBoolVariables = ReadSceneVariablesFromFile(filename);
+}
+
+float GetDistanceFromCamera(SceneObject obj){
+    glm::vec4 bbox_min_world = obj.model * obj.bbox_min;
+    glm::vec4 bbox_max_world = obj.model * obj.bbox_max;
+
+    glm::vec4 centroObj = (bbox_min_world + bbox_max_world) / 2.0f;
+
+    return norm(centroObj - GetCameraPosition());
+}
+
+bool TestRayIntersection(SceneObject obj){
+    glm::vec4 bbox_min_world = obj.model * obj.bbox_min;
+    glm::vec4 bbox_max_world = obj.model * obj.bbox_max;
+    glm::vec4 centroObj = (bbox_min_world + bbox_max_world) / 2.0f;
+
+    if(obj.thisColliderType == (int)ColliderType::SPHERE){
+        glm::vec4 maxEsfera_world = obj.model * glm::vec4(obj.bbox_max.x, 0.0f, 0.0f, 1.0f);
+        float raioEsfera = norm(maxEsfera_world - centroObj);
+        return IntersectionRaySphere(GetCameraPosition(), GetViewVector(), centroObj, raioEsfera);
+    }
+    /*
+    else if(obj.thisColliderType == ColliderType::CUBE){
+
+    }
+    else if(obj.thisColliderType == ColliderType::CYLINDER){
+
+    }
+    */
+    else return false;
+}
+
+#define MAX_DISTANCE_FROM_CAMERA 5.0f
+
+void TestMouseCollision(MouseCollisionType colType){
+
+    std::vector<SceneObject> mouseOverCandidates;
+    std::vector<int> candidatesIndices;
+    SceneObject chosenObject;
+    int chosenObjectIndex;
+    float chosenObjectDistance = -1.0f;
+
+    for(unsigned int i = 0; i < currentScene.size(); i++){
+        if(currentScene[i].active
+           && GetDistanceFromCamera(currentScene[i]) < MAX_DISTANCE_FROM_CAMERA
+           && currentScene[i].thisColliderType != (int)ColliderType::NONE){
+                mouseOverCandidates.push_back(currentScene[i]);
+                candidatesIndices.push_back(i);
+           }
+    }
+
+    if(mouseOverCandidates.size() == 0) return;
+
+    for(unsigned int i = 0; i < mouseOverCandidates.size(); i++){
+        if(TestRayIntersection(mouseOverCandidates[i])){
+            if(chosenObjectDistance == -1 || GetDistanceFromCamera(mouseOverCandidates[i]) < chosenObjectDistance){
+                chosenObject = mouseOverCandidates[i];
+                chosenObjectDistance = GetDistanceFromCamera(mouseOverCandidates[i]);
+                chosenObjectIndex = i;
+            }
+        }
+    }
+
+    if(chosenObjectDistance == -1.0f) return;
+
+    if(colType == MouseCollisionType::MOUSE_OVER)
+        chosenObject.onMouseOver(currentSceneBoolVariables, currentScene, chosenObjectIndex);
+    else if(colType == MouseCollisionType::CLICK)
+        chosenObject.onClick(currentSceneBoolVariables, currentScene, chosenObjectIndex);
+}
+
+
+
+void Debug_NewObjectSphere(){
+    //CRIAÇÃO DE UMA NOVA CENA
+    currentScene = ObjectLoad("../../data/sphere.obj");
+    currentScene[0].texture_id = CreateNewTexture("../../data/Liberty-GreenBronze-1.bmp", WrapMode::MIRRORED_REPEAT);
+    currentScene[0].textureWrapMode = (int)WrapMode::MIRRORED_REPEAT;
+    currentScene[0].textureFilename = "../../data/Liberty-GreenBronze-1.bmp";
+    currentScene[0].gpuProgramId = CreateGPUProgram("../../src/shader_vertex.glsl", "../../src/shader_fragment.glsl");
+    currentScene[0].fragmentShaderFilename = "../../src/shader_fragment.glsl";
+    currentScene[0].vertexShaderFilename = "../../src/shader_vertex.glsl";
+    currentScene[0].active = true;
+    currentScene[0].blockMovement = glm::vec3(1, 0, 0);
+    currentScene[0].decelerationRate = 0.1f;
+    currentScene[0].onClickName = "SphereOnClick";
+    currentScene[0].onClick = SphereOnClick;
+    currentScene[0].onMouseOverName = "SphereOnMouseOver";
+    currentScene[0].onMouseOver = SphereOnMouseOver;
+    currentScene[0].velocity = glm::vec4(0, 0, 0, 0);
+    currentScene[0].thisColliderType = (int)ColliderType::SPHERE;
+    currentScene[0].thisCollisionType = (int)CollisionType::ELASTIC;
+
+    currentSceneBoolVariables = std::vector<bool>{false};
+
 }

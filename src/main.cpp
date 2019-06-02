@@ -1,5 +1,6 @@
 #define PI 3.14159265359f
 
+#define ISDEBUG
 
 #include <cmath>
 #include <cstdio>
@@ -25,17 +26,10 @@
 #include <glm/vec4.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-// Headers da biblioteca para carregar modelos obj
-#include <tiny_obj_loader.h>
-
 // Headers locais, definidos na pasta "include/"
 #include "objUtils.h"
 
-//{ callbacks
-
-bool teste = false;
-
-void TesteInterseccao(){
+/*void TesteMouseOver(){
     glm::vec4 bbox_min_world = currentScene[0].model * currentScene[0].bbox_min;
     glm::vec4 bbox_max_world = currentScene[0].model * currentScene[0].bbox_max;
 
@@ -59,8 +53,9 @@ void TesteInterseccao(){
             }
         }
     }
-}
+}*/
 
+//{ callbacks
 
 float mouse_sensitivity = 0.01f;
 
@@ -126,32 +121,25 @@ void MouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
         //glm::vec4 moveX = glm::vec4(0.1f, 0.0f, 0.0f, 0.0f);
         //MoveObject(moveX, &currentScene[0]);
 
-        TesteInterseccao();
+        TestMouseCollision(MouseCollisionType::CLICK);
     }
+
+    #ifdef ISDEBUG
 
     if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS)
     {
-        glm::vec4 moveX = glm::vec4(-0.1f, 0.0f, 0.0f, 0.0f);
-        MoveObject(moveX, &currentScene[0]);
+        //glm::vec4 moveX = glm::vec4(-0.1f, 0.0f, 0.0f, 0.0f);
+        //MoveObject(moveX, &currentScene[0]);
 
-        //SaveScene(currentScene, "aaaaaaa.json");
+        SaveScene("aaaaaaa.json");
     }
+    #endif // ISDEBUG
 }
 
 
 bool isPressingW = false, isPressingS = false, isPressingA = false, isPressingD = false;
 
 void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mod){
-    if (key == GLFW_KEY_F1 && action == GLFW_PRESS){
-        currentScene.push_back(ObjectLoad("../../data/sphere.obj")[0]);
-        currentScene[1].texture_id = CreateNewTexture("../../data/Liberty-Pavimentazione-1.bmp", WrapMode::MIRRORED_REPEAT);
-        currentScene[1].gpuProgramId = CreateGPUProgram("../../src/shader_vertex.glsl", "../../src/shader_fragment.glsl");
-        currentScene[1].textureFilename = "../../data/Liberty-Pavimentazione-1.bmp";
-        currentScene[1].fragmentShaderFilename = "../../src/shader_fragment.glsl";
-        currentScene[1].vertexShaderFilename = "../../src/shader_vertex.glsl";
-        currentScene[0].textureWrapMode = (int)WrapMode::MIRRORED_REPEAT;
-    }
-
     if(key == GLFW_KEY_W && action == GLFW_PRESS){
 
         isPressingW = true;
@@ -247,14 +235,8 @@ GLFWwindow* initGL(){
 int main(){
     GLFWwindow* window = initGL();
 
-    //CRIAÇÃO DE UM NOVO OBJETO
-    currentScene = ObjectLoad("../../data/sphere.obj");
-    currentScene[0].texture_id = CreateNewTexture("../../data/Liberty-GreenBronze-1.bmp", WrapMode::MIRRORED_REPEAT);
-    currentScene[0].textureWrapMode = (int)WrapMode::MIRRORED_REPEAT;
-    currentScene[0].textureFilename = "../../data/Liberty-GreenBronze-1.bmp";
-    currentScene[0].gpuProgramId = CreateGPUProgram("../../src/shader_vertex.glsl", "../../src/shader_fragment.glsl");
-    currentScene[0].fragmentShaderFilename = "../../src/shader_fragment.glsl";
-    currentScene[0].vertexShaderFilename = "../../src/shader_vertex.glsl";
+    Debug_NewObjectSphere();
+
 
     //CARREGAMENTO DE UMA CENA DO DISCO
     //currentScene = LoadScene("aaaaaaa.json");
@@ -268,14 +250,11 @@ int main(){
         // "clear" a janela inteira
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        if(isPressingW) MoveCameraForward();
-        if(isPressingS) MoveCameraBack();
-        if(isPressingA) MoveCameraLeft();
-        if(isPressingD) MoveCameraRight();
 
-       for(unsigned int i = 0; i<currentScene.size(); i++){
-            DrawVirtualObject(currentScene[i]);
-       }
+        MoveCamera(isPressingW, isPressingA, isPressingS, isPressingD);
+
+
+       DrawScene();
 
 
 
@@ -284,6 +263,8 @@ int main(){
 
         //checa se aconteceram eventos nesse frame e trata eles
         glfwPollEvents();
+
+        TestMouseCollision(MouseCollisionType::MOUSE_OVER);
 
     }
 

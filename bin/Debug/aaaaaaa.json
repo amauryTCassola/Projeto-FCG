@@ -1,31 +1,13 @@
 {
     "Scene": [
         {
-            "fragmentShaderFilename": "../../src/shader_fragment.glsl",
-            "model": [
+            "active": true,
+            "blockMovement": [
                 1.0,
                 0.0,
-                0.0,
-                0.0,
-                0.0,
-                1.0,
-                0.0,
-                0.0,
-                0.0,
-                0.0,
-                1.0,
-                0.0,
-                1.50000023841858,
-                0.0,
-                0.0,
-                1.0
+                0.0
             ],
-            "objFilename": "../../data/LibertStatue.obj",
-            "textureFilename": "../../data/Liberty-GreenBronze-1.bmp",
-            "textureWrapMode": 1,
-            "vertexShaderFilename": "../../src/shader_vertex.glsl"
-        },
-        {
+            "decelerationRate": 0.100000001490116,
             "fragmentShaderFilename": "../../src/shader_fragment.glsl",
             "model": [
                 1.0,
@@ -40,15 +22,26 @@
                 0.0,
                 1.0,
                 0.0,
-                0.0,
+                -0.100000001490116,
                 0.0,
                 0.0,
                 1.0
             ],
             "objFilename": "../../data/sphere.obj",
-            "textureFilename": "../../data/Liberty-Pavimentazione-1.bmp",
-            "textureWrapMode": 2685472,
+            "onClickName": "",
+            "onMouseOverName": "",
+            "textureFilename": "../../data/Liberty-GreenBronze-1.bmp",
+            "textureWrapMode": 1,
+            "thisColliderType": 1,
+            "thisCollisionType": 0,
+            "velocity": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
             "vertexShaderFilename": "../../src/shader_vertex.glsl"
         }
-    ]
+    ],
+    "Variables": []
 }

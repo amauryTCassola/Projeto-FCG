@@ -97,3 +97,10 @@ void RotateCamera(float dx, float dy){
 
     camera_view_vector = camera_view_vector*Matrix_Rotate(dy, u);
 }
+
+void MoveCamera(bool isPressingW, bool isPressingA, bool isPressingS, bool isPressingD){
+    if(isPressingW) MoveCameraForward();
+    if(isPressingS) MoveCameraBack();
+    if(isPressingA) MoveCameraLeft();
+    if(isPressingD) MoveCameraRight();
+}

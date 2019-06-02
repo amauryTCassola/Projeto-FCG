@@ -31,10 +31,7 @@
 
 
 void UpdateCamera(GLuint program_id, float screen_ratio);
-void MoveCameraForward();
-void MoveCameraBack();
-void MoveCameraLeft();
-void MoveCameraRight();
+void MoveCamera(bool isPressingW, bool isPressingA, bool isPressingS, bool isPressingD);
 void RotateCamera(float dx, float dy);
 glm::vec4 GetCameraPosition();
 glm::vec4 GetUpVector();

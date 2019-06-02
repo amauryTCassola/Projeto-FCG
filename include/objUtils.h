@@ -72,7 +72,9 @@ enum class WrapMode{REPEAT, MIRRORED_REPEAT, CLAMP_TO_EDGE, CLAMP_TO_BORDER};
 
 enum class CollisionType{ELASTIC, INELASTIC, WALL};
 
-enum class ColliderTyle{CUBE, SPHERE, CYLINDER, NONE};
+enum class ColliderType{CUBE, SPHERE, CYLINDER, NONE};
+
+enum class MouseCollisionType{MOUSE_OVER, CLICK};
 
 const std::vector<float> black = {0.0f, 0.0f, 0.0f, 1.0f};
 
@@ -98,26 +100,23 @@ struct SceneObject
 
     //NOVOS
 
-    glm::vec4       velocity;                   //vetor velocidade do objeto, representa seu movimento
-    glm::vec3       blockMovement;              //vetor representando em quais eixos o objeto pode se mover. Por exemplo, se essa variável tiver o valor (1, 0, 1) significa que o objeto pode se mover nos eixos X e Z, mas não no Y
-    float           decelerationRate;           //velocidade de desaceleração do objeto, simula atrito, resistência do ar, etc (precisa ser um valor entre 0 e 1)
-    std::function   onMouseOver;                //função chamada quando o usuário olhar para o objeto
-    const char*     onMouseOverName;            //nome da função, para ser guardado no disco, é utilizado na função de mapeamento de funções
-    std::function   onClick;                    //função chamada quando o usuário clicar no objeto
-    const char*     onClickName;
-    int             thisCollisionType;          //o tipo de colisão que deve ser implementada quando uma colisão for detectada (pode ser elástica, inelástica ou imóvel (WALL))
-    int             thisColliderType;           //tipo (forma) do colisor deste objeto
-    bool            active;                     //se este objeto deve ser considerado na cena, etc
+    glm::vec4               velocity;                       //vetor velocidade do objeto, representa seu movimento
+    glm::vec3               blockMovement;                  //vetor representando em quais eixos o objeto pode se mover. Por exemplo, se essa variável tiver o valor (1, 0, 1) significa que o objeto pode se mover nos eixos X e Z, mas não no Y
+    float                   decelerationRate;               //velocidade de desaceleração do objeto, simula atrito, resistência do ar, etc (precisa ser um valor entre 0 e 1)
+    const char*             onMouseOverName;                //nome da função, para ser guardado no disco, é utilizado na função de mapeamento de funções
+    const char*             onClickName;
+    int                     thisCollisionType;              //o tipo de colisão que deve ser implementada quando uma colisão for detectada (pode ser elástica, inelástica ou imóvel (WALL))
+    int                     thisColliderType;               //tipo (forma) do colisor deste objeto
+    bool                    active;                         //se este objeto deve ser considerado na cena, etc
+
+    std::function<void(std::vector<bool>&, std::vector<SceneObject>&, int callerIndex)>   onMouseOver;   //função chamada quando o usuário olhar para o objeto
+    std::function<void(std::vector<bool>&, std::vector<SceneObject>&, int callerIndex)>   onClick;       //função chamada quando o usuário clicar no objeto
 };
-
-std::vector<SceneObject> currentScene;              //lista de objetos que representa a cena atual
-std::vector<bool>        currentSceneBoolVariables; //lista das variáveis da cena (usada para programar as funções da cena)
-
 //===========================================================================================================================================
 
 std::vector<SceneObject> ObjectLoad(const char* filename);
 void ComputeNormals(ObjModel* model);
-void DrawVirtualObject(SceneObject objToDraw);
+void DrawScene();
 void MoveObject(glm::vec4 movementVector, SceneObject* objToBeMoved);
 GLuint CreateGPUProgram(const char* vertex_shader_filename, const char* fragment_shader_filename);
 GLuint CreateNewTexture(const char* textureFileName, WrapMode wrapMode, std::vector<GLfloat> borderColor = black);
@@ -125,9 +124,13 @@ GLuint CreateNewTexture(const char* textureFileName, WrapMode wrapMode, std::vec
 //void WriteSceneToFile(std::vector<SceneObjectOnDisc> objsList, const char* newSceneFilename);
 //std::vector<SceneObjectOnDisc> ReadSceneFromFile(const char* sceneFilename);
 
-void SaveScene(std::vector<SceneObject> scene, const char* filename);
-std::vector<SceneObject> LoadScene(const char* sceneFilename);
+void SaveScene(const char* filename);
+void OpenScene(const char* filename);
 
+void TestMouseCollision(MouseCollisionType colType);
 
+void Debug_NewObjectSphere();
+
+#include "IntersectionFunctions.h"
 
 #endif// OBJUTILS
