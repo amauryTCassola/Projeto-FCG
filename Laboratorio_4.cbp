@@ -63,6 +63,7 @@
 		<Unit filename="include/GLFW/glfw3native.h" />
 		<Unit filename="include/IntersectionFunctions.h" />
 		<Unit filename="include/KHR/khrplatform.h" />
+		<Unit filename="include/Scene0Functions.h" />
 		<Unit filename="include/cameraUtils.h" />
 		<Unit filename="include/constants.h" />
 		<Unit filename="include/dejavufont.h" />
@@ -337,14 +338,12 @@
 		<Unit filename="include/stb_imageUtils.h" />
 		<Unit filename="include/tiny_obj_loader.h" />
 		<Unit filename="include/utils.h" />
-		<Unit filename="src/IntersectionFunctions.c">
-			<Option compilerVar="CC" />
-		</Unit>
+		<Unit filename="src/IntersectionFunctions.cpp" />
+		<Unit filename="src/Scene0Functions.cpp" />
 		<Unit filename="src/cameraUtils.cpp" />
 		<Unit filename="src/glad.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="src/main - Copia.cpp" />
 		<Unit filename="src/main.cpp" />
 		<Unit filename="src/matrices.cpp" />
 		<Unit filename="src/objUtils.cpp" />

@@ -29,32 +29,6 @@
 // Headers locais, definidos na pasta "include/"
 #include "objUtils.h"
 
-/*void TesteMouseOver(){
-    glm::vec4 bbox_min_world = currentScene[0].model * currentScene[0].bbox_min;
-    glm::vec4 bbox_max_world = currentScene[0].model * currentScene[0].bbox_max;
-
-
-    glm::vec4 centroEsfera = (bbox_min_world + bbox_max_world) / 2.0f;
-
-    glm::vec4 maxEsfera_world = currentScene[0].model * glm::vec4(currentScene[0].bbox_max.x, 0.0f, 0.0f, 1.0f);
-
-    float raioEsfera = norm(maxEsfera_world - centroEsfera);
-    if(norm(centroEsfera - GetCameraPosition()) < 5.0f){
-        if(IntersectionRaySphere(GetCameraPosition(), GetViewVector(), centroEsfera, raioEsfera)){
-            if(teste){
-                glDeleteTextures(1, &currentScene[0].texture_id);
-                currentScene[0].texture_id = CreateNewTexture("../../data/Liberty-GreenBronze-1.bmp", WrapMode::MIRRORED_REPEAT);
-                teste = false;
-            }
-            else{
-                teste = true;
-                glDeleteTextures(1, &currentScene[0].texture_id);
-                currentScene[0].texture_id = CreateNewTexture("../../data/Liberty-Pavimentazione-1.bmp", WrapMode::MIRRORED_REPEAT);
-            }
-        }
-    }
-}*/
-
 //{ callbacks
 
 float mouse_sensitivity = 0.01f;
@@ -243,20 +217,14 @@ int main(){
 
 
     while (!glfwWindowShouldClose(window)){
-        //tudo aqui acontece relativo à janela que é o contexto atual
-        //(isso foi definido com a função glfwMakeContextCurrent(window);
 
         glClearColor(1.0f, 1.0f, 1.0f, 1.0f); //define a "clear color" como branco
         // "clear" a janela inteira
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-
         MoveCamera(isPressingW, isPressingA, isPressingS, isPressingD);
 
-
        DrawScene();
-
-
 
         //troca os buffers para atualizar a janela
         glfwSwapBuffers(window);
