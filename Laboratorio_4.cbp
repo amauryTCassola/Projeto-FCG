@@ -59,11 +59,13 @@
 			<Add option="lib\libglfw3.a -lgdi32 -lopengl32" />
 			<Add directory="lib" />
 		</Linker>
+		<Unit filename="include/CollisionUtils.h" />
 		<Unit filename="include/GLFW/glfw3.h" />
 		<Unit filename="include/GLFW/glfw3native.h" />
 		<Unit filename="include/IntersectionFunctions.h" />
 		<Unit filename="include/KHR/khrplatform.h" />
 		<Unit filename="include/Scene0Functions.h" />
+		<Unit filename="include/SceneLoadSaveUtils.h" />
 		<Unit filename="include/cameraUtils.h" />
 		<Unit filename="include/constants.h" />
 		<Unit filename="include/dejavufont.h" />
@@ -335,11 +337,12 @@
 		<Unit filename="include/objUtils.h" />
 		<Unit filename="include/shaderUtil.h" />
 		<Unit filename="include/stb_image.h" />
-		<Unit filename="include/stb_imageUtils.h" />
 		<Unit filename="include/tiny_obj_loader.h" />
 		<Unit filename="include/utils.h" />
+		<Unit filename="src/CollisionUtils.cpp" />
 		<Unit filename="src/IntersectionFunctions.cpp" />
 		<Unit filename="src/Scene0Functions.cpp" />
+		<Unit filename="src/SceneLoadSaveUtils.cpp" />
 		<Unit filename="src/cameraUtils.cpp" />
 		<Unit filename="src/glad.c">
 			<Option compilerVar="CC" />
@@ -349,8 +352,9 @@
 		<Unit filename="src/objUtils.cpp" />
 		<Unit filename="src/shaderUtil.cpp" />
 		<Unit filename="src/shader_fragment.glsl" />
+		<Unit filename="src/shader_fragment_LINHA.glsl" />
 		<Unit filename="src/shader_vertex.glsl" />
-		<Unit filename="src/stb_imageUtils.cpp" />
+		<Unit filename="src/shader_vertex_LINHA.glsl" />
 		<Unit filename="src/textrendering.cpp" />
 		<Unit filename="src/tiny_obj_loader.cpp" />
 		<Extensions>

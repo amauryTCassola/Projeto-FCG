@@ -22,7 +22,9 @@
 #include <glm/vec4.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include "SceneLoadSaveUtils.h"
 #include "objUtils.h"
 
-void SphereOnClick(std::vector<bool>& sceneVariables, std::vector<SceneObject>& currentScene, int callerIndex);
-void SphereOnMouseOver(std::vector<bool>& _sceneVariables, std::vector<SceneObject>& _currentScene, int callerIndex);
+void SphereOnClick(std::vector<SceneObject>& currentScene, int callerIndex);
+void SphereOnMouseOver(std::vector<SceneObject>& _currentScene, int callerIndex);
+void SphereOnMove(std::vector<SceneObject>& _currentScene, int callerIndex, float delta);

@@ -30,11 +30,19 @@
 #include "matrices.h"
 
 
-void UpdateCamera(GLuint program_id, float screen_ratio);
-void MoveCamera(bool isPressingW, bool isPressingA, bool isPressingS, bool isPressingD);
-void RotateCamera(float dx, float dy);
+void SetCameraToDraw(GLuint program_id, float screen_ratio);
+void UpdateCameraPositionAndRotation(float deltaTime);
 glm::vec4 GetCameraPosition();
 glm::vec4 GetUpVector();
 glm::vec4 GetViewVector();
+glm::vec4 GetCameraVelocity();
+void AddToCameraRotationX(float addX);
+void AddToCameraRotationY(float addY);
+void MoveCameraForward();
+void MoveCameraBack();
+void MoveCameraLeft();
+void MoveCameraRight();
+void MoveCameraByVector(glm::vec4 movementVector);
+void SetCameraVelocity(glm::vec4 newVelocity);
 
 #endif // CAMERA_UTILS

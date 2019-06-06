@@ -1377,10 +1377,10 @@
 
 1553121722 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\nlohmann\detail\macro_unscope.hpp
 
-1559508139 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\camerautils.cpp
+1559776917 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\camerautils.cpp
 	"cameraUtils.h"
 
-1559508192 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\camerautils.h
+1559760937 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\camerautils.h
 	<cmath>
 	<cstdio>
 	<cstdlib>
@@ -2269,7 +2269,7 @@
 
 1559095944 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\main - copia.cpp
 
-1559101556 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\matrices.cpp
+1559772935 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\matrices.cpp
 	"matrices.h"
 
 1559096784 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\shaderutil.cpp
@@ -2371,7 +2371,7 @@
 
 1559502974 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\intersectionfunctions.c
 
-1559510651 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\main.cpp
+1559797477 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\main.cpp
 	<cmath>
 	<cstdio>
 	<cstdlib>
@@ -2391,7 +2391,7 @@
 	<glm/gtc/type_ptr.hpp>
 	"objUtils.h"
 
-1559509888 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\objutils.h
+1559756714 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\objutils.h
 	<cmath>
 	<cstdio>
 	<cstdlib>
@@ -2410,13 +2410,9 @@
 	<glm/mat4x4.hpp>
 	<glm/vec4.hpp>
 	<glm/gtc/type_ptr.hpp>
-	<tiny_obj_loader.h>
-	<nlohmann/json.hpp>
-	"matrices.h"
-	"stb_imageUtils.h"
 	"cameraUtils.h"
-	"shaderUtil.h"
-	"IntersectionFunctions.h"
+	"SceneLoadSaveUtils.h"
+	"CollisionUtils.h"
 
 1488818172 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\nlohmann\json.hpp
 	<algorithm>
@@ -2448,17 +2444,7 @@
 	<vector>
 	<cstdio>
 
-1559504708 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\intersectionfunctions.h
-	"objUtils.h"
-
-1559510234 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\objutils.cpp
-	"objUtils.h"
-	"Scene0Functions.h"
-
-1559504704 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\intersectionfunctions.cpp
-	"IntersectionFunctions.h"
-
-1559510123 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\scene0functions.h
+1559791880 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\intersectionfunctions.h
 	<cmath>
 	<cstdio>
 	<cstdlib>
@@ -2476,8 +2462,93 @@
 	<glm/mat4x4.hpp>
 	<glm/vec4.hpp>
 	<glm/gtc/type_ptr.hpp>
+	"SceneLoadSaveUtils.h"
+	"matrices.h"
+	"cameraUtils.h"
+
+1559799438 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\objutils.cpp
 	"objUtils.h"
 
-1559510117 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\scene0functions.cpp
+1559793984 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\intersectionfunctions.cpp
+	"IntersectionFunctions.h"
+
+1559799375 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\scene0functions.h
+	<cmath>
+	<cstdio>
+	<cstdlib>
+	<map>
+	<stack>
+	<string>
+	<vector>
+	<limits>
+	<fstream>
+	<sstream>
+	<stdexcept>
+	<algorithm>
+	<glad/glad.h>
+	<GLFW/glfw3.h>
+	<glm/mat4x4.hpp>
+	<glm/vec4.hpp>
+	<glm/gtc/type_ptr.hpp>
+	"SceneLoadSaveUtils.h"
+	"objUtils.h"
+
+1559799208 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\scene0functions.cpp
 	"Scene0Functions.h"
+
+1559799410 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\sceneloadsaveutils.h
+	<cmath>
+	<cstdio>
+	<cstdlib>
+	<map>
+	<stack>
+	<string>
+	<vector>
+	<limits>
+	<fstream>
+	<sstream>
+	<stdexcept>
+	<algorithm>
+	<glad/glad.h>
+	<GLFW/glfw3.h>
+	<glm/mat4x4.hpp>
+	<glm/vec4.hpp>
+	<glm/gtc/type_ptr.hpp>
+	<nlohmann/json.hpp>
+	<tiny_obj_loader.h>
+	"matrices.h"
+	"shaderUtil.h"
+
+1559799459 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\sceneloadsaveutils.cpp
+	"SceneLoadSaveUtils.h"
+	"stb_image.h"
+	"Scene0Functions.h"
+
+1559767354 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\collisionutils.h
+	<cmath>
+	<cstdio>
+	<cstdlib>
+	<map>
+	<stack>
+	<string>
+	<vector>
+	<limits>
+	<fstream>
+	<sstream>
+	<stdexcept>
+	<algorithm>
+	<sys/stat.h>
+	<glad/glad.h>
+	<GLFW/glfw3.h>
+	<glm/mat4x4.hpp>
+	<glm/vec4.hpp>
+	<glm/gtc/type_ptr.hpp>
+	"SceneLoadSaveUtils.h"
+	"matrices.h"
+	"cameraUtils.h"
+	"IntersectionFunctions.h"
+
+1559798275 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\collisionutils.cpp
+	"CollisionUtils.h"
+	"objUtils.h"
 

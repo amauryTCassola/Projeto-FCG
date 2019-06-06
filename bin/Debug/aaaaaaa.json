@@ -4,10 +4,10 @@
             "active": true,
             "blockMovement": [
                 1.0,
-                0.0,
-                0.0
+                1.0,
+                1.0
             ],
-            "decelerationRate": 0.100000001490116,
+            "decelerationRate": 0.300000011920929,
             "fragmentShaderFilename": "../../src/shader_fragment.glsl",
             "model": [
                 1.0,
@@ -15,33 +15,38 @@
                 0.0,
                 0.0,
                 0.0,
-                1.0,
+                0.249458998441696,
+                -0.96838390827179,
+                0.0,
+                0.0,
+                0.96838390827179,
+                0.249458998441696,
                 0.0,
                 0.0,
                 0.0,
-                0.0,
-                1.0,
-                0.0,
-                -0.100000001490116,
-                0.0,
-                0.0,
+                -1.22012746334076,
                 1.0
             ],
+            "name": "Esfera1",
             "objFilename": "../../data/sphere.obj",
-            "onClickName": "",
-            "onMouseOverName": "",
-            "textureFilename": "../../data/Liberty-GreenBronze-1.bmp",
+            "onClickName": "SphereOnClick",
+            "onCollisionName": "",
+            "onMouseOverName": "SphereOnMouseOver",
+            "onMoveName": "SphereOnMove",
+            "textureFilenames": [
+                "../../data/Liberty-GreenBronze-1.bmp",
+                "../../data/Liberty-Pavimentazione-1.bmp"
+            ],
             "textureWrapMode": 1,
             "thisColliderType": 1,
-            "thisCollisionType": 0,
+            "thisCollisionType": 2,
             "velocity": [
                 0.0,
                 0.0,
-                0.0,
+                -0.63377171754837,
                 0.0
             ],
             "vertexShaderFilename": "../../src/shader_vertex.glsl"
         }
-    ],
-    "Variables": []
+    ]
 }

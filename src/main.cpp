@@ -31,8 +31,6 @@
 
 //{ callbacks
 
-float mouse_sensitivity = 0.01f;
-
 void SetMousePosToMiddle(GLFWwindow* window){
     int windowWidth, windowHeight;
 
@@ -46,8 +44,10 @@ void SetMousePosToMiddle(GLFWwindow* window){
 
 // Função callback chamada sempre que o usuário movimentar o cursor do mouse em
 // cima da janela OpenGL.
+
 void CursorPosCallback(GLFWwindow* window, double xpos, double ypos)
 {
+
     int windowWidth, windowHeight;
 
     glfwGetWindowSize(window, &windowWidth, &windowHeight);
@@ -56,12 +56,27 @@ void CursorPosCallback(GLFWwindow* window, double xpos, double ypos)
     int midPointY = windowHeight/2;
 
     // Deslocamento do cursor do mouse em x e y de coordenadas de tela!
-    float dx = (xpos - midPointX)*mouse_sensitivity;
-    float dy = (ypos - midPointY)*mouse_sensitivity;
+    float dx = xpos - midPointX;
+    float dy = ypos - midPointY;
 
-    RotateCamera(dx, dy);
+    if(dx != 0 || dy != 0){
 
-    SetMousePosToMiddle(window);
+       /* if(dx > 0.2){
+            if(dx < -0.2)
+                dx = -0.2;
+            else dx = 0.2;
+        }
+
+        if(dy > 0.2){
+            if(dy < -0.2)
+                dy = -0.2;
+            else dy = 0.2;
+        }*/
+
+        SetMousePosToMiddle(window);
+        RotateCameraX(dx);
+        RotateCameraY(dy);
+    }
 }
 
 
@@ -84,7 +99,7 @@ void FramebufferSizeCallback(GLFWwindow* window, int width, int height)
     //
     // O cast para float é necessário pois números inteiros são arredondados ao
     // serem divididos!
-    g_ScreenRatio = (float)width / height;
+    UpdateScreenRatio((float)width / height);
 }
 
 // Função callback chamada sempre que o usuário aperta algum dos botões do mouse
@@ -92,20 +107,14 @@ void MouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
 {
     if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
     {
-        //glm::vec4 moveX = glm::vec4(0.1f, 0.0f, 0.0f, 0.0f);
-        //MoveObject(moveX, &currentScene[0]);
-
-        TestMouseCollision(MouseCollisionType::CLICK);
+        TestOnClick();
     }
 
     #ifdef ISDEBUG
 
     if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS)
     {
-        //glm::vec4 moveX = glm::vec4(-0.1f, 0.0f, 0.0f, 0.0f);
-        //MoveObject(moveX, &currentScene[0]);
-
-        SaveScene("aaaaaaa.json");
+        SaveCurrentScene("aaaaaaa.json");
     }
     #endif // ISDEBUG
 }
@@ -194,13 +203,13 @@ GLFWwindow* initGL(){
     glEnable(GL_DEPTH_TEST);
 
     // Habilitamos o Backface Culling. Veja slides 22-34 do documento "Aula_13_Clipping_and_Culling.pdf".
-    glEnable(GL_CULL_FACE);
-    glCullFace(GL_BACK);
-    glFrontFace(GL_CCW);
+    //glEnable(GL_CULL_FACE);
+    //glCullFace(GL_BACK);
+    //glFrontFace(GL_CCW);
 
     SetMousePosToMiddle(window);
 
-    ShowCursor(false);
+    //ShowCursor(false);
 
     return window;
 }
@@ -209,7 +218,7 @@ GLFWwindow* initGL(){
 int main(){
     GLFWwindow* window = initGL();
 
-    Debug_NewObjectSphere();
+    Debug_CreateNewObjectSphere();
 
 
     //CARREGAMENTO DE UMA CENA DO DISCO
@@ -224,15 +233,21 @@ int main(){
 
         MoveCamera(isPressingW, isPressingA, isPressingS, isPressingD);
 
-       DrawScene();
+
+
+        TestPhysicalCollisions();
+
+        MoveCurrentSceneObjects();
+
+        TestOnMouseOver();
+
+        DrawCurrentScene();
 
         //troca os buffers para atualizar a janela
         glfwSwapBuffers(window);
 
         //checa se aconteceram eventos nesse frame e trata eles
         glfwPollEvents();
-
-        TestMouseCollision(MouseCollisionType::MOUSE_OVER);
 
     }
 
