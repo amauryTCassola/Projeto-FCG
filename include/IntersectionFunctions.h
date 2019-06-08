@@ -63,6 +63,12 @@ struct Cylinder{
 
 };
 
+typedef struct Interval {
+    float Min;
+    float Max;
+} Interval;
+
+
 //IMPLEMENTAR FUNÇÕES COMENTADAS, algoritmos podem ser encontrados em:
 //http://www.realtimerendering.com/intersections.html
 bool IntersectionRaySphere(glm::vec4 ray_origin, glm::vec4 ray_direction, glm::vec4 sphere_center, float sphere_radius);
@@ -70,10 +76,14 @@ bool IntersectionRayCube(glm::vec4 ray_origin, glm::vec4 ray_direction, glm::vec
 bool IntersectionRayOBB(glm::vec4 ray_origin, glm::vec4 ray_direction, OBB thisOBB);
 
 
-//bool IntersectionOBB_OBB();
-//bool IntersectionOBB_Cylinder();
 std::vector<float> IntersectionOBB_Sphere(OBB thisOBB, Sphere thisSphere);
 std::vector<float> IntersectionSphereSphere(Sphere s1, Sphere s2);
+
+
+Interval GetInterval(OBB thisOBB, glm::vec4 axis);
+bool OverlapOnAxis(OBB obb1, OBB obb2, glm::vec4 axis);
+bool IntersectionOBB_OBB(OBB obb1, OBB obb2);
+
 
 
 
