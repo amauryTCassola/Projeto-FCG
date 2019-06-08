@@ -279,8 +279,10 @@ bool OverlapOnAxis(OBB obb1, OBB obb2, glm::vec4 axis)
 }
 
 
-bool IntersectionOBB_OBB(OBB obb1, OBB obb2)
+std::vector<float> IntersectionOBB_OBB(OBB obb1, OBB obb2)
 {
+
+    std::vector<float> retorno;
 
     glm::vec4 test[15] =
     {
@@ -303,20 +305,18 @@ bool IntersectionOBB_OBB(OBB obb1, OBB obb2)
     {
         if (!OverlapOnAxis(obb1, obb2, test[i]))
         {
-            return false; // Seperating axis found
+            return retorno;
         }
     }
 
-    return true; // Seperating axis not found
+    glm::vec4 pontoInterseccao = ClosestPointOnOBBToPoint(obb1, obb2.centro);
+
+    retorno.push_back(pontoInterseccao.x);
+    retorno.push_back(pontoInterseccao.y);
+    retorno.push_back(pontoInterseccao.z);
+    retorno.push_back(pontoInterseccao.w);
+
+    return retorno;
 }
-
-
-
-
-
-
-
-
-
 
 
