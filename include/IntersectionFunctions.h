@@ -1,3 +1,4 @@
+
 #ifndef INTERSECTIONFUNCTIONS
 #define INTERSECTIONFUNCTIONS
 
@@ -66,13 +67,14 @@ struct Cylinder{
 //http://www.realtimerendering.com/intersections.html
 bool IntersectionRaySphere(glm::vec4 ray_origin, glm::vec4 ray_direction, glm::vec4 sphere_center, float sphere_radius);
 bool IntersectionRayCube(glm::vec4 ray_origin, glm::vec4 ray_direction, glm::vec4 minimum, glm::vec4 maximum);
-//bool IntersectionRayCylinder();
+bool IntersectionRayOBB(glm::vec4 ray_origin, glm::vec4 ray_direction, OBB thisOBB);
 
 
 //bool IntersectionOBB_OBB();
 //bool IntersectionOBB_Cylinder();
 std::vector<float> IntersectionOBB_Sphere(OBB thisOBB, Sphere thisSphere);
 std::vector<float> IntersectionSphereSphere(Sphere s1, Sphere s2);
+
 
 
 #endif // INTERSECTIONFUNCTIONS
