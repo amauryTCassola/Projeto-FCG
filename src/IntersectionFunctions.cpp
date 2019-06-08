@@ -259,9 +259,11 @@ Interval GetInterval(OBB thisOBB, glm::vec4 axis)
     vertex[7] = C - A[0]*E[0] - A[1]*E[1] + A[2]*E[2];
 
     Interval result;
+    vertex[0] = glm::vec4(vertex[0].x, vertex[0].y, vertex[0].z, 0.0f);
     result.Min = result.Max = dotproduct(axis, vertex[0]);
     for (int i = 1; i < 8; ++i)
     {
+        vertex[i] = glm::vec4(vertex[i].x, vertex[i].y, vertex[i].z, 0.0f);
         float projection = dotproduct(axis, vertex[i]);
         result.Min = (projection < result.Min) ? projection : result.Min;
         result.Max = (projection > result.Max) ? projection : result.Max;
