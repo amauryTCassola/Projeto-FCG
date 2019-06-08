@@ -82,7 +82,7 @@ std::vector<float> IntersectionSphereSphere(Sphere s1, Sphere s2);
 
 Interval GetInterval(OBB thisOBB, glm::vec4 axis);
 bool OverlapOnAxis(OBB obb1, OBB obb2, glm::vec4 axis);
-bool IntersectionOBB_OBB(OBB obb1, OBB obb2);
+std::vector<float> IntersectionOBB_OBB(OBB obb1, OBB obb2);
 
 
 
