@@ -3,6 +3,8 @@
 std::vector<SceneObject> currentScene;              //lista de objetos que representa a cena atual
 float lastFrameTime = 0;
 float screen_ratio = 1.0f;
+float deltaTime = 0;
+float currentTime = 0;
 
 void DrawVirtualObject(SceneObject objToDraw)
 {
@@ -49,16 +51,36 @@ void DrawCurrentScene(){
        }
 }
 
-void MoveObject(glm::vec4 movementVector, SceneObject& objToBeMoved){
-    objToBeMoved.translationMatrix = objToBeMoved.translationMatrix * Matrix_Translate(movementVector.x, movementVector.y, movementVector.z);
+void ScaleObject(glm::vec4 scaleVector, SceneObject& obj){
+    obj.scaleMatrix = Matrix_Scale(scaleVector.x, scaleVector.y, scaleVector.z) * obj.scaleMatrix;
+}
+
+void ResetScale(SceneObject& obj){
+    obj.scaleMatrix = Matrix_Identity();
+}
+
+void MoveObject(glm::vec4 movementVector, SceneObject& obj){
+    obj.translationMatrix = Matrix_Translate(movementVector.x, movementVector.y, movementVector.z) * obj.translationMatrix;
+}
+
+void ResetTranslation(SceneObject& obj){
+    obj.translationMatrix = Matrix_Identity();
 }
 
 void RotateObject(SceneObject& obj, glm::vec4 axis, float angle){
-    obj.rotationMatrix = obj.rotationMatrix*Matrix_Rotate(angle, axis);
+    obj.rotationMatrix = Matrix_Rotate(angle, axis)*obj.rotationMatrix;
+}
+void ResetRotation(SceneObject& obj){
+    obj.rotationMatrix = Matrix_Identity();
 }
 
 void ApplyTransformations(SceneObject& obj){
-    obj.model = obj.translationMatrix * obj.rotationMatrix;
+    obj.model = obj.parentMatrix*obj.scaleMatrix * obj.translationMatrix * obj.rotationMatrix;
+    if(obj.childrenIndices.size() > 0){
+        for(unsigned int i = 0; i<obj.childrenIndices.size(); i++){
+            currentScene[obj.childrenIndices[i]].parentMatrix = obj.model;
+        }
+    }
 }
 
 void SaveCurrentScene(std::string filename){
@@ -100,26 +122,31 @@ void ApplyFriction(SceneObject& obj, float deltaTime){
     if(norm(obj.velocity) <= 0.1f) obj.velocity = glm::vec4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
+void CallChildrenMoveFunction(SceneObject parent){
+    for(unsigned int i = 0; i<parent.childrenIndices.size(); i++){
+        if(currentScene[parent.childrenIndices[i]].onMove != NULL)currentScene[parent.childrenIndices[i]].onMove(currentScene, parent.childrenIndices[i]);
+        if(currentScene[parent.childrenIndices[i]].childrenIndices.size() > 0)
+            CallChildrenMoveFunction(currentScene[parent.childrenIndices[i]]);
+    }
+}
+
 void MoveCurrentSceneObjects(){
     glm::vec4 movementVector;
-    float currentTime = (float)glfwGetTime();
+    currentTime = (float)glfwGetTime();
 
-    float deltaTime = currentTime - lastFrameTime;
-
-    UpdateCameraPositionAndRotation(deltaTime);
+    deltaTime = currentTime - lastFrameTime;
 
     for(unsigned int i = 0; i<currentScene.size(); i++){
-            //ApplyFriction(currentScene[i], deltaTime);
+            ApplyFriction(currentScene[i], deltaTime);
             if(currentScene[i].velocity != glm::vec4(0.0f, 0.0f, 0.0f, 0.0f)){
                 movementVector = currentScene[i].velocity*currentScene[i].blockMovement*deltaTime;
                 MoveObject(movementVector, currentScene[i]);
-                if(currentScene[i].onMove != NULL)currentScene[i].onMove(currentScene, i, deltaTime);
+                if(currentScene[i].onMove != NULL)currentScene[i].onMove(currentScene, i);
+                CallChildrenMoveFunction(currentScene[i]);
             }
 
             ApplyTransformations(currentScene[i]);
     }
-
-    lastFrameTime = currentTime;
 }
 
 void RotateCameraX(float x){
@@ -130,13 +157,23 @@ void RotateCameraY(float y){
 }
 
 void MoveCamera(bool W, bool A, bool S, bool D){
-    if(W) MoveCameraForward();
-    if(A) MoveCameraLeft();
-    if(S) MoveCameraBack();
-    if(D) MoveCameraRight();
+
+    if(W) MoveCameraForward(deltaTime);
+    if(A) MoveCameraLeft(deltaTime);
+    if(S) MoveCameraBack(deltaTime);
+    if(D) MoveCameraRight(deltaTime);
 }
 
 
 void Debug_CreateNewObjectSphere(){
     Debug_NewObjectSphere(currentScene);
+}
+
+void FinishFrame(){
+    UpdateCameraPositionAndRotation(deltaTime);
+    lastFrameTime = currentTime;
+}
+
+float GetDeltaTime(){
+    return deltaTime;
 }

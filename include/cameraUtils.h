@@ -29,6 +29,7 @@
 
 #include "matrices.h"
 
+enum class CameraMode{FREE, LOOKAT};
 
 void SetCameraToDraw(GLuint program_id, float screen_ratio);
 void UpdateCameraPositionAndRotation(float deltaTime);
@@ -38,11 +39,14 @@ glm::vec4 GetViewVector();
 glm::vec4 GetCameraVelocity();
 void AddToCameraRotationX(float addX);
 void AddToCameraRotationY(float addY);
-void MoveCameraForward();
-void MoveCameraBack();
-void MoveCameraLeft();
-void MoveCameraRight();
+void MoveCameraForward(float delta);
+void MoveCameraBack(float delta);
+void MoveCameraLeft(float delta);
+void MoveCameraRight(float delta);
 void MoveCameraByVector(glm::vec4 movementVector);
 void SetCameraVelocity(glm::vec4 newVelocity);
+CameraMode GetCameraMode();
+void ActivateFreeCamera();
+void ActivateLookAtCamera(glm::vec4 pointToLookAt, float distance);
 
 #endif // CAMERA_UTILS

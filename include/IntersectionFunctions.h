@@ -6,13 +6,9 @@
 #include <cstdlib>
 
 // Headers abaixo são específicos de C++
-#include <map>
-#include <stack>
 #include <string>
 #include <vector>
 #include <limits>
-#include <fstream>
-#include <sstream>
 #include <stdexcept>
 #include <algorithm>
 
@@ -24,6 +20,7 @@
 #include <glm/mat4x4.hpp>
 #include <glm/vec4.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <cfloat>
 
 #include "SceneLoadSaveUtils.h"
 #include "matrices.h"
@@ -54,26 +51,17 @@ struct Sphere{
 
 };
 
-struct Cylinder{
-
-    glm::vec4 eixo;
-    glm::vec4 centro;
-    float raio;
-
-};
+typedef struct Interval {
+    float Min;
+    float Max;
+} Interval;
 
 //IMPLEMENTAR FUNÇÕES COMENTADAS, algoritmos podem ser encontrados em:
 //http://www.realtimerendering.com/intersections.html
-bool IntersectionRaySphere(glm::vec4 ray_origin, glm::vec4 ray_direction, glm::vec4 sphere_center, float sphere_radius);
-bool IntersectionRayCube(glm::vec4 ray_origin, glm::vec4 ray_direction, glm::vec4 minimum, glm::vec4 maximum);
-//bool IntersectionRayCylinder();
-
-
-//bool IntersectionOBB_OBB();
-//bool IntersectionOBB_Cylinder();
+bool IntersectionRay_Sphere(glm::vec4 ray_origin, glm::vec4 ray_direction, Sphere thisSphere);
+bool IntersectionRay_OBB(glm::vec4 ray_origin, glm::vec4 ray_direction, OBB thisOBB);
+std::vector<float> IntersectionOBB_OBB(OBB obb1, OBB obb2);
 std::vector<float> IntersectionOBB_Sphere(OBB thisOBB, Sphere thisSphere);
-//bool IntersectionCylinder_Cylinder();
-//bool IntersectionCylinder_Sphere();
-//bool IntersectionSphere_Sphere();
+std::vector<float> IntersectionSphere_Sphere(Sphere s1, Sphere s2);
 
 #endif // INTERSECTIONFUNCTIONS

@@ -203,13 +203,13 @@ GLFWwindow* initGL(){
     glEnable(GL_DEPTH_TEST);
 
     // Habilitamos o Backface Culling. Veja slides 22-34 do documento "Aula_13_Clipping_and_Culling.pdf".
-    //glEnable(GL_CULL_FACE);
-    //glCullFace(GL_BACK);
-    //glFrontFace(GL_CCW);
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_BACK);
+    glFrontFace(GL_CCW);
 
     SetMousePosToMiddle(window);
 
-    //ShowCursor(false);
+    ShowCursor(false);
 
     return window;
 }
@@ -219,7 +219,6 @@ int main(){
     GLFWwindow* window = initGL();
 
     Debug_CreateNewObjectSphere();
-
 
     //CARREGAMENTO DE UMA CENA DO DISCO
     //currentScene = LoadScene("aaaaaaa.json");
@@ -231,23 +230,24 @@ int main(){
         // "clear" a janela inteira
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+        //checa se aconteceram eventos nesse frame e trata eles
+        glfwPollEvents();
+
+
         MoveCamera(isPressingW, isPressingA, isPressingS, isPressingD);
 
-
+        MoveCurrentSceneObjects();
 
         TestPhysicalCollisions();
-
-        MoveCurrentSceneObjects();
 
         TestOnMouseOver();
 
         DrawCurrentScene();
 
+        FinishFrame();
+
         //troca os buffers para atualizar a janela
         glfwSwapBuffers(window);
-
-        //checa se aconteceram eventos nesse frame e trata eles
-        glfwPollEvents();
 
     }
 

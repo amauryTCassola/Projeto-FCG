@@ -33,8 +33,6 @@
 void UpdateScreenRatio(float newScreenRatio);
 
 void DrawCurrentScene();
-void MoveObject(glm::vec4 movementVector, SceneObject& objToBeMoved);
-void RotateObject(SceneObject& obj, glm::vec4 axis, float angle);
 
 void SaveCurrentScene(std::string filename);
 void LoadToCurrentScene(std::string filename);
@@ -54,6 +52,13 @@ void MoveCamera(bool W, bool A, bool S, bool D);
 void MoveCurrentSceneObjects();
 
 void ChangeTexture(int index, std::string filename);
-void RotateObject(SceneObject& obj, glm::vec4 axis, float angle);
 
+void ScaleObject(glm::vec4 scaleVector, SceneObject& obj);
+void ResetScale(SceneObject& obj);
+void MoveObject(glm::vec4 movementVector, SceneObject& obj);
+void ResetTranslation(SceneObject& obj);
+void RotateObject(SceneObject& obj, glm::vec4 axis, float angle);
+void ResetRotation(SceneObject& obj);
+float GetDeltaTime();
+void FinishFrame();
 #endif// OBJUTILS

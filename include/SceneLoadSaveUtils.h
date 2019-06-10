@@ -16,6 +16,8 @@
 #include <stdexcept>
 #include <algorithm>
 
+#define PI 3.14159265359f
+
 // Headers das bibliotecas OpenGL
 #include <glad/glad.h>   // Criação de contexto OpenGL 3.3
 #include <GLFW/glfw3.h>  // Criação de janelas do sistema operacional
@@ -68,12 +70,28 @@ enum class WrapMode{REPEAT, MIRRORED_REPEAT, CLAMP_TO_EDGE, CLAMP_TO_BORDER};
 
 enum class CollisionType{ELASTIC, INELASTIC, WALL};
 
-enum class ColliderType{OBB, SPHERE, CYLINDER, NONE};
+enum class ColliderType{OBB, SPHERE, NONE};
 
 enum class MouseCollisionType{MOUSE_OVER, CLICK};
 
 const std::vector<float> black = {0.0f, 0.0f, 0.0f, 1.0f};
 
+//estrutura que guarda as informações de algum modelo 3D em memória
+struct ModelInformation{
+    void*           first_index;               // Índice do primeiro vértice dentro do vetor indices[] definido em BuildTrianglesAndAddToVirtualScene()
+    int             num_indices;               // Número de índices do objeto dentro do vetor indices[] definido em BuildTrianglesAndAddToVirtualScene()
+    GLenum          rendering_mode;            // Modo de rasterização (GL_TRIANGLES, GL_TRIANGLE_STRIP, etc.)
+    GLuint          vertex_array_object_id;
+    glm::vec4       bbox_min_min_min;                  // Axis-Aligned Bounding Box do objeto
+    glm::vec4       bbox_max_min_min;
+    glm::vec4       bbox_max_min_max;
+    glm::vec4       bbox_min_min_max;
+    glm::vec4       bbox_max_max_max;
+    glm::vec4       bbox_min_max_max;
+    glm::vec4       bbox_min_max_min;
+    glm::vec4       bbox_max_max_min;
+    std::vector<GLuint> buffers;
+};
 
 // Definimos uma estrutura que armazenará dados necessários para renderizar
 // cada objeto da cena virtual.
@@ -87,8 +105,8 @@ struct SceneObject
     glm::mat4       model;                     //matriz model deste objeto
     glm::mat4       rotationMatrix;
     glm::mat4       translationMatrix;
+    glm::mat4       scaleMatrix;
 
-    //GLuint          texture_id;                //ID da textura vinculada a este objeto
     glm::vec4       bbox_min_min_min;                  // Axis-Aligned Bounding Box do objeto
     glm::vec4       bbox_max_min_min;
     glm::vec4       bbox_max_min_max;
@@ -99,7 +117,6 @@ struct SceneObject
     glm::vec4       bbox_max_max_min;
 
     std::string     objFilename;               //o endereço relativo do .obj correspondente a este objeto
-    //std::string     textureFilename;           //o endereço relativo da textura correspondente a este objeto
     GLuint          gpuProgramId;              //id do programa de GPU usado para desenhar este objeto
     std::string     fragmentShaderFilename;
     std::string     vertexShaderFilename;
@@ -126,8 +143,14 @@ struct SceneObject
 
     std::function<void(std::vector<SceneObject>&, int)>   onMouseOver;   //função chamada quando o usuário olhar para o objeto
     std::function<void(std::vector<SceneObject>&, int)>   onClick;       //função chamada quando o usuário clicar no objeto
-    std::function<void(std::vector<SceneObject>&, int, float)>   onMove;       //função chamada quando o objeto for movido, pode ser usada para fazer animações
+    std::function<void(std::vector<SceneObject>&, int)>   onMove;       //função chamada quando o objeto for movido, pode ser usada para fazer animações
     std::function<void(std::vector<SceneObject>&, int, int)>   onCollision;   //função chamada quando é detectada uma colisão
+
+    glm::mat4   parentMatrix = Matrix_Identity();
+    std::vector<std::string> childrenNames;
+    std::vector<int> childrenIndices;
+    int parentIndex = -1;
+
 };
 
 

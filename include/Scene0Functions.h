@@ -24,7 +24,11 @@
 
 #include "SceneLoadSaveUtils.h"
 #include "objUtils.h"
+#include "cameraUtils.h"
+#define PI 3.14159265359f
 
 void SphereOnClick(std::vector<SceneObject>& currentScene, int callerIndex);
 void SphereOnMouseOver(std::vector<SceneObject>& _currentScene, int callerIndex);
-void SphereOnMove(std::vector<SceneObject>& _currentScene, int callerIndex, float delta);
+void SphereOnMove(std::vector<SceneObject>& _currentScene, int callerIndex);
+void SphereChildOnMove(std::vector<SceneObject>& _currentScene, int callerIndex);
+void RabbitOnClick(std::vector<SceneObject>& _currentScene, int callerIndex);

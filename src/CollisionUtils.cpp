@@ -1,8 +1,9 @@
 #include "CollisionUtils.h"
 #include "objUtils.h"
 
-
-
+std::vector<std::string> cameraCollisionsList;
+std::vector<std::string> wallCollisionsList;
+std::vector<glm::vec4> wallCollisionsNormalsList;
 OBB DefineOrientedBoundingBox(SceneObject obj){
 
     //model = obj.model;
@@ -10,14 +11,14 @@ OBB DefineOrientedBoundingBox(SceneObject obj){
     OBB retorno;
 
     glm::vec4 max_max_max = obj.model*obj.bbox_max_max_max;
-    glm::vec4 max_max_min = obj.model*obj.bbox_max_max_min;
-    glm::vec4 max_min_max = obj.model*obj.bbox_max_min_max;
+    //glm::vec4 max_max_min = obj.model*obj.bbox_max_max_min;
+   // glm::vec4 max_min_max = obj.model*obj.bbox_max_min_max;
     glm::vec4 max_min_min = obj.model*obj.bbox_max_min_min;
 
     glm::vec4 min_min_min = obj.model*obj.bbox_min_min_min;
     glm::vec4 min_min_max = obj.model*obj.bbox_min_min_max;
     glm::vec4 min_max_min = obj.model*obj.bbox_min_max_min;
-    glm::vec4 min_max_max = obj.model*obj.bbox_min_max_max;
+    //glm::vec4 min_max_max = obj.model*obj.bbox_min_max_max;
 
     glm::vec4 eixoU = max_min_min - min_min_min;
     glm::vec4 eixoV = min_max_min - min_min_min;
@@ -33,9 +34,7 @@ OBB DefineOrientedBoundingBox(SceneObject obj){
 
     retorno.centro = (min_min_min+max_max_max)*0.5f;
 
-    /*retorno.c = min_min_min;
-
-    glm::vec4 cVector = glm::vec4(retorno.c.x, retorno.c.y, retorno.c.z, 0.0f);
+    glm::vec4 cVector = glm::vec4(retorno.centro.x, retorno.centro.y, retorno.centro.z, 0.0f);
 
     retorno.cartesianToOBB = Matrix(
         retorno.eixoU.x   , retorno.eixoU.y   , retorno.eixoU.z   , -dotproduct(retorno.eixoU , cVector) ,
@@ -44,32 +43,42 @@ OBB DefineOrientedBoundingBox(SceneObject obj){
         0.0f , 0.0f , 0.0f , 1.0f);
 
     retorno.OBBToCartesian = Matrix(
-        retorno.eixoU.x   , retorno.eixoV.x   , retorno.eixoW.x   , retorno.c.x ,
-        retorno.eixoU.y   , retorno.eixoV.y   , retorno.eixoW.y   , retorno.c.y ,
-        retorno.eixoU.z   , retorno.eixoV.z   , retorno.eixoW.z   , retorno.c.z ,
-        0.0f , 0.0f , 0.0f , 1.0f);*/
-
-
-        //printf("\ncentro: (%f %f %f)", cu);
+        retorno.eixoU.x   , retorno.eixoV.x   , retorno.eixoW.x   , retorno.centro.x ,
+        retorno.eixoU.y   , retorno.eixoV.y   , retorno.eixoW.y   , retorno.centro.y ,
+        retorno.eixoU.z   , retorno.eixoV.z   , retorno.eixoW.z   , retorno.centro.z ,
+        0.0f , 0.0f , 0.0f , 1.0f);
 
     return retorno;
 }
 
 OBB DefineCameraOBB(){
 
-    OBB cameraOBB;
-    /*glm::vec4 cameraPosition = GetCameraPosition();
+    OBB retorno;
 
-    cameraOBB.c = glm::vec4(cameraPosition.x-CAMERA_OBB_SIZE_U/2, cameraPosition.y-CAMERA_OBB_SIZE_V/2, cameraPosition.z-CAMERA_OBB_SIZE_W/2, 1.0f);
-    cameraOBB.eixoU = glm::vec4(1.0f, 0.0f, 0.0f, 0.0f);
-    cameraOBB.eixoV = glm::vec4(0.0f, 1.0f, 0.0f, 0.0f);
-    cameraOBB.eixoW = glm::vec4(0.0f, 0.0f, 1.0f, 0.0f);
+    retorno.centro = GetCameraPosition();
+    retorno.tamanhoU = CAMERA_OBB_SIZE_U;
+    retorno.tamanhoV = CAMERA_OBB_SIZE_V;
+    retorno.tamanhoW = CAMERA_OBB_SIZE_W;
 
-    cameraOBB.tamanhoU = CAMERA_OBB_SIZE_U;
-    cameraOBB.tamanhoV = CAMERA_OBB_SIZE_V;
-    cameraOBB.tamanhoW = CAMERA_OBB_SIZE_W;*/
+    retorno.eixoU = glm::vec4(1.0f, 0.0f, 0.0f, 0.0f);
+    retorno.eixoV = glm::vec4(0.0f, 1.0f, 0.0f, 0.0f);
+    retorno.eixoW = glm::vec4(0.0f, 0.0f, 1.0f, 0.0f);
 
-    return cameraOBB;
+    glm::vec4 cVector = glm::vec4(retorno.centro.x, retorno.centro.y, retorno.centro.z, 0.0f);
+
+    retorno.cartesianToOBB = Matrix(
+        retorno.eixoU.x   , retorno.eixoU.y   , retorno.eixoU.z   , -dotproduct(retorno.eixoU , cVector) ,
+        retorno.eixoV.x   , retorno.eixoV.y   , retorno.eixoV.z   , -dotproduct(retorno.eixoV , cVector) ,
+        retorno.eixoW.x   , retorno.eixoW.y   , retorno.eixoW.z   , -dotproduct(retorno.eixoW , cVector) ,
+        0.0f , 0.0f , 0.0f , 1.0f);
+
+    retorno.OBBToCartesian = Matrix(
+        retorno.eixoU.x   , retorno.eixoV.x   , retorno.eixoW.x   , retorno.centro.x ,
+        retorno.eixoU.y   , retorno.eixoV.y   , retorno.eixoW.y   , retorno.centro.y ,
+        retorno.eixoU.z   , retorno.eixoV.z   , retorno.eixoW.z   , retorno.centro.z ,
+        0.0f , 0.0f , 0.0f , 1.0f);
+
+    return retorno;
 }
 
 Sphere DefineSphere(SceneObject obj){
@@ -77,39 +86,13 @@ Sphere DefineSphere(SceneObject obj){
     Sphere retorno;
     OBB aux = DefineOrientedBoundingBox(obj);
 
-    /*glm::vec4 centro_local = (obj.bbox_min_min_min + obj.bbox_max_max_max)/2.0f;
-    glm::vec4 centro_global = obj.model * centro_local;*/
-
     float x = std::max(std::max(aux.tamanhoU, aux.tamanhoV), aux.tamanhoW);
 
     float raio_global = x/2;
     glm::vec4 centro_global = aux.centro;
 
-
-
-    /*glm::vec4 maxXEsfera = glm::vec4(obj.bbox_max.x, 0.0f, 0.0f, 1.0f);
-    glm::vec4 raio_local_vec = (maxXEsfera - centro_local);
-    glm::vec4 raio_global_vec = obj.model * raio_local_vec;
-    float raio_global = norm(raio_global_vec);*/
-
     retorno.centro = centro_global;
     retorno.raio = raio_global;
-
-    //printf("\ncentro (%2.f, %2.f, %2.f) raio: %2.f", centro_global.x, centro_global.y, centro_global.z, raio_global);
-
-    return retorno;
-
-}
-
-Cylinder DefineCylinder(SceneObject obj){
-
-    Cylinder retorno;
-    Sphere auxSphere = DefineSphere(obj);
-    OBB auxOBB = DefineOrientedBoundingBox(obj);
-    retorno.raio = auxSphere.raio;
-    retorno.eixo = auxOBB.eixoV;
-    retorno.centro = auxSphere.centro;
-
     return retorno;
 
 }
@@ -132,32 +115,13 @@ float GetDistanceFromCamera(SceneObject obj){
 bool TestRayIntersection(SceneObject obj){
     if(obj.thisColliderType == (int)ColliderType::SPHERE){
 
-        Sphere a = DefineSphere(obj);
-        return IntersectionRaySphere(GetCameraPosition(), GetViewVector(), a.centro, a.raio);
+        Sphere thisSphere = DefineSphere(obj);
+        return IntersectionRay_Sphere(GetCameraPosition(), GetViewVector(), thisSphere);
     }
     else if(obj.thisColliderType == (int)ColliderType::OBB){
-        OBB a = DefineOrientedBoundingBox(obj);
-
-        glm::vec4 min_global = a.centro - a.eixoU*0.5f - a.eixoV*0.5f - a.eixoW*0.5f;
-        glm::vec4 max_global = a.centro + a.eixoU*0.5f + a.eixoV*0.5f + a.eixoW*0.5f;
-
-
-        /*glm::vec4 max_local = glm::vec4(a.tamanhoU, a.tamanhoV, a.tamanhoW, 1.0f);
-        glm::vec4 min_local = glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
-
-        glm::vec4 pontoA = a.OBBToCartesian*max_local;
-        glm::vec4 pontoB = a.OBBToCartesian*min_local;
-
-        glm::vec4 max_global = glm::vec4(std::max(pontoA.x, pontoB.x), std::max(pontoA.y, pontoB.y), std::max(pontoA.z, pontoB.z), 1.0f);
-        glm::vec4 min_global = glm::vec4(std::min(pontoA.x, pontoB.x), std::min(pontoA.y, pontoB.y), std::min(pontoA.z, pontoB.z), 1.0f);*/
-
-       return IntersectionRayCube(GetCameraPosition(), GetViewVector(), min_global, max_global);
+        OBB thisOBB = DefineOrientedBoundingBox(obj);
+        return IntersectionRay_OBB(GetCameraPosition(), GetViewVector(), thisOBB);
     }
-    /*
-    else if(obj.thisColliderType == ColliderType::CYLINDER){
-
-    }
-    */
     else return false;
 }
 
@@ -192,9 +156,9 @@ void TestMouseCollision(MouseCollisionType colType, std::vector<SceneObject>& cu
 
     if(chosenObjectDistance == -1.0f) return;
 
-    if(colType == MouseCollisionType::MOUSE_OVER)
+    if(colType == MouseCollisionType::MOUSE_OVER && chosenObject.onMouseOver != NULL)
         chosenObject.onMouseOver(currentScene, chosenObjectIndex);
-    else if(colType == MouseCollisionType::CLICK)
+    else if(colType == MouseCollisionType::CLICK && chosenObject.onClick != NULL)
         chosenObject.onClick(currentScene, chosenObjectIndex);
 }
 
@@ -203,89 +167,61 @@ std::vector<float> CheckCollision(SceneObject& objA, SceneObject& objB){
 
     if(objA.thisColliderType == (int)ColliderType::OBB){
 
-            OBB thisOBB = DefineOrientedBoundingBox(objA);
-            Sphere thisSphere = DefineSphere(objB);
-            printf("BBBBBBBB");
-        switch((ColliderType)objB.thisColliderType){
-            case ColliderType::OBB:
-                //retorno = IntersectionAABB_AABB();
-                return retorno;
-            break;
-            case ColliderType::CYLINDER:
-                //retorno = IntersectionAABB_Cylinder();
-                return retorno;
-            break;
-            case ColliderType::SPHERE:
-                return IntersectionOBB_Sphere(thisOBB, thisSphere);
-            break;
-            default:
-                return retorno;
-        }
-    } else if(objA.thisColliderType == (int)ColliderType::CYLINDER){
-        switch((ColliderType)objB.thisColliderType){
-            case ColliderType::OBB:
-                //retorno = IntersectionAABB_Cylinder();
-                return retorno;
-            break;
-            case ColliderType::CYLINDER:
-                //retorno = IntersectionCylinder_Cylinder();
-                return retorno;
-            break;
-            case ColliderType::SPHERE:
-                //retorno = IntersectionCylinder_Sphere();
-                return retorno;
-            break;
-            default:
-                return retorno;
-        }
-    } else if(objA.thisColliderType == (int)ColliderType::SPHERE){
+        OBB thisOBB = DefineOrientedBoundingBox(objA);
 
-        OBB thisOBB = DefineOrientedBoundingBox(objB);
+        if(objB.thisColliderType == (int)ColliderType::OBB){
+            OBB thatOBB = DefineOrientedBoundingBox(objB);
+            return IntersectionOBB_OBB(thisOBB, thatOBB);
+        }
+        else if(objB.thisColliderType == (int)ColliderType::SPHERE){
+            Sphere thatSphere = DefineSphere(objB);
+            return IntersectionOBB_Sphere(thisOBB, thatSphere);
+        }
+
+    } else if(objA.thisColliderType == (int)ColliderType::SPHERE){
         Sphere thisSphere = DefineSphere(objA);
 
-
-        switch((ColliderType)objB.thisColliderType){
-            case ColliderType::OBB:
-                return IntersectionOBB_Sphere(thisOBB, thisSphere);
-            break;
-            case ColliderType::CYLINDER:
-                //retorno = IntersectionCylinder_Sphere();
-                return retorno;
-            break;
-            case ColliderType::SPHERE:
-                //retorno = IntersectionSphere_Sphere();
-                return retorno;
-            break;
-            default:
-                return retorno;
+        if(objB.thisColliderType == (int)ColliderType::OBB){
+            OBB thatOBB = DefineOrientedBoundingBox(objB);
+            return IntersectionOBB_Sphere(thatOBB, thisSphere);
+        }
+        else if(objB.thisColliderType == (int)ColliderType::SPHERE){
+            Sphere thatSphere = DefineSphere(objB);
+            return IntersectionSphere_Sphere(thisSphere, thatSphere);
         }
     }
     else return retorno;
 }
 
-std::vector<glm::vec4> GetParallelAndPerpendicularComponents(glm::vec4 objVelocity, SceneObject wall, glm::vec4 collisionPoint){
+glm::vec4 GetCollisionNormal(glm::vec4 objVelocity, SceneObject wall, glm::vec4 collisionPoint){
     glm::vec4 collisionPointNormal;
 
     if(wall.thisColliderType == (int)ColliderType::OBB){
         OBB thisOBB = DefineOrientedBoundingBox(wall);
 
-        glm::vec4 collisionPInOBBCoordinates = thisOBB.cartesianToOBB * collisionPoint;
+        glm::vec4 vectorCenterToPoint = collisionPoint - thisOBB.centro;
 
-        glm::vec4 boxCenter = glm::vec4(thisOBB.tamanhoU/2, thisOBB.tamanhoV/2, thisOBB.tamanhoW/2, 1.0f);
+        glm::vec4 vectorInOBBSpace = thisOBB.cartesianToOBB*vectorCenterToPoint;
 
-        glm::vec4 vectorCenterToPoint = collisionPInOBBCoordinates - boxCenter;
+        float diffX = (thisOBB.tamanhoU/2) - std::abs(vectorInOBBSpace.x);
+        float diffY = (thisOBB.tamanhoV/2) - std::abs(vectorInOBBSpace.y);
+        float diffZ = (thisOBB.tamanhoW/2) - std::abs(vectorInOBBSpace.z);
 
-        float divX = boxCenter.x;
-        float divY = boxCenter.y;
-        float divZ = boxCenter.w;
+        glm::vec4 resultVector = glm::vec4(0.0f, 0.0f, 0.0f, 0.0f);
 
-        int normalX = (int)(vectorCenterToPoint.x/divX);
-        int normalY = (int)(vectorCenterToPoint.y/divY);
-        int normalZ = (int)(vectorCenterToPoint.z/divZ);
+        if(diffX <= diffY && diffX <= diffZ){
+            resultVector = glm::vec4(vectorInOBBSpace.x, 0.0f, 0.0f, 0.0f);
+        }
+        if(diffY <= diffX && diffY <= diffZ){
+            resultVector = glm::vec4(resultVector.x, vectorInOBBSpace.y, 0.0f, 0.0f);
+        }
+        if(diffZ <= diffX && diffZ <= diffY){
+            resultVector = glm::vec4(resultVector.x, resultVector.y, vectorInOBBSpace.z, 0.0f);
+        }
 
-        glm::vec4 normalInOBBCoordinates = glm::vec4((float)normalX, (float)normalY, (float)normalZ, 0.0f);
+        collisionPointNormal = thisOBB.OBBToCartesian*resultVector;
+        collisionPointNormal = collisionPointNormal/norm(collisionPointNormal);
 
-        collisionPointNormal = thisOBB.OBBToCartesian * normalInOBBCoordinates;
     }
 
     else if(wall.thisColliderType == (int)ColliderType::SPHERE){
@@ -293,49 +229,49 @@ std::vector<glm::vec4> GetParallelAndPerpendicularComponents(glm::vec4 objVeloci
         collisionPointNormal = (collisionPoint - thisSphere.centro)/norm(collisionPoint - thisSphere.centro);
     }
 
-    else if(wall.thisColliderType == (int)ColliderType::CYLINDER){
-        Cylinder thisCylinder = DefineCylinder(wall);
-        glm::vec4 v = collisionPoint - thisCylinder.centro;
-        glm::vec4 u = Projecao(v, thisCylinder.eixo);
-        glm::vec4 q = thisCylinder.centro + u;
-        collisionPointNormal = collisionPoint - q;
-    }
+    return collisionPointNormal;
+}
 
-    glm::vec4 perpendicularComponent = (dotproduct(objVelocity, collisionPointNormal) / dotproduct(collisionPointNormal, collisionPointNormal)) * collisionPointNormal;
+std::vector<glm::vec4> GetParallelAndPerpendicularComponentsAndNormal(glm::vec4 objVelocity, SceneObject wall, glm::vec4 collisionPoint){
+    glm::vec4 collisionPointNormal = GetCollisionNormal(objVelocity, wall, collisionPoint);
+    glm::vec4 perpendicularComponent = ( dotproduct(objVelocity, collisionPointNormal) / dotproduct(collisionPointNormal, collisionPointNormal) ) * collisionPointNormal;
     glm::vec4 parallelComponent = objVelocity - perpendicularComponent;
 
-    return std::vector<glm::vec4>{parallelComponent, perpendicularComponent};
+    return std::vector<glm::vec4>{parallelComponent, perpendicularComponent, collisionPointNormal};
 }
 
 void InelasticCollisionWithWall(SceneObject& obj, SceneObject& wall, glm::vec4 collisionPoint){
 
-    std::vector<glm::vec4> components = GetParallelAndPerpendicularComponents(obj.velocity, wall, collisionPoint);
+    std::vector<glm::vec4> components = GetParallelAndPerpendicularComponentsAndNormal(obj.velocity, wall, collisionPoint);
 
     glm::vec4 parallelComponent = components[0];
     glm::vec4 perpendicularComponent = components[1];
 
+    obj.velocity = parallelComponent + (1 -COEFFICIENT_OF_RESTITUTION)*(-perpendicularComponent);;
 
-    MoveObject(-(perpendicularComponent/norm(perpendicularComponent)), obj);
-    obj.velocity = parallelComponent;
+    wallCollisionsList.push_back(obj.name);
+    wallCollisionsNormalsList.push_back(components[2]);
 }
 
 void ElasticCollisionWithWall(SceneObject& obj, SceneObject& wall, glm::vec4 collisionPoint){
 
-    std::vector<glm::vec4> components = GetParallelAndPerpendicularComponents(obj.velocity, wall, collisionPoint);
+    std::vector<glm::vec4> components = GetParallelAndPerpendicularComponentsAndNormal(obj.velocity, wall, collisionPoint);
 
     glm::vec4 parallelComponent = components[0];
     glm::vec4 perpendicularComponent = components[1];
 
-    glm::vec4 newVelocity = parallelComponent - COEFFICIENT_OF_RESTITUTION * perpendicularComponent;
-    newVelocity = newVelocity * COEFFICIENT_OF_RESTITUTION;
+    glm::vec4 newVelocity = parallelComponent + COEFFICIENT_OF_RESTITUTION*(-perpendicularComponent);
 
     obj.velocity = newVelocity;
+
+    wallCollisionsList.push_back(obj.name);
+    wallCollisionsNormalsList.push_back(components[2]);
 }
 
 void InelasticCollision(SceneObject& obj, glm::vec4 velocityObjB){
-    float newVelocityX = (obj.velocity.x + velocityObjB.x + 0*(velocityObjB.x - obj.velocity.x))/2;
-    float newVelocityY = (obj.velocity.y + velocityObjB.y + 0*(velocityObjB.y - obj.velocity.y))/2;
-    float newVelocityZ = (obj.velocity.z + velocityObjB.z + 0*(velocityObjB.z - obj.velocity.z))/2;
+    float newVelocityX = (obj.velocity.x + velocityObjB.x + (1 - COEFFICIENT_OF_RESTITUTION)*(velocityObjB.x - obj.velocity.x))/2;
+    float newVelocityY = (obj.velocity.y + velocityObjB.y + (1 - COEFFICIENT_OF_RESTITUTION)*(velocityObjB.y - obj.velocity.y))/2;
+    float newVelocityZ = (obj.velocity.z + velocityObjB.z + (1 - COEFFICIENT_OF_RESTITUTION)*(velocityObjB.z - obj.velocity.z))/2;
 
     glm::vec4 newVelocity = glm::vec4(newVelocityX, newVelocityY, newVelocityZ, 0.0f);
 
@@ -344,56 +280,63 @@ void InelasticCollision(SceneObject& obj, glm::vec4 velocityObjB){
 
 void ElasticCollision(SceneObject& obj, glm::vec4 velocityObjB){
 
-    float newVelocityX = (obj.velocity.x + velocityObjB.x + 1*(velocityObjB.x - obj.velocity.x))/2;
-    float newVelocityY = (obj.velocity.y + velocityObjB.y + 1*(velocityObjB.y - obj.velocity.y))/2;
-    float newVelocityZ = (obj.velocity.z + velocityObjB.z + 1*(velocityObjB.z - obj.velocity.z))/2;
+    float newVelocityX = (obj.velocity.x + velocityObjB.x + COEFFICIENT_OF_RESTITUTION*(velocityObjB.x - obj.velocity.x))/2;
+    float newVelocityY = (obj.velocity.y + velocityObjB.y + COEFFICIENT_OF_RESTITUTION*(velocityObjB.y - obj.velocity.y))/2;
+    float newVelocityZ = (obj.velocity.z + velocityObjB.z + COEFFICIENT_OF_RESTITUTION*(velocityObjB.z - obj.velocity.z))/2;
 
     glm::vec4 newVelocity = glm::vec4(newVelocityX, newVelocityY, newVelocityZ, 0.0f);
 
     obj.velocity = newVelocity;
 }
 
-void ApplyCollisionPhysics(SceneObject& objA, SceneObject& objB, glm::vec4 collisionPoint, bool wasAlreadyColliding){
+void ApplyCollisionPhysics(SceneObject& objA, SceneObject& objB, glm::vec4 collisionPoint, bool wasAlreadyColliding, std::vector<SceneObject>& currentScene){
 
     glm::vec4 velocityA = objA.velocity;
     glm::vec4 velocityB = objB.velocity;
 
-    if(!wasAlreadyColliding){
-        if(objB.thisCollisionType == (int)CollisionType::WALL){
-            if(objA.thisCollisionType == (int)CollisionType::ELASTIC){
-                ElasticCollisionWithWall(objA, objB, collisionPoint);
-            }
-            else{
-                InelasticCollisionWithWall(objA, objB, collisionPoint);
-            }
-        } else if(objA.thisCollisionType == (int)CollisionType::WALL){
-            if(objB.thisCollisionType == (int)CollisionType::ELASTIC){
-                ElasticCollisionWithWall(objB, objA, collisionPoint);
-            }
-            else{
-                InelasticCollisionWithWall(objB, objA, collisionPoint);
-            }
-        } else {
-
+    if(objA.parentIndex == -1 && objB.parentIndex == -1){
+        if(!wasAlreadyColliding) {
+            if(objB.thisCollisionType == (int)CollisionType::WALL){
                 if(objA.thisCollisionType == (int)CollisionType::ELASTIC){
-                        ElasticCollision(objA, velocityB);
+                    ElasticCollisionWithWall(objA, objB, collisionPoint);
                 }
-                else if(objA.thisCollisionType == (int)CollisionType::INELASTIC){
-                        InelasticCollision(objA, velocityB);
+                else{
+                    InelasticCollisionWithWall(objA, objB, collisionPoint);
                 }
-
-
+            } else if(objA.thisCollisionType == (int)CollisionType::WALL){
                 if(objB.thisCollisionType == (int)CollisionType::ELASTIC){
-                        ElasticCollision(objB, velocityA);
+                    ElasticCollisionWithWall(objB, objA, collisionPoint);
                 }
-                else if(objB.thisCollisionType == (int)CollisionType::INELASTIC){
-                        InelasticCollision(objB, velocityA);
+                else{
+                    InelasticCollisionWithWall(objB, objA, collisionPoint);
                 }
+            }else if(objA.thisCollisionType == (int)CollisionType::ELASTIC){
+                    ElasticCollision(objA, velocityB);
+            }
+            else if(objA.thisCollisionType == (int)CollisionType::INELASTIC){
+                    InelasticCollision(objA, velocityB);
+            }
+
+
+            if(objB.thisCollisionType == (int)CollisionType::ELASTIC){
+                    ElasticCollision(objB, velocityA);
+            }
+            else if(objB.thisCollisionType == (int)CollisionType::INELASTIC){
+                    InelasticCollision(objB, velocityA);
+            }
+        } else{
+            if(objB.thisCollisionType == (int)CollisionType::WALL){
+                wallCollisionsList.push_back(objA.name);
+                wallCollisionsNormalsList.push_back(GetParallelAndPerpendicularComponentsAndNormal(objA.velocity, objB, collisionPoint)[2]);
+            } else if(objA.thisCollisionType == (int)CollisionType::WALL){
+                wallCollisionsList.push_back(objB.name);
+                wallCollisionsNormalsList.push_back(GetParallelAndPerpendicularComponentsAndNormal(objB.velocity, objA, collisionPoint)[2]);
             }
         }
-    else{
-            //exit(0);
-        //printf("JÁ ESTAVA COLIDINDO");
+    } else if(objA.parentIndex != -1){
+        ApplyCollisionPhysics(currentScene[objA.parentIndex], objB, collisionPoint, wasAlreadyColliding, currentScene);
+    } else if(objB.parentIndex != -1){
+        ApplyCollisionPhysics(objA, currentScene[objB.parentIndex], collisionPoint, wasAlreadyColliding, currentScene);
     }
 }
 
@@ -406,43 +349,110 @@ bool IsNameInCollisionsList(std::vector<std::string> _collisionsList, std::strin
     return false;
 }
 
-void ElasticCollisionWithCamera(SceneObject& obj){
+int IsNameInWallsCollisionsList(std::string _name){
+    for(unsigned int i = 0; i< wallCollisionsList.size(); i++){
+        if(wallCollisionsList[i].compare(_name) == 0){
+            return i;
+        }
+    }
+    return -1;
+}
 
-    glm::vec4 cameraVelocity = GetCameraVelocity();
+void ElasticCollisionWithCamera(SceneObject& obj, glm::vec4 collisionPoint, glm::vec4 cameraVelocity){
+    glm::vec4 newVelocity;
 
-    float newVelocityX = (obj.velocity.x + cameraVelocity.x + COEFFICIENT_OF_RESTITUTION*(cameraVelocity.x - obj.velocity.x))/2;
-    float newVelocityY = (obj.velocity.y + cameraVelocity.y + COEFFICIENT_OF_RESTITUTION*(cameraVelocity.y - obj.velocity.y))/2;
-    float newVelocityZ = (obj.velocity.z + cameraVelocity.z + COEFFICIENT_OF_RESTITUTION*(cameraVelocity.z - obj.velocity.z))/2;
+    if(cameraVelocity != glm::vec4(0.0f, 0.0f, 0.0f, 0.0f)){
+        float newVelocityX = (obj.velocity.x + cameraVelocity.x + 1*(cameraVelocity.x - obj.velocity.x))/2;
+        float newVelocityY = (obj.velocity.y + cameraVelocity.y + 1*(cameraVelocity.y - obj.velocity.y))/2;
+        float newVelocityZ = (obj.velocity.z + cameraVelocity.z + 1*(cameraVelocity.z - obj.velocity.z))/2;
+        newVelocity = glm::vec4(newVelocityX, newVelocityY, newVelocityZ, 0.0f);
+    }
+    else{
+        glm::vec4 collisionPointNormal;
+        OBB thisOBB = DefineCameraOBB();
+        glm::vec4 objVelocity = obj.velocity;
 
-    glm::vec4 newVelocity = glm::vec4(newVelocityX, newVelocityY, newVelocityZ, 0.0f);
+        glm::vec4 vectorCenterToPoint = collisionPoint - thisOBB.centro;
+        glm::vec4 vectorInOBBSpace = thisOBB.cartesianToOBB*vectorCenterToPoint;
+
+        float diffX = (thisOBB.tamanhoU/2) - std::abs(vectorInOBBSpace.x);
+        float diffY = (thisOBB.tamanhoV/2) - std::abs(vectorInOBBSpace.y);
+        float diffZ = (thisOBB.tamanhoW/2) - std::abs(vectorInOBBSpace.z);
+
+        glm::vec4 resultVector = glm::vec4(0.0f, 0.0f, 0.0f, 0.0f);
+
+        if(diffX <= diffY && diffX <= diffZ){
+            resultVector = glm::vec4(vectorInOBBSpace.x, 0.0f, 0.0f, 0.0f);
+        }
+        if(diffY <= diffX && diffY <= diffZ){
+            resultVector = glm::vec4(resultVector.x, vectorInOBBSpace.y, 0.0f, 0.0f);
+        }
+        if(diffZ <= diffX && diffZ <= diffY){
+            resultVector = glm::vec4(resultVector.x, resultVector.y, vectorInOBBSpace.z, 0.0f);
+        }
+
+        collisionPointNormal = thisOBB.OBBToCartesian*resultVector;
+        collisionPointNormal = collisionPointNormal/norm(collisionPointNormal);
+
+        glm::vec4 perpendicularComponent = ( dotproduct(objVelocity, collisionPointNormal) / dotproduct(collisionPointNormal, collisionPointNormal) ) * collisionPointNormal;
+        glm::vec4 parallelComponent = objVelocity - perpendicularComponent;
+
+        newVelocity = parallelComponent + COEFFICIENT_OF_RESTITUTION*(-perpendicularComponent);
+    }
 
     obj.velocity = newVelocity;
 }
 
-void InelasticCollisionWithCamera(SceneObject& obj){
-    obj.velocity = GetCameraVelocity();
-}
 
-void CameraCollisionWithWall(SceneObject wall, glm::vec4 collisionPoint){
-    std::vector<glm::vec4> components = GetParallelAndPerpendicularComponents(GetCameraVelocity(), wall, collisionPoint);
+SceneObject dummy;
 
-    glm::vec4 parallelComponent = components[0];
-    glm::vec4 perpendicularComponent = components[1];
+void ApplyCollisionWithCameraPhysics(SceneObject& obj, glm::vec4 collisionPoint, bool wasAlreadyColliding, std::vector<SceneObject>& currentScene, bool isParent = false, SceneObject child = dummy){
+
+        OBB aux;
+
+        if(isParent) aux = DefineOrientedBoundingBox(child);
+        else aux = DefineOrientedBoundingBox(obj);
+
+        glm::vec4 vetor = (aux.centro - GetCameraPosition());
+
+        glm::vec4 outroVetor = -vetor;
+
+        glm::vec4 cameraVelocity = GetCameraVelocity();
+
+        std::vector<glm::vec4> components;
+        if(isParent) components = GetParallelAndPerpendicularComponentsAndNormal(cameraVelocity, child, collisionPoint);
+        else components = GetParallelAndPerpendicularComponentsAndNormal(cameraVelocity, obj, collisionPoint);
 
 
-    MoveCameraByVector(-(perpendicularComponent/norm(perpendicularComponent)));
-    SetCameraVelocity(parallelComponent);
-}
 
-void ApplyCollisionWithCameraPhysics(SceneObject& obj, glm::vec4 collisionPoint){
-    if(obj.thisCollisionType == (int)CollisionType::WALL){
-        CameraCollisionWithWall(obj, collisionPoint);
+        glm::vec4 parallel = components[0];
+        glm::vec4 perpendicular = components[1];
+        glm::vec4 normal = components[2];
+        int indexInWallCollisionsList = IsNameInWallsCollisionsList(obj.name);
+
+        if(obj.parentIndex == -1){
+            if(indexInWallCollisionsList != -1){
+                glm::vec4 perpendicularToWallNormal = ( dotproduct(cameraVelocity, wallCollisionsNormalsList[indexInWallCollisionsList]) / dotproduct(wallCollisionsNormalsList[indexInWallCollisionsList], wallCollisionsNormalsList[indexInWallCollisionsList]) ) * wallCollisionsNormalsList[indexInWallCollisionsList];
+                glm::vec4 parallelToWallNormal = cameraVelocity - perpendicularToWallNormal;
+                ElasticCollisionWithCamera(obj, collisionPoint, parallelToWallNormal);
+            }
+            else{
+                if(dotproduct(GetCameraVelocity(), vetor) > 0 || dotproduct(obj.velocity, outroVetor) > 0){
+                    if(obj.thisCollisionType == (int)CollisionType::ELASTIC || obj.thisCollisionType == (int)CollisionType::INELASTIC){
+                        ElasticCollisionWithCamera(obj, collisionPoint, cameraVelocity);
+                    }
+                }
+            }
+
+        if(dotproduct(cameraVelocity, -normal) > 0)
+            SetCameraVelocity(parallel);
+
     }
-    else if(obj.thisCollisionType == (int)CollisionType::ELASTIC){
-        ElasticCollisionWithCamera(obj);
-    }
-    else if(obj.thisCollisionType == (int)CollisionType::INELASTIC){
-        InelasticCollisionWithCamera(obj);
+    else{
+        if(isParent){
+            ApplyCollisionWithCameraPhysics(currentScene[obj.parentIndex], collisionPoint, wasAlreadyColliding, currentScene, true, child);
+        }
+        else ApplyCollisionWithCameraPhysics(currentScene[obj.parentIndex], collisionPoint, wasAlreadyColliding, currentScene, true, obj);
     }
 }
 
@@ -451,26 +461,15 @@ std::vector<float> CheckCollisionWithCamera(SceneObject& obj){
     std::vector<float> retorno;
 
     OBB cameraOBB = DefineCameraOBB();
-    Sphere thisSphere;
-
-    if(obj.thisColliderType == (int)ColliderType::SPHERE)
-    thisSphere = DefineSphere(obj);
-
-    switch((ColliderType)obj.thisColliderType){
-        case ColliderType::SPHERE:
-            return IntersectionOBB_Sphere(cameraOBB, thisSphere);
-        break;
-        case ColliderType::CYLINDER:
-            //retorno = IntersectionAABB_Cylinder();
-            return retorno;
-        break;
-        case ColliderType::OBB:
-            //retorno = IntersectionAABB_Sphere();
-            return retorno;
-        break;
-        default:
-            return retorno;
+    if(obj.thisColliderType == (int)ColliderType::SPHERE){
+        Sphere thisSphere = DefineSphere(obj);
+        return IntersectionOBB_Sphere(cameraOBB, thisSphere);
     }
+    else if(obj.thisColliderType == (int)ColliderType::OBB){
+        OBB thisOBB = DefineOrientedBoundingBox(obj);
+        return IntersectionOBB_OBB(thisOBB, cameraOBB);
+    }
+    return retorno;
 }
 
 void TestCollisions(std::vector<SceneObject>& currentScene){
@@ -485,47 +484,54 @@ void TestCollisions(std::vector<SceneObject>& currentScene){
 
     if(colliders.size() == 0) return;
 
-
-    /*for(unsigned int i = 0; i < colliders.size(); i++){
-
-        //if(GetDistanceFromCamera(currentScene[i]) < MAX_DISTANCE_FROM_CAMERA){
-            std::vector<float> collisionWithCameraPoint = CheckCollisionWithCamera(currentScene[i]);
-
-            if(collisionWithCameraPoint.size() == 4){ //houve colisão com a câmera
-                glm::vec4 vec4CollisionPoint = glm::vec4(collisionWithCameraPoint[0], collisionWithCameraPoint[1], collisionWithCameraPoint[2], collisionWithCameraPoint[3]);
-
-                if(currentScene[i].onCollision != NULL)currentScene[i].onCollision(currentScene, i, COLLISION_WITH_CAMERA_CODE);
-
-                //printf("COLIDIU COM A CAMERA AAAAAAAAAAAAAA");
-                //ApplyCollisionWithCameraPhysics(currentScene[i], vec4CollisionPoint);
-            }
-        //}
-
-    }*/
+    bool alreadyColliding = false;
 
 
     for(unsigned int i = 0; i < colliders.size(); i++){
         std::vector<std::string> newCollisionsList;
         for(unsigned int j = i+1; j < colliders.size(); j++){
-            std::vector<float> collisionPoint = CheckCollision(currentScene[i], currentScene[j]);
+              if(!IsNameInCollisionsList(currentScene[i].childrenNames, currentScene[j].name)){
+                std::vector<float> collisionPoint = CheckCollision(currentScene[i], currentScene[j]);
 
-            if(collisionPoint.size() == 4){ //houve colisão
-                    glm::vec4 vec4CollisionPoint = glm::vec4(collisionPoint[0], collisionPoint[1], collisionPoint[2], collisionPoint[3]);
+                if(collisionPoint.size() == 4){ //houve colisão
+                        glm::vec4 vec4CollisionPoint = glm::vec4(collisionPoint[0], collisionPoint[1], collisionPoint[2], collisionPoint[3]);
 
-                    bool wasAlreadyColliding = IsNameInCollisionsList(currentScene[i].collisionsList, currentScene[j].name);
+                        newCollisionsList.push_back(currentScene[j].name);
 
-                    newCollisionsList.push_back(currentScene[j].name);
+                        alreadyColliding = IsNameInCollisionsList(currentScene[i].collisionsList, currentScene[j].name);
 
-                    if(!wasAlreadyColliding){
-                        if(currentScene[i].onCollision != NULL)currentScene[i].onCollision(currentScene, i, j);
-                        if(currentScene[j].onCollision != NULL)currentScene[j].onCollision(currentScene, j, i);
+                        if(!alreadyColliding){
+                            if(currentScene[i].onCollision != NULL)currentScene[i].onCollision(currentScene, i, j);
+                            if(currentScene[j].onCollision != NULL)currentScene[j].onCollision(currentScene, j, i);
+                        }
 
-                        ApplyCollisionPhysics(currentScene[i], currentScene[j], vec4CollisionPoint, wasAlreadyColliding);
-                    }
+                            ApplyCollisionPhysics(currentScene[i], currentScene[j], vec4CollisionPoint, alreadyColliding, currentScene);
+                }
             }
         }
         currentScene[i].collisionsList = newCollisionsList;
         newCollisionsList.clear();
+    }
+
+    std::vector<std::string> newCameraCollisionsList;
+
+    if(GetCameraMode() == CameraMode::FREE){
+        for(unsigned int i = 0; i < colliders.size(); i++){
+            if(GetDistanceFromCamera(currentScene[i]) < MAX_DISTANCE_FROM_CAMERA){
+                std::vector<float> collisionWithCameraPoint = CheckCollisionWithCamera(currentScene[i]);
+                if(collisionWithCameraPoint.size() == 4){ //houve colisão com a câmera
+                    glm::vec4 vec4CollisionPoint = glm::vec4(collisionWithCameraPoint[0], collisionWithCameraPoint[1], collisionWithCameraPoint[2], collisionWithCameraPoint[3]);
+                    newCameraCollisionsList.push_back(currentScene[i].name);
+                   // if(!IsNameInCollisionsList(cameraCollisionsList, currentScene[i].name)){
+                        if(currentScene[i].onCollision != NULL)currentScene[i].onCollision(currentScene, i, COLLISION_WITH_CAMERA_CODE);
+                        ApplyCollisionWithCameraPhysics(currentScene[i], vec4CollisionPoint, IsNameInCollisionsList(cameraCollisionsList, currentScene[i].name), currentScene);
+                   // }
+                }
+            }
+        }
+        cameraCollisionsList = newCameraCollisionsList;
+        wallCollisionsList.clear();
+        wallCollisionsNormalsList.clear();
     }
 
 }

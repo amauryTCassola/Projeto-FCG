@@ -34,9 +34,9 @@
 #define MAX_DISTANCE_FROM_CAMERA 5.0f
 #define COLLISION_WITH_CAMERA_CODE -1
 
-#define CAMERA_OBB_SIZE_U 2
-#define CAMERA_OBB_SIZE_V 2
-#define CAMERA_OBB_SIZE_W 2
+#define CAMERA_OBB_SIZE_U 0.5f
+#define CAMERA_OBB_SIZE_V 1.0f
+#define CAMERA_OBB_SIZE_W 0.5f
 
 
 void TestMouseCollision(MouseCollisionType colType, std::vector<SceneObject>& currentScene);
