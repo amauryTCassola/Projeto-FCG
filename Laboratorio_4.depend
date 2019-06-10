@@ -2371,7 +2371,7 @@
 
 1559502974 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\intersectionfunctions.c
 
-1560125489 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\main.cpp
+1560132780 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\main.cpp
 	<cmath>
 	<cstdio>
 	<cstdlib>
@@ -2391,7 +2391,7 @@
 	<glm/gtc/type_ptr.hpp>
 	"objUtils.h"
 
-1560060214 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\objutils.h
+1560132838 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\objutils.h
 	<cmath>
 	<cstdio>
 	<cstdlib>
@@ -2413,6 +2413,7 @@
 	"cameraUtils.h"
 	"SceneLoadSaveUtils.h"
 	"CollisionUtils.h"
+	"BezierCurvesUtils.h"
 
 1488818172 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\nlohmann\json.hpp
 	<algorithm>
@@ -2444,7 +2445,7 @@
 	<vector>
 	<cstdio>
 
-1560022019 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\intersectionfunctions.h
+1560131679 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\intersectionfunctions.h
 	<cmath>
 	<cstdio>
 	<cstdlib>
@@ -2463,10 +2464,10 @@
 	"matrices.h"
 	"cameraUtils.h"
 
-1560110920 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\objutils.cpp
+1560133020 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\objutils.cpp
 	"objUtils.h"
 
-1560036065 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\intersectionfunctions.cpp
+1560131667 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\intersectionfunctions.cpp
 	"IntersectionFunctions.h"
 
 1560124773 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\scene0functions.h
@@ -2491,7 +2492,7 @@
 	"objUtils.h"
 	"cameraUtils.h"
 
-1560125233 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\scene0functions.cpp
+1560132098 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\scene0functions.cpp
 	"Scene0Functions.h"
 
 1560110884 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\sceneloadsaveutils.h
@@ -2517,7 +2518,7 @@
 	"matrices.h"
 	"shaderUtil.h"
 
-1560124445 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\sceneloadsaveutils.cpp
+1560133057 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\sceneloadsaveutils.cpp
 	"SceneLoadSaveUtils.h"
 	"stb_image.h"
 	"Scene0Functions.h"
@@ -2549,4 +2550,27 @@
 1560123925 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\collisionutils.cpp
 	"CollisionUtils.h"
 	"objUtils.h"
+
+1560130196 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\beziercurvesutils.cpp
+	"BezierCurvesUtils.h"
+
+1560132865 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\beziercurvesutils.h
+	<cmath>
+	<cstdio>
+	<cstdlib>
+	<map>
+	<stack>
+	<string>
+	<vector>
+	<limits>
+	<fstream>
+	<sstream>
+	<stdexcept>
+	<algorithm>
+	<glad/glad.h>
+	<GLFW/glfw3.h>
+	<glm/mat4x4.hpp>
+	<glm/vec4.hpp>
+	<glm/gtc/type_ptr.hpp>
+	"matrices.h"
 

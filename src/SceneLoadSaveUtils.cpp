@@ -758,7 +758,7 @@ void Debug_NewObjectSphere(std::vector<SceneObject>& currentScene){
     currentScene.back().onMoveName = "SphereChildOnMove";
     currentScene.back().onMove = FunctionMapping(currentScene.back().onMoveName);
     currentScene.back().velocity = glm::vec4(0, 0, 0, 0);
-    currentScene.back().thisColliderType = (int)ColliderType::SPHERE;
+    currentScene.back().thisColliderType = (int)ColliderType::NONE;
     currentScene.back().thisCollisionType = (int)CollisionType::WALL;
     currentScene.back().model = Matrix_Identity();
     currentScene.back().rotationMatrix = Matrix_Identity();

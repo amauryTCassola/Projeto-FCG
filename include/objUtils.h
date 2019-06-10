@@ -29,6 +29,7 @@
 #include "cameraUtils.h"
 #include "SceneLoadSaveUtils.h"
 #include "CollisionUtils.h"
+#include "BezierCurvesUtils.h"
 
 void UpdateScreenRatio(float newScreenRatio);
 

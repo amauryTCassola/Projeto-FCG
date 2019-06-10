@@ -130,6 +130,26 @@ void CallChildrenMoveFunction(SceneObject parent){
     }
 }
 
+glm::vec4 p1 = glm::vec4(0.0f, 2.0, 0.0f, 1.0f);
+glm::vec4 p2 = glm::vec4(3.0f, 2.0, 0.0f, 1.0f);
+glm::vec4 p3 = glm::vec4(3.0f, -2.0, 0.0f, 1.0f);
+glm::vec4 p4 = glm::vec4(0.0f, -2.0, 0.0f, 1.0f);
+
+glm::vec4 p5 = glm::vec4(0.0f, -2.0, 0.0f, 1.0f);
+glm::vec4 p6 = glm::vec4(-3.0f, -2.0, 0.0f, 1.0f);
+glm::vec4 p7 = glm::vec4(-3.0f, 2.0, 0.0f, 1.0f);
+glm::vec4 p8 = glm::vec4(0.0f, 2.0, 0.0f, 1.0f);
+
+std::vector<glm::vec4> pontos {p1, p2, p3, p4, p5, p6, p7, p8};
+
+void TesteBezier(){
+
+    float t = fmod(glfwGetTime(), 2);
+    glm::vec4 ponto = PointInBezierCurve(pontos, t);
+    currentScene[2].translationMatrix = Matrix_Translate(ponto.x, ponto.y, ponto.z);
+
+}
+
 void MoveCurrentSceneObjects(){
     glm::vec4 movementVector;
     currentTime = (float)glfwGetTime();
@@ -147,7 +167,11 @@ void MoveCurrentSceneObjects(){
 
             ApplyTransformations(currentScene[i]);
     }
+
+    TesteBezier();
 }
+
+
 
 void RotateCameraX(float x){
     AddToCameraRotationX(x);
