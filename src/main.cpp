@@ -91,7 +91,7 @@ void FramebufferSizeCallback(GLFWwindow* window, int width, int height)
     // coordinates" (NDC) para "pixel coordinates".  Essa é a operação de
     // "Screen Mapping" ou "Viewport Mapping" vista em aula (slides 33-44 do documento "Aula_07_Transformacoes_Geometricas_3D.pdf").
     glViewport(0, 0, width, height);
-
+    UpdateFramebufferSize(height, width);
     // Atualizamos também a razão que define a proporção da janela (largura /
     // altura), a qual será utilizada na definição das matrizes de projeção,
     // tal que não ocorra distorções durante o processo de "Screen Mapping"
@@ -184,10 +184,12 @@ GLFWwindow* initGL(){
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     //criação da janela
-    GLFWwindow* window = glfwCreateWindow(500, 500, "Janela 1", NULL, NULL);
+    GLFWwindow* window = glfwCreateWindow(800, 600, "Janela 1", NULL, NULL);
 
     //faz com que a janela recém criada seja o contexto atual
     glfwMakeContextCurrent(window);
+
+    glfwSetWindowPos(window, 10, 10);
 
     // Carregamento de todas funções definidas por OpenGL 3.3, utilizando a
     // biblioteca GLAD.
@@ -197,7 +199,6 @@ GLFWwindow* initGL(){
     glfwSetFramebufferSizeCallback(window, FramebufferSizeCallback);
     glfwSetKeyCallback(window, KeyCallback);
     glfwSetCursorPosCallback(window, CursorPosCallback);
-    //FramebufferSizeCallback(window, 800, 600); // Forçamos a chamada do callback acima, para definir g_ScreenRatio.
 
     // Habilitamos o Z-buffer. Veja slide 108 do documento "Aula_09_Projecoes.pdf".
     glEnable(GL_DEPTH_TEST);
@@ -210,6 +211,8 @@ GLFWwindow* initGL(){
     SetMousePosToMiddle(window);
 
     ShowCursor(false);
+
+    FramebufferSizeCallback(window, 800, 600); // Forçamos a chamada do callback acima, para definir g_ScreenRatio.
 
     return window;
 }

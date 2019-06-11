@@ -61,6 +61,7 @@
 		</Linker>
 		<Unit filename="include/BezierCurvesUtils.h" />
 		<Unit filename="include/CollisionUtils.h" />
+		<Unit filename="include/FunctionMappingUtils.h" />
 		<Unit filename="include/GLFW/glfw3.h" />
 		<Unit filename="include/GLFW/glfw3native.h" />
 		<Unit filename="include/IntersectionFunctions.h" />
@@ -342,6 +343,7 @@
 		<Unit filename="include/utils.h" />
 		<Unit filename="src/BezierCurvesUtils.cpp" />
 		<Unit filename="src/CollisionUtils.cpp" />
+		<Unit filename="src/FunctionMappingUtils.cpp" />
 		<Unit filename="src/IntersectionFunctions.cpp" />
 		<Unit filename="src/Scene0Functions.cpp" />
 		<Unit filename="src/SceneLoadSaveUtils.cpp" />

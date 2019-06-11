@@ -34,8 +34,10 @@ enum class CameraMode{FREE, LOOKAT};
 void SetCameraToDraw(GLuint program_id, float screen_ratio);
 void UpdateCameraPositionAndRotation(float deltaTime);
 glm::vec4 GetCameraPosition();
-glm::vec4 GetUpVector();
-glm::vec4 GetViewVector();
+void SetCameraPosition(glm::vec4 _camera_position);
+glm::vec4 GetCameraUpVector();
+glm::vec4 GetCameraViewVector();
+void SetCameraViewVector(glm::vec4 _view_vector);
 glm::vec4 GetCameraVelocity();
 void AddToCameraRotationX(float addX);
 void AddToCameraRotationY(float addY);
@@ -48,5 +50,7 @@ void SetCameraVelocity(glm::vec4 newVelocity);
 CameraMode GetCameraMode();
 void ActivateFreeCamera();
 void ActivateLookAtCamera(glm::vec4 pointToLookAt, float distance);
+void SetCameraMode(CameraMode _newMode);
+glm::vec4 GetLookAtCameraPosition();
 
 #endif // CAMERA_UTILS

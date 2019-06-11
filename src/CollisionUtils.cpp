@@ -116,11 +116,11 @@ bool TestRayIntersection(SceneObject obj){
     if(obj.thisColliderType == (int)ColliderType::SPHERE){
 
         Sphere thisSphere = DefineSphere(obj);
-        return IntersectionRay_Sphere(GetCameraPosition(), GetViewVector(), thisSphere);
+        return IntersectionRay_Sphere(GetCameraPosition(), GetCameraViewVector(), thisSphere);
     }
     else if(obj.thisColliderType == (int)ColliderType::OBB){
         OBB thisOBB = DefineOrientedBoundingBox(obj);
-        return IntersectionRay_OBB(GetCameraPosition(), GetViewVector(), thisOBB);
+        return IntersectionRay_OBB(GetCameraPosition(), GetCameraViewVector(), thisOBB);
     }
     else return false;
 }

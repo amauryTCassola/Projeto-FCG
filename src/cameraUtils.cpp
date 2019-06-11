@@ -50,20 +50,45 @@ glm::vec4 GetCameraVelocity(){
     return camera_velocity;
 }
 
-glm::vec4 GetViewVector(){
+glm::vec4 GetCameraViewVector(){
     return camera_view_vector;
-}
-
-glm::vec4 GetUpVector(){
-    return camera_up_vector;
 }
 
 glm::vec4 GetCameraPosition(){
     return camera_position_point;
 }
 
+void SetCameraViewVector(glm::vec4 _view_vector){
+    camera_view_vector = _view_vector;
+}
+
+void SetCameraPosition(glm::vec4 _camera_position){
+    camera_position_point = _camera_position;
+}
+
+glm::vec4 GetCameraUpVector(){
+    return camera_up_vector;
+}
+
 CameraMode GetCameraMode(){
     return currentMode;
+}
+
+void SetCameraMode(CameraMode _newMode){
+    currentMode = _newMode;
+}
+
+glm::vec4 GetLookAtCameraPosition(){
+    if(currentMode == CameraMode::FREE)
+        return camera_position_point;
+    else{
+        float r = g_CameraDistance;
+        float y = r*sin(g_CameraPhi);
+        float z = r*cos(g_CameraPhi)*cos(g_CameraTheta);
+        float x = r*cos(g_CameraPhi)*sin(g_CameraTheta);
+
+        return Matrix_Translate(camera_point_to_look_at.x, camera_point_to_look_at.y, camera_point_to_look_at.z)*glm::vec4(x,y,z,1.0f); // Ponto "c", centro da câmera
+    }
 }
 
 void SetCameraToDraw(GLuint program_id, float screen_ratio){

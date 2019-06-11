@@ -1,6 +1,7 @@
 #include "SceneLoadSaveUtils.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
+#include "FunctionMappingUtils.h"
 
 namespace ns{
     struct SceneObjectOnDisc{
@@ -24,6 +25,7 @@ namespace ns{
         std::string         onClickName;
         std::string         onCollisionName;
         std::string         onMoveName;
+        std::string         updateName;
         int                 thisCollisionType;          //o tipo de colisão que deve ser implementada quando uma colisão for detectada (pode ser elástica, inelástica ou imóvel (WALL))
         int                 thisColliderType;           //tipo (forma) do colisor deste objeto
         bool                active;                     //se este objeto deve ser considerado na cena, etc
@@ -48,7 +50,8 @@ namespace ns{
                 {"thisCollisionType", obj.thisCollisionType},
                 {"thisColliderType", obj.thisColliderType},
                 {"active", obj.active},
-                {"onMoveName", obj.onMoveName}};
+                {"onMoveName", obj.onMoveName},
+                {"updateName", obj.updateName}};
     }
 
     void from_json(const json& j, SceneObjectOnDisc& obj) {
@@ -64,6 +67,7 @@ namespace ns{
         obj.onMouseOverName = j.at("onMouseOverName");
         obj.onClickName = j.at("onClickName");
         obj.onCollisionName = j.at("onCollisionName");
+        obj.updateName = j.at("updateName");
         obj.thisCollisionType = j.at("thisCollisionType").get<int>();
         obj.thisColliderType = j.at("thisColliderType").get<int>();
         obj.active = j.at("active").get<bool>();
@@ -79,22 +83,6 @@ std::map<std::pair<GLuint, GLuint>, GLuint> GPUProgramsMap;
 std::map<std::string, GLuint> fragmentShadersMap;
 std::map<std::string, GLuint> vertexShadersMap;
 std::map<std::string, ModelInformation> modelsMap;
-
-#include "Scene0Functions.h"
-std::function<void(std::vector<SceneObject>&, int callerIndex)> FunctionMapping(std::string functionName){
-
-    if(functionName.compare("SphereOnClick") == 0) return SphereOnClick;
-    if(functionName.compare("SphereOnMouseOver") == 0) return SphereOnMouseOver;
-    if(functionName.compare("SphereOnMove") == 0) return SphereOnMove;
-    if(functionName.compare("SphereChildOnMove") == 0) return SphereChildOnMove;
-    if(functionName.compare("RabbitOnClick") == 0) return RabbitOnClick;
-
-    return NULL;
-}
-
-std::function<void(std::vector<SceneObject>&, int, int)> CollisionFunctionMapping(std::string functionName){
-    return NULL;
-}
 
 bool KeyExistsInMap(std::map<std::string, GLuint> thisMap, std::string key){
     if(thisMap.find(key) != thisMap.end()) return true;
@@ -485,7 +473,6 @@ GLuint GetFragmentShaderId(std::string fragment_shader_filename){
     }
 }
 
-
 GLuint GetGPUProgramId(GLuint vertex_shader_id, GLuint fragment_shader_id){
     if(GPUProgramsMap.find(std::pair<GLuint, GLuint>(vertex_shader_id, fragment_shader_id)) != GPUProgramsMap.end()){
         return GPUProgramsMap.at(std::pair<GLuint, GLuint>(vertex_shader_id, fragment_shader_id));
@@ -496,7 +483,6 @@ GLuint GetGPUProgramId(GLuint vertex_shader_id, GLuint fragment_shader_id){
         return newGPUProgramId;
     }
 }
-
 
 std::vector<int> GetChildrenList(std::vector<std::string> childrenNames, std::vector<SceneObject>& currentScene, int parentIndex){
     std::vector<int> retorno;
@@ -557,6 +543,7 @@ void SaveScene(std::string filename, std::vector<SceneObject> currentScene){
         curObj.onMouseOverName =        currentScene[i].onMouseOverName;
         curObj.onCollisionName =        currentScene[i].onCollisionName;
         curObj.onMoveName =             currentScene[i].onMoveName;
+        curObj.updateName =             currentScene[i].updateName;
 
         objsListToWrite.push_back(curObj);
     }
@@ -625,6 +612,9 @@ std::vector<SceneObject> LoadScene(std::string sceneFilename){
         aux.onClickName      =  objsList[i].onClickName;
         aux.onClick          =  FunctionMapping(aux.onClickName);
 
+        aux.updateName      =  objsList[i].updateName;
+        aux.update          =  FunctionMapping(aux.updateName);
+
         aux.onCollisionName = objsList[i].onCollisionName;
         aux.onCollision     = CollisionFunctionMapping(aux.onCollisionName);
 
@@ -663,14 +653,28 @@ void OpenSceneAdditive(std::string filename, std::vector<SceneObject>& currentSc
 }
 
 void UnloadScene(std::vector<SceneObject>& currentScene){
-    for(unsigned int i = 0; i<currentScene.size(); i++){
-        glDeleteShader(currentScene[i].vertexShaderId);
-        glDeleteShader(currentScene[i].fragmentShaderId);
-        glDeleteProgram(currentScene[i].gpuProgramId);
-        glDeleteBuffers(currentScene[i].buffers.size(), &currentScene[i].buffers[0]);
-        glDeleteTextures(currentScene[i].textureIds.size(), &currentScene[i].textureIds[0]);
-        glDeleteVertexArrays(1, &currentScene[i].vertex_array_object_id);
+    for (auto const& item : texturesMap){
+        glDeleteTextures(1, &item.second);
     }
+    for (auto const& item : vertexShadersMap){
+        glDeleteShader(item.second);
+    }
+    for (auto const& item : fragmentShadersMap){
+        glDeleteShader(item.second);
+    }
+    for (auto const& item : GPUProgramsMap){
+        glDeleteProgram(item.second);
+    }
+    for (auto const& item : modelsMap){
+        glDeleteBuffers(item.second.buffers.size(), &item.second.buffers[0]);
+        glDeleteVertexArrays(1, &item.second.vertex_array_object_id);
+    }
+
+    texturesMap.clear();
+    GPUProgramsMap.clear();
+    fragmentShadersMap.clear();
+    vertexShadersMap.clear();
+    modelsMap.clear();
     currentScene.clear();
 }
 
@@ -698,6 +702,8 @@ void Debug_NewObjectSphere(std::vector<SceneObject>& currentScene){
     currentScene.back().onMouseOver = FunctionMapping(currentScene.back().onMouseOverName);
     currentScene.back().onMoveName = std::string("SphereOnMove");
     currentScene.back().onMove = FunctionMapping(currentScene.back().onMoveName);
+    currentScene.back().updateName = std::string("");
+    currentScene.back().update = FunctionMapping(currentScene.back().updateName);
     currentScene.back().velocity = glm::vec4(0, 0, 0, 0);
     currentScene.back().thisColliderType = (int)ColliderType::SPHERE;
     currentScene.back().thisCollisionType = (int)CollisionType::ELASTIC;
@@ -705,7 +711,7 @@ void Debug_NewObjectSphere(std::vector<SceneObject>& currentScene){
     currentScene.back().rotationMatrix = Matrix_Identity();
     currentScene.back().translationMatrix = Matrix_Translate(0.0f, -0.5f, 0.0f);
     currentScene.back().scaleMatrix = Matrix_Scale(0.5f,0.5f,0.5f);
-    //currentScene.back().childrenNames = std::vector<std::string>{"Esfera2"};
+    currentScene.back().childrenNames = std::vector<std::string>{"Esfera2"};
 
     currentScene.push_back(LoadNewObject("../../data/bunny.obj"));
     currentScene.back().name = "Bunny2";
@@ -728,6 +734,37 @@ void Debug_NewObjectSphere(std::vector<SceneObject>& currentScene){
     currentScene.back().onMouseOver = FunctionMapping(currentScene.back().onMouseOverName);
     currentScene.back().onMoveName = "";
     currentScene.back().onMove = FunctionMapping(currentScene.back().onMoveName);
+    currentScene.back().updateName = std::string("");
+    currentScene.back().update = FunctionMapping(currentScene.back().updateName);
+    currentScene.back().velocity = glm::vec4(0, 0, 0, 0);
+    currentScene.back().thisColliderType = (int)ColliderType::OBB;
+    currentScene.back().thisCollisionType = (int)CollisionType::WALL;
+    currentScene.back().model = Matrix_Identity();
+    currentScene.back().rotationMatrix = Matrix_Identity();
+    currentScene.back().translationMatrix = Matrix_Translate(0.0f, 0.0f, 15.0f);
+    currentScene.back().scaleMatrix = Matrix_Identity();
+
+    currentScene.push_back(LoadNewObject("../../data/Crate.obj"));
+    currentScene.back().name = "Mirror1";
+    currentScene.back().textureIds.push_back(GetTextureId("../../data/mirror.jpg", WrapMode::MIRRORED_REPEAT));
+    currentScene.back().textureFilenames.push_back("../../data/mirror.jpg");
+    currentScene.back().textureWrapMode = (int)WrapMode::MIRRORED_REPEAT;
+    currentScene.back().vertexShaderId = GetVertexShaderId("../../src/shader_vertex.glsl");
+    currentScene.back().fragmentShaderId = GetFragmentShaderId("../../src/shader_fragment_Planar_Proj.glsl");
+    currentScene.back().gpuProgramId = GetGPUProgramId(currentScene.back().vertexShaderId, currentScene.back().fragmentShaderId);
+    currentScene.back().fragmentShaderFilename = std::string("../../src/shader_fragment_Planar_Proj.glsl");
+    currentScene.back().vertexShaderFilename = std::string("../../src/shader_vertex.glsl");
+    currentScene.back().active = true;
+    currentScene.back().blockMovement = glm::vec4(0.0f, 0.0f, 0.0f, 0.0f);
+    currentScene.back().decelerationRate = 0.0f;
+    currentScene.back().onClickName = "";
+    currentScene.back().onClick = FunctionMapping(currentScene.back().onClickName);
+    currentScene.back().onMouseOverName = "";
+    currentScene.back().onMouseOver = FunctionMapping(currentScene.back().onMouseOverName);
+    currentScene.back().onMoveName = "";
+    currentScene.back().onMove = FunctionMapping(currentScene.back().onMoveName);
+    currentScene.back().updateName = std::string("MirrorUpdate");
+    currentScene.back().update = FunctionMapping(currentScene.back().updateName);
     currentScene.back().velocity = glm::vec4(0, 0, 0, 0);
     currentScene.back().thisColliderType = (int)ColliderType::OBB;
     currentScene.back().thisCollisionType = (int)CollisionType::WALL;
@@ -757,6 +794,8 @@ void Debug_NewObjectSphere(std::vector<SceneObject>& currentScene){
     currentScene.back().onMouseOver = FunctionMapping(currentScene.back().onMouseOverName);
     currentScene.back().onMoveName = "SphereChildOnMove";
     currentScene.back().onMove = FunctionMapping(currentScene.back().onMoveName);
+    currentScene.back().updateName = std::string("SphereChildUpdate");
+    currentScene.back().update = FunctionMapping(currentScene.back().updateName);
     currentScene.back().velocity = glm::vec4(0, 0, 0, 0);
     currentScene.back().thisColliderType = (int)ColliderType::NONE;
     currentScene.back().thisCollisionType = (int)CollisionType::WALL;

@@ -128,6 +128,7 @@ struct SceneObject
     std::string     onClickName;
     std::string     onCollisionName;
     std::string     onMoveName;
+    std::string     updateName;
     int             thisCollisionType;              //o tipo de colisão que deve ser implementada quando uma colisão for detectada (pode ser elástica, inelástica ou imóvel (WALL))
     int             thisColliderType;               //tipo (forma) do colisor deste objeto
     bool            active;                         //se este objeto deve ser considerado na cena, etc
@@ -141,10 +142,12 @@ struct SceneObject
 
     std::vector<std::string>  collisionsList;             //lista de objetos colidindo com este no frame atual
 
-    std::function<void(std::vector<SceneObject>&, int)>   onMouseOver;   //função chamada quando o usuário olhar para o objeto
-    std::function<void(std::vector<SceneObject>&, int)>   onClick;       //função chamada quando o usuário clicar no objeto
+    std::function<void(std::vector<SceneObject>&, int)>   onMouseOver;  //função chamada quando o usuário olhar para o objeto
+    std::function<void(std::vector<SceneObject>&, int)>   onClick;      //função chamada quando o usuário clicar no objeto
     std::function<void(std::vector<SceneObject>&, int)>   onMove;       //função chamada quando o objeto for movido, pode ser usada para fazer animações
+    std::function<void(std::vector<SceneObject>&, int)>   update;       //função chamada todos os frames no fim do frame (útil para implementar animações baseadas em curvas de Bézier, por exemplo)
     std::function<void(std::vector<SceneObject>&, int, int)>   onCollision;   //função chamada quando é detectada uma colisão
+
 
     glm::mat4   parentMatrix = Matrix_Identity();
     std::vector<std::string> childrenNames;

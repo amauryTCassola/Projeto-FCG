@@ -31,8 +31,10 @@
 #include "CollisionUtils.h"
 #include "BezierCurvesUtils.h"
 
-void UpdateScreenRatio(float newScreenRatio);
+enum class MirrorReflectiveFace{TOP, BOTTOM, LEFT, RIGHT, FRONT, BACK};
 
+void UpdateScreenRatio(float newScreenRatio);
+void UpdateFramebufferSize(int newHeight, int newWidth);
 void DrawCurrentScene();
 
 void SaveCurrentScene(std::string filename);
@@ -62,4 +64,6 @@ void RotateObject(SceneObject& obj, glm::vec4 axis, float angle);
 void ResetRotation(SceneObject& obj);
 float GetDeltaTime();
 void FinishFrame();
+void SetObjectPosition(glm::vec4 newPosition, SceneObject& obj);
+void DrawMirror(SceneObject& mirrorObj, glm::vec4 mirrorColor, MirrorReflectiveFace reflectiveFace);
 #endif// OBJUTILS

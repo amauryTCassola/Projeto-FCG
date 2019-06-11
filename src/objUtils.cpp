@@ -6,6 +6,15 @@ float screen_ratio = 1.0f;
 float deltaTime = 0;
 float currentTime = 0;
 
+int framebufferWidth = 0;
+int framebufferHeight = 0;
+
+void UpdateFramebufferSize(int newHeight, int newWidth){
+    framebufferWidth = newWidth;
+    framebufferHeight= newHeight;
+
+}
+
 void DrawVirtualObject(SceneObject objToDraw)
 {
     GLuint program_id = objToDraw.gpuProgramId;
@@ -61,6 +70,10 @@ void ResetScale(SceneObject& obj){
 
 void MoveObject(glm::vec4 movementVector, SceneObject& obj){
     obj.translationMatrix = Matrix_Translate(movementVector.x, movementVector.y, movementVector.z) * obj.translationMatrix;
+}
+
+void SetObjectPosition(glm::vec4 newPosition, SceneObject& obj){
+    obj.translationMatrix = Matrix_Translate(newPosition.x, newPosition.y, newPosition.z);
 }
 
 void ResetTranslation(SceneObject& obj){
@@ -130,26 +143,6 @@ void CallChildrenMoveFunction(SceneObject parent){
     }
 }
 
-glm::vec4 p1 = glm::vec4(0.0f, 2.0, 0.0f, 1.0f);
-glm::vec4 p2 = glm::vec4(3.0f, 2.0, 0.0f, 1.0f);
-glm::vec4 p3 = glm::vec4(3.0f, -2.0, 0.0f, 1.0f);
-glm::vec4 p4 = glm::vec4(0.0f, -2.0, 0.0f, 1.0f);
-
-glm::vec4 p5 = glm::vec4(0.0f, -2.0, 0.0f, 1.0f);
-glm::vec4 p6 = glm::vec4(-3.0f, -2.0, 0.0f, 1.0f);
-glm::vec4 p7 = glm::vec4(-3.0f, 2.0, 0.0f, 1.0f);
-glm::vec4 p8 = glm::vec4(0.0f, 2.0, 0.0f, 1.0f);
-
-std::vector<glm::vec4> pontos {p1, p2, p3, p4, p5, p6, p7, p8};
-
-void TesteBezier(){
-
-    float t = fmod(glfwGetTime(), 2);
-    glm::vec4 ponto = PointInBezierCurve(pontos, t);
-    currentScene[2].translationMatrix = Matrix_Translate(ponto.x, ponto.y, ponto.z);
-
-}
-
 void MoveCurrentSceneObjects(){
     glm::vec4 movementVector;
     currentTime = (float)glfwGetTime();
@@ -167,8 +160,6 @@ void MoveCurrentSceneObjects(){
 
             ApplyTransformations(currentScene[i]);
     }
-
-    TesteBezier();
 }
 
 
@@ -195,9 +186,244 @@ void Debug_CreateNewObjectSphere(){
 
 void FinishFrame(){
     UpdateCameraPositionAndRotation(deltaTime);
+
+    for(unsigned int i = 0; i<currentScene.size(); i++){
+        if(currentScene[i].update != NULL)currentScene[i].update(currentScene, i);
+    }
+
     lastFrameTime = currentTime;
 }
 
 float GetDeltaTime(){
     return deltaTime;
+}
+
+
+glm::vec4 GetPointInOBBNormal(OBB thisOBB, glm::vec4 collisionPoint){
+    glm::vec4 collisionPointNormal;
+
+    glm::vec4 vectorCenterToPoint = collisionPoint - thisOBB.centro;
+
+    glm::vec4 vectorInOBBSpace = thisOBB.cartesianToOBB*vectorCenterToPoint;
+
+    float diffX = (thisOBB.tamanhoU/2) - std::abs(vectorInOBBSpace.x);
+    float diffY = (thisOBB.tamanhoV/2) - std::abs(vectorInOBBSpace.y);
+    float diffZ = (thisOBB.tamanhoW/2) - std::abs(vectorInOBBSpace.z);
+
+    glm::vec4 resultVector = glm::vec4(0.0f, 0.0f, 0.0f, 0.0f);
+
+    if(diffX <= diffY && diffX <= diffZ){
+        resultVector = glm::vec4(vectorInOBBSpace.x, 0.0f, 0.0f, 0.0f);
+    }
+    if(diffY <= diffX && diffY <= diffZ){
+        resultVector = glm::vec4(resultVector.x, vectorInOBBSpace.y, 0.0f, 0.0f);
+    }
+    if(diffZ <= diffX && diffZ <= diffY){
+        resultVector = glm::vec4(resultVector.x, resultVector.y, vectorInOBBSpace.z, 0.0f);
+    }
+
+    collisionPointNormal = thisOBB.OBBToCartesian*resultVector;
+    collisionPointNormal = collisionPointNormal/norm(collisionPointNormal);
+
+    return collisionPointNormal;
+}
+
+#define NO_INTERSECTION -1
+/*Usando Cyrus-Beck Clipping*/
+/*retirado do livro Game Physics Cookbook - Gabor Szauer*/
+/*Retorna o t correspondente ao ponto de entrada do raio no OBB ou -1 se não houver intersecção*/
+float IntersectionPointRay_OBB(glm::vec4 ray_origin, glm::vec4 ray_direction, OBB thisOBB)
+{
+
+    glm::vec4 X = thisOBB.eixoU;
+    glm::vec4 Y = thisOBB.eixoV;
+    glm::vec4 Z = thisOBB.eixoW;
+
+    float obb_size[] = {thisOBB.tamanhoU/2, thisOBB.tamanhoV/2, thisOBB.tamanhoW/2};
+
+    glm::vec4 p = thisOBB.centro - ray_origin;
+    glm::vec4 f = glm::vec4( dotproduct(X, ray_direction), dotproduct(Y, ray_direction), dotproduct(Z, ray_direction), 0.0f);
+    glm::vec4 e = glm::vec4(dotproduct(X, p), dotproduct(Y, p), dotproduct(Z, p), 0.0f);
+
+    float t[6] = { 0, 0, 0, 0, 0, 0 };
+    for (int i = 0; i < 3; ++i)
+    {
+        if( (fabsf((f[i])-(0)) <= FLT_EPSILON * fmaxf(1.0f, fmaxf(fabsf(f[i]), fabsf(0))) ))
+        {
+            if (-e[i] - obb_size[i]>0 || -e[i] + obb_size[i]<0)
+            {
+                return false;
+            }
+            f[i] = 0.00001f; // Avoid div by 0!
+        }
+        t[i * 2 + 0] = (e[i] + obb_size[i]) / f[i]; // min
+        t[i * 2 + 1] = (e[i] - obb_size[i]) / f[i]; // max
+    }
+
+    float tmin = fmaxf(fmaxf(
+                           fminf(t[0], t[1]),
+                           fminf(t[2], t[3])),
+                       fminf(t[4], t[5])
+                      );
+    float tmax = fminf(
+                     fminf(
+                         fmaxf(t[0], t[1]),
+                         fmaxf(t[2], t[3])),
+                     fmaxf(t[4], t[5])
+                 );
+
+    if(tmax < 0)
+        return NO_INTERSECTION;
+    if(tmin > tmax)
+        return NO_INTERSECTION;
+
+    return tmin;
+}
+
+//Dados um objeto em forma de caixa (que será o espelho), uma cor (para mapear a reflexão, tipo green screen) e um número que representa qual das faces da caixa é a reflexiva,
+//implementa um espelho simples da seguinte forma (esta função deve ser chamada ao fim do frame, logo antes de realizar o SwapBuffers:
+//1. Salva todas as informações relevantes da câmera (ela será movida durante esta função e, depois, deve ser posta de volta no seu lugar)
+//2. Salva o framebuffer atual em memória
+//3. Traça um raio da posição da câmera até o centro da face reflexiva do espelho
+//4. Descobre se este raio intersecta a caixa em algum outro ponto
+//  4.1. Se sim, pula para o passo 13
+//  4.2. Se não, continua
+//5. Usando o raio como vetor de incidência, calcula o vetor de reflexão especular ideal
+//6. Move a câmera para o ponto do espelho que foi calculado no passo 4 e define seu modo como FREE
+//7. Define o vetor view da câmera como o vetor de reflexão especular ideal calculado no passo 5
+//8. Desenha a cena inteira
+//9. Salva o framebuffer
+//10. Itera sobre o framebuffer original
+//  10.1. Se a cor do pixel atual for a mirrorColor, troca ele pelo pixel correspondente no framebuffer salvo no passo 9
+//11. Envia o framebuffer para ser desenhado na tela
+//12. Libera o espaço do segundo framebuffer
+//13. Restaura as configurações da câmera e libera o espaço alocado para o buffer
+//14. Termina
+
+void DrawMirror(SceneObject& mirrorObj, glm::vec4 mirrorColor, MirrorReflectiveFace reflectiveFace){
+    /*Passo 1*/
+    glm::vec4 originalFreeCameraPosition = GetCameraPosition();
+    glm::vec4 originalCameraViewVector = GetCameraViewVector();
+    CameraMode originalCameraMode = GetCameraMode();
+
+
+    /*Passo 2*/
+    GLubyte* originalFramebuffer = (GLubyte*)malloc(3*framebufferHeight*framebufferWidth*sizeof(GLubyte));
+    //glReadPixels( GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLvoid* data);
+    glReadPixels(0,0,framebufferWidth, framebufferHeight, GL_RGB, GL_UNSIGNED_BYTE, originalFramebuffer);
+
+
+    /*Passo 3*/
+    OBB mirrorOBB = DefineOrientedBoundingBox(mirrorObj);
+    glm::vec4 camera_position;
+    switch(originalCameraMode){
+    case CameraMode::FREE:
+        camera_position = originalFreeCameraPosition;
+    break;
+    case CameraMode::LOOKAT:
+        camera_position = GetLookAtCameraPosition();
+    break;
+    }
+
+    glm::vec4 reflective_face_center_point = mirrorOBB.centro;
+    switch(reflectiveFace){
+        case MirrorReflectiveFace::RIGHT:
+            reflective_face_center_point += mirrorOBB.eixoU*(mirrorOBB.tamanhoU/2);
+        break;
+        case MirrorReflectiveFace::LEFT:
+            reflective_face_center_point += mirrorOBB.eixoU*(-mirrorOBB.tamanhoU/2);
+        break;
+        case MirrorReflectiveFace::TOP:
+            reflective_face_center_point += mirrorOBB.eixoV*(mirrorOBB.tamanhoV/2);
+        break;
+        case MirrorReflectiveFace::BOTTOM:
+            reflective_face_center_point += mirrorOBB.eixoV*(-mirrorOBB.tamanhoV/2);
+        break;
+        case MirrorReflectiveFace::FRONT:
+            reflective_face_center_point += mirrorOBB.eixoW*(mirrorOBB.tamanhoW/2);
+        break;
+        case MirrorReflectiveFace::BACK:
+            reflective_face_center_point += mirrorOBB.eixoW*(-mirrorOBB.tamanhoW/2);
+        break;
+    }
+
+    glm::vec4 incidenceVector = reflective_face_center_point - camera_position;
+    incidenceVector = incidenceVector/norm(incidenceVector);
+
+    /*Passo 4*/
+    float t = IntersectionPointRay_OBB(camera_position, incidenceVector, mirrorOBB);
+    glm::vec4 intersection_point = camera_position + incidenceVector*t;
+
+
+
+    glm::vec4 face_center_point_normal = GetPointInOBBNormal(mirrorOBB, reflective_face_center_point);
+    glm::vec4 intersection_point_normal = GetPointInOBBNormal(mirrorOBB, intersection_point);
+
+    if(face_center_point_normal == intersection_point_normal){
+
+        /*Passo 5*/
+        glm::vec4 reflection_vector = incidenceVector - 2*dot(incidenceVector, intersection_point_normal)*intersection_point_normal;
+
+        reflection_vector = glm::vec4(reflection_vector.x, reflection_vector.y, reflection_vector.z, 0.0f);
+
+        /*Passo 6*/
+        SetCameraPosition(intersection_point+intersection_point_normal);
+        SetCameraMode(CameraMode::FREE);
+
+        /*Passo 7*/
+        SetCameraViewVector(reflection_vector);
+
+        glClear(GL_COLOR_BUFFER_BIT);
+        /*Passo 8*/
+        DrawCurrentScene();
+
+
+        /*Passo 9*/
+        GLubyte* newFramebuffer = (GLubyte*)malloc(3*framebufferHeight*framebufferWidth*sizeof(GLubyte));
+        glReadPixels(0,0,framebufferWidth, framebufferHeight, GL_RGB, GL_UNSIGNED_BYTE, newFramebuffer);
+
+        /*Passo 10*/
+        for(int i = 0; i<3*framebufferHeight*framebufferWidth; i += 3){
+
+            /*Passo 10.1*/
+            if(originalFramebuffer[i+0] == mirrorColor.x
+               && originalFramebuffer[i+1] == mirrorColor.y
+               && originalFramebuffer[i+2] == mirrorColor.z){
+                    originalFramebuffer[i+0] = newFramebuffer[i+0];
+                    originalFramebuffer[i+1] =  newFramebuffer[i+1];
+                    originalFramebuffer[i+2] =  newFramebuffer[i+2];
+
+               }
+        }
+        /*Passo 11*/
+        /*??????????????????????????????????????????????????????????????????*/
+        /*??????????????????????????????????????????????????????????????????*/
+        /*??????????????????????????????????????????????????????????????????*/
+        /*??????????????????????????????????????????????????????????????????*/
+        /*??????????????????????????????????????????????????????????????????*/
+        /*??????????????????????????????????????????????????????????????????*/
+        /*??????????????????????????????????????????????????????????????????*/
+        /*??????????????????????????????????????????????????????????????????*/
+
+
+        //glClear(GL_COLOR_BUFFER_BIT);
+        //void glDrawPixels( GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid* data);
+        /*glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glDisable(GL_DEPTH_TEST);
+        glRasterPos2i(100, 100);
+        glEnable(GL_DEPTH_TEST);*/
+
+        //glDrawPixels(framebufferWidth, framebufferHeight, GL_RGB, GL_UNSIGNED_BYTE, newFramebuffer);
+
+        /*Passo 12*/
+        free(newFramebuffer);
+    }
+
+
+    /*Passo 13*/
+    free(originalFramebuffer);
+    SetCameraPosition(originalFreeCameraPosition);
+    SetCameraViewVector(originalCameraViewVector);
+    SetCameraMode(originalCameraMode);
+
 }

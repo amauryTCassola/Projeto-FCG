@@ -59,3 +59,29 @@ void RabbitOnClick(std::vector<SceneObject>& _currentScene, int callerIndex){
     }
     else ActivateFreeCamera();
 }
+
+glm::vec4 p1 = glm::vec4(2.0f, 4.0, 0.0f, 1.0f);
+glm::vec4 p2 = glm::vec4(5.0f, 4.0, 0.0f, 1.0f);
+glm::vec4 p3 = glm::vec4(5.0f, -4.0, 0.0f, 1.0f);
+glm::vec4 p4 = glm::vec4(2.0f, -4.0, 0.0f, 1.0f);
+
+glm::vec4 p5 = glm::vec4(2.0f, -4.0, 0.0f, 1.0f);
+glm::vec4 p6 = glm::vec4(-5.0f, -4.0, 0.0f, 1.0f);
+glm::vec4 p7 = glm::vec4(-5.0f, 4.0, 0.0f, 1.0f);
+glm::vec4 p8 = glm::vec4(2.0f, 4.0, 0.0f, 1.0f);
+
+std::vector<glm::vec4> pontos {p1, p2, p3, p4, p5, p6, p7, p8};
+
+void SphereChildUpdate(std::vector<SceneObject>& _currentScene, int callerIndex){
+    float t = fmod(glfwGetTime(), 2);
+    glm::vec4 ponto = PointInBezierCurve(pontos, t);
+    SetObjectPosition(ponto, _currentScene[callerIndex]);
+}
+
+
+
+glm::vec4 magenta = glm::vec4(255.0f, 0.0f, 255.0f, 1.0f);
+
+void MirrorUpdate(std::vector<SceneObject>& _currentScene, int callerIndex){
+    DrawMirror(_currentScene[callerIndex], magenta, MirrorReflectiveFace::FRONT);
+}
