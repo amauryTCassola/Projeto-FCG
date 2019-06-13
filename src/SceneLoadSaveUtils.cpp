@@ -440,7 +440,7 @@ GLuint CreateNewTexture(std::string textureFileName, WrapMode wrapMode, std::vec
     return newTexture_id;
 }
 
-GLuint GetTextureId(std::string textureFileName, WrapMode wrapMode, std::vector<GLfloat> borderColor = black){
+GLuint GetTextureId(std::string textureFileName, WrapMode wrapMode, std::vector<GLfloat> borderColor){
     if(KeyExistsInMap(texturesMap, textureFileName)){
         return texturesMap.at(textureFileName);
     }
@@ -744,7 +744,7 @@ void Debug_NewObjectSphere(std::vector<SceneObject>& currentScene){
     currentScene.back().translationMatrix = Matrix_Translate(0.0f, 0.0f, 15.0f);
     currentScene.back().scaleMatrix = Matrix_Identity();
 
-    currentScene.push_back(LoadNewObject("../../data/Crate.obj"));
+    currentScene.push_back(LoadNewObject("../../data/crate.obj"));
     currentScene.back().name = "Mirror1";
     currentScene.back().textureIds.push_back(GetTextureId("../../data/mirror.jpg", WrapMode::MIRRORED_REPEAT));
     currentScene.back().textureFilenames.push_back("../../data/mirror.jpg");
@@ -752,7 +752,7 @@ void Debug_NewObjectSphere(std::vector<SceneObject>& currentScene){
     currentScene.back().vertexShaderId = GetVertexShaderId("../../src/shader_vertex.glsl");
     currentScene.back().fragmentShaderId = GetFragmentShaderId("../../src/shader_fragment_Planar_Proj.glsl");
     currentScene.back().gpuProgramId = GetGPUProgramId(currentScene.back().vertexShaderId, currentScene.back().fragmentShaderId);
-    currentScene.back().fragmentShaderFilename = std::string("../../src/shader_fragment_Planar_Proj.glsl");
+    currentScene.back().fragmentShaderFilename = std::string("../../src/shader_fragment.glsl");
     currentScene.back().vertexShaderFilename = std::string("../../src/shader_vertex.glsl");
     currentScene.back().active = true;
     currentScene.back().blockMovement = glm::vec4(0.0f, 0.0f, 0.0f, 0.0f);
@@ -770,8 +770,8 @@ void Debug_NewObjectSphere(std::vector<SceneObject>& currentScene){
     currentScene.back().thisCollisionType = (int)CollisionType::WALL;
     currentScene.back().model = Matrix_Identity();
     currentScene.back().rotationMatrix = Matrix_Identity();
-    currentScene.back().translationMatrix = Matrix_Translate(0.0f, 0.0f, 5.0f);
-    currentScene.back().scaleMatrix = Matrix_Identity();
+    currentScene.back().translationMatrix = Matrix_Translate(0.0f, 0.0f, 50.0f);
+    currentScene.back().scaleMatrix = Matrix_Scale(1.0f, 1.0f, 0.1f);
 
     currentScene.push_back(LoadNewObject("../../data/sphere.obj"));
     currentScene.back().name = "Esfera2";

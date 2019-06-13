@@ -166,12 +166,9 @@ void OpenSceneAdditive(std::string filename, std::vector<SceneObject>& currentSc
 
 std::vector<SceneObject> ObjectLoad(std::string filename);
 void ComputeNormals(ObjModel* model);
-GLuint CreateFragmentShader(std::string fragment_shader_filename);
-GLuint CreateVertexShader(std::string vertex_shader_filename);
-GLuint CreateGPUProgram(GLuint vertex_shader_id, GLuint fragment_shader_id);
-GLuint CreateNewTexture(std::string textureFileName, WrapMode wrapMode, std::vector<GLfloat> borderColor = black);
 
-GLuint CreateFragmentShader(std::string fragment_shader_filename);
-GLuint CreateVertexShader(std::string vertex_shader_filename);
-GLuint CreateGPUProgram(GLuint vertex_shader_id, GLuint fragment_shader_id);
+GLuint GetFragmentShaderId(std::string fragment_shader_filename);
+GLuint GetGPUProgramId(GLuint vertex_shader_id, GLuint fragment_shader_id);
+GLuint GetVertexShaderId(std::string vertex_shader_filename);
+GLuint GetTextureId(std::string textureFileName, WrapMode wrapMode, std::vector<GLfloat> borderColor = black);
 #endif // SCENEUTILS

@@ -2371,7 +2371,7 @@
 
 1559502974 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\intersectionfunctions.c
 
-1560234588 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\main.cpp
+1560394698 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\main.cpp
 	<cmath>
 	<cstdio>
 	<cstdlib>
@@ -2391,7 +2391,7 @@
 	<glm/gtc/type_ptr.hpp>
 	"objUtils.h"
 
-1560227873 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\objutils.h
+1560385515 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\objutils.h
 	<cmath>
 	<cstdio>
 	<cstdlib>
@@ -2464,7 +2464,7 @@
 	"matrices.h"
 	"cameraUtils.h"
 
-1560235608 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\objutils.cpp
+1560394110 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\objutils.cpp
 	"objUtils.h"
 
 1560229440 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\intersectionfunctions.cpp
@@ -2493,10 +2493,10 @@
 	"cameraUtils.h"
 	"BezierCurvesUtils.h"
 
-1560227231 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\scene0functions.cpp
+1560387077 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\scene0functions.cpp
 	"Scene0Functions.h"
 
-1560215311 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\sceneloadsaveutils.h
+1560295153 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\sceneloadsaveutils.h
 	<cmath>
 	<cstdio>
 	<cstdlib>
@@ -2519,7 +2519,7 @@
 	"matrices.h"
 	"shaderUtil.h"
 
-1560230506 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\sceneloadsaveutils.cpp
+1560395028 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\sceneloadsaveutils.cpp
 	"SceneLoadSaveUtils.h"
 	"stb_image.h"
 	"FunctionMappingUtils.h"

@@ -83,5 +83,5 @@ void SphereChildUpdate(std::vector<SceneObject>& _currentScene, int callerIndex)
 glm::vec4 magenta = glm::vec4(255.0f, 0.0f, 255.0f, 1.0f);
 
 void MirrorUpdate(std::vector<SceneObject>& _currentScene, int callerIndex){
-    DrawMirror(_currentScene[callerIndex], magenta, MirrorReflectiveFace::FRONT);
+    DrawMirror(_currentScene[callerIndex], magenta, MirrorReflectiveFace::BACK);
 }

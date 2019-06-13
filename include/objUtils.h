@@ -66,4 +66,7 @@ float GetDeltaTime();
 void FinishFrame();
 void SetObjectPosition(glm::vec4 newPosition, SceneObject& obj);
 void DrawMirror(SceneObject& mirrorObj, glm::vec4 mirrorColor, MirrorReflectiveFace reflectiveFace);
+void CallUpdateFuntions();
+int GetHeight();
+int GetWidth();
 #endif// OBJUTILS

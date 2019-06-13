@@ -27,7 +27,7 @@ uniform vec4 bbox_min;
 uniform vec4 bbox_max;
 
 // O valor de saída ("out") de um Fragment Shader é a cor final do fragmento.
-out vec3 color;
+layout(location = 0) out vec3 color;
 
 
 void main()

@@ -245,6 +245,8 @@ int main(){
 
         TestOnMouseOver();
 
+        CallUpdateFuntions();
+
         DrawCurrentScene();
 
         FinishFrame();
@@ -253,5 +255,7 @@ int main(){
         glfwSwapBuffers(window);
 
     }
+
+    glfwTerminate();
 
 }

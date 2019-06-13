@@ -15,6 +15,14 @@ void UpdateFramebufferSize(int newHeight, int newWidth){
 
 }
 
+int GetHeight(){
+    return framebufferHeight;
+}
+
+int GetWidth(){
+    return framebufferWidth;
+}
+
 void DrawVirtualObject(SceneObject objToDraw)
 {
     GLuint program_id = objToDraw.gpuProgramId;
@@ -36,8 +44,7 @@ void DrawVirtualObject(SceneObject objToDraw)
     // "Ligamos" o VAO.
     glBindVertexArray(objToDraw.vertex_array_object_id);
 
-    // "Ligamos" a textura vinculada a este objeto, se tiver
-    //if(objToDraw.texture_id != -1)
+    // "Ligamos" a textura vinculada a este objeto
         glBindTexture(GL_TEXTURE_2D, objToDraw.textureIds[objToDraw.activeTexture]);
 
     glDrawElements(
@@ -54,9 +61,15 @@ void DrawVirtualObject(SceneObject objToDraw)
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 
+void CallUpdateFuntions(){
+    for(unsigned int i = 0; i<currentScene.size(); i++){
+        if(currentScene[i].update != NULL)currentScene[i].update(currentScene, i);
+    }
+}
+
 void DrawCurrentScene(){
     for(unsigned int i = 0; i<currentScene.size(); i++){
-            DrawVirtualObject(currentScene[i]);
+            if(currentScene[i].active)DrawVirtualObject(currentScene[i]);
        }
 }
 
@@ -186,11 +199,6 @@ void Debug_CreateNewObjectSphere(){
 
 void FinishFrame(){
     UpdateCameraPositionAndRotation(deltaTime);
-
-    for(unsigned int i = 0; i<currentScene.size(); i++){
-        if(currentScene[i].update != NULL)currentScene[i].update(currentScene, i);
-    }
-
     lastFrameTime = currentTime;
 }
 
@@ -300,20 +308,77 @@ float IntersectionPointRay_OBB(glm::vec4 ray_origin, glm::vec4 ray_direction, OB
 //13. Restaura as configurações da câmera e libera o espaço alocado para o buffer
 //14. Termina
 
+float NDC_ooefficients[] = {
+    0.0, 0.5, 0.0,
+    -0.5,-0.5, 0.0,
+    0.5,-0.5, 0.0
+  };
+
+void UnbindFrameBuffer(){
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    glViewport(0, 0, GetWidth(), GetHeight());
+
+}
+
+void BindFrameBuffer(GLuint frameBuffer, int width, int height){
+
+    glBindTexture(GL_TEXTURE_2D, 0);//To make sure the texture isn't bound
+    glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
+    glViewport(0, 0, width, height);
+}
+
+GLuint CreateDepthAttachment(GLuint fbo, int width, int height){
+    GLuint depth_buffer_id;
+    glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+    glGenRenderbuffers(1, &depth_buffer_id);
+    glBindRenderbuffer(GL_RENDERBUFFER, depth_buffer_id);
+        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, width, height);
+        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depth_buffer_id);
+    glBindRenderbuffer(GL_RENDERBUFFER, 0);
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+    return depth_buffer_id;
+}
+
+GLuint CreateTextureAttachment(GLuint fbo, int width, int height){
+    GLuint texture_id;
+    glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+    glGenTextures(1, &texture_id);
+    glBindTexture(GL_TEXTURE_2D, texture_id);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, 0);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+        glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, texture_id, 0);
+    glBindTexture(GL_TEXTURE_2D, 0);
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    return texture_id;
+}
+
+GLuint CreateFrameBuffer(){
+    GLuint fbo_id;
+    glGenFramebuffers(1, &fbo_id);
+    //glBindFramebuffer(GL_FRAMEBUFFER, fbo_id);
+    //glDrawBuffer(GL_COLOR_ATTACHMENT0);
+    //glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    return fbo_id;
+}
+
+GLuint fboId;
+GLuint textureId;
+GLuint depthId;
+bool hasGeneratedFBO = false;
+
+int fbo_width = 800;
+int fbo_height = 600;
+
+
 void DrawMirror(SceneObject& mirrorObj, glm::vec4 mirrorColor, MirrorReflectiveFace reflectiveFace){
-    /*Passo 1*/
     glm::vec4 originalFreeCameraPosition = GetCameraPosition();
     glm::vec4 originalCameraViewVector = GetCameraViewVector();
     CameraMode originalCameraMode = GetCameraMode();
 
-
-    /*Passo 2*/
-    GLubyte* originalFramebuffer = (GLubyte*)malloc(3*framebufferHeight*framebufferWidth*sizeof(GLubyte));
-    //glReadPixels( GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLvoid* data);
-    glReadPixels(0,0,framebufferWidth, framebufferHeight, GL_RGB, GL_UNSIGNED_BYTE, originalFramebuffer);
-
-
-    /*Passo 3*/
     OBB mirrorOBB = DefineOrientedBoundingBox(mirrorObj);
     glm::vec4 camera_position;
     switch(originalCameraMode){
@@ -348,80 +413,48 @@ void DrawMirror(SceneObject& mirrorObj, glm::vec4 mirrorColor, MirrorReflectiveF
     }
 
     glm::vec4 incidenceVector = reflective_face_center_point - camera_position;
+    float incidenceVectorNorm = norm(incidenceVector);
     incidenceVector = incidenceVector/norm(incidenceVector);
 
-    /*Passo 4*/
+
     float t = IntersectionPointRay_OBB(camera_position, incidenceVector, mirrorOBB);
     glm::vec4 intersection_point = camera_position + incidenceVector*t;
-
-
 
     glm::vec4 face_center_point_normal = GetPointInOBBNormal(mirrorOBB, reflective_face_center_point);
     glm::vec4 intersection_point_normal = GetPointInOBBNormal(mirrorOBB, intersection_point);
 
-    if(face_center_point_normal == intersection_point_normal){
-
-        /*Passo 5*/
+    if(face_center_point_normal == intersection_point_normal){ //face reflexiva está no campo de visão do jogador
         glm::vec4 reflection_vector = incidenceVector - 2*dot(incidenceVector, intersection_point_normal)*intersection_point_normal;
-
         reflection_vector = glm::vec4(reflection_vector.x, reflection_vector.y, reflection_vector.z, 0.0f);
 
-        /*Passo 6*/
-        SetCameraPosition(intersection_point+intersection_point_normal);
-        SetCameraMode(CameraMode::FREE);
+        if(!hasGeneratedFBO){
+            fboId = CreateFrameBuffer();
+            textureId = CreateTextureAttachment(fboId, fbo_width, fbo_height);
+            depthId = CreateDepthAttachment(fboId, fbo_width, fbo_height);
+            mirrorObj.textureIds.push_back(textureId);
+            mirrorObj.activeTexture = 1;
+            hasGeneratedFBO = true;
+        }
 
-        /*Passo 7*/
+        if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE){
+            exit(0);
+        }
+
+        SetCameraPosition(intersection_point-(reflection_vector*1.5f));
+        SetCameraMode(CameraMode::FREE);
         SetCameraViewVector(reflection_vector);
 
-        glClear(GL_COLOR_BUFFER_BIT);
-        /*Passo 8*/
-        DrawCurrentScene();
+        mirrorObj.active = false;
+        BindFrameBuffer(fboId, fbo_width, fbo_height);
+            glClearColor(0.25f, 0.25f, 0.25f, 1);
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            DrawCurrentScene();
+        UnbindFrameBuffer();
 
-
-        /*Passo 9*/
-        GLubyte* newFramebuffer = (GLubyte*)malloc(3*framebufferHeight*framebufferWidth*sizeof(GLubyte));
-        glReadPixels(0,0,framebufferWidth, framebufferHeight, GL_RGB, GL_UNSIGNED_BYTE, newFramebuffer);
-
-        /*Passo 10*/
-        for(int i = 0; i<3*framebufferHeight*framebufferWidth; i += 3){
-
-            /*Passo 10.1*/
-            if(originalFramebuffer[i+0] == mirrorColor.x
-               && originalFramebuffer[i+1] == mirrorColor.y
-               && originalFramebuffer[i+2] == mirrorColor.z){
-                    originalFramebuffer[i+0] = newFramebuffer[i+0];
-                    originalFramebuffer[i+1] =  newFramebuffer[i+1];
-                    originalFramebuffer[i+2] =  newFramebuffer[i+2];
-
-               }
-        }
-        /*Passo 11*/
-        /*??????????????????????????????????????????????????????????????????*/
-        /*??????????????????????????????????????????????????????????????????*/
-        /*??????????????????????????????????????????????????????????????????*/
-        /*??????????????????????????????????????????????????????????????????*/
-        /*??????????????????????????????????????????????????????????????????*/
-        /*??????????????????????????????????????????????????????????????????*/
-        /*??????????????????????????????????????????????????????????????????*/
-        /*??????????????????????????????????????????????????????????????????*/
-
-
-        //glClear(GL_COLOR_BUFFER_BIT);
-        //void glDrawPixels( GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid* data);
-        /*glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glDisable(GL_DEPTH_TEST);
-        glRasterPos2i(100, 100);
-        glEnable(GL_DEPTH_TEST);*/
-
-        //glDrawPixels(framebufferWidth, framebufferHeight, GL_RGB, GL_UNSIGNED_BYTE, newFramebuffer);
-
-        /*Passo 12*/
-        free(newFramebuffer);
+        mirrorObj.active = true;
     }
 
 
-    /*Passo 13*/
-    free(originalFramebuffer);
     SetCameraPosition(originalFreeCameraPosition);
     SetCameraViewVector(originalCameraViewVector);
     SetCameraMode(originalCameraMode);
