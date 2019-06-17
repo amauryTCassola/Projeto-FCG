@@ -52,5 +52,8 @@ void ActivateFreeCamera();
 void ActivateLookAtCamera(glm::vec4 pointToLookAt, float distance);
 void SetCameraMode(CameraMode _newMode);
 glm::vec4 GetLookAtCameraPosition();
+void SetCameraPerspective();
+void SetCameraOrtho();
+void SetCameraUpVector(glm::vec4 new_up);
 
 #endif // CAMERA_UTILS

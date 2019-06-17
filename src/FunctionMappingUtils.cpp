@@ -8,6 +8,18 @@ std::function<void(std::vector<SceneObject>&, int callerIndex)> FunctionMapping(
     if(functionName.compare("RabbitOnClick") == 0) return RabbitOnClick;
     if(functionName.compare("SphereChildUpdate") == 0) return SphereChildUpdate;
     if(functionName.compare("MirrorUpdate") == 0) return MirrorUpdate;
+    if(functionName.compare("DescricaoDummy") == 0) return DescricaoDummy;
+    if(functionName.compare("GavetaOnClick") == 0) return GavetaOnClick;
+    if(functionName.compare("GavetaUpdate") == 0) return GavetaUpdate;
+    if(functionName.compare("GavetaOnMouseOver") == 0) return GavetaOnMouseOver;
+    if(functionName.compare("VidroDummyOnMouseOver") == 0) return VidroDummyOnMouseOver;
+    if(functionName.compare("VidroDummyOnClick") == 0) return VidroDummyOnClick;
+    if(functionName.compare("AbstrataDummyOnMouseOver") == 0) return AbstrataDummyOnMouseOver;
+    if(functionName.compare("DescricaoVenus") == 0) return DescricaoVenus;
+    if(functionName.compare("DescricaoGourard") == 0) return DescricaoGourard;
+    if(functionName.compare("DescricaoBunny") == 0) return DescricaoBunny;
+    if(functionName.compare("DescricaoChest") == 0) return DescricaoChest;
+
 
     return NULL;
 }

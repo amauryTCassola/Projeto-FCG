@@ -70,6 +70,10 @@ glm::vec4 GetCameraUpVector(){
     return camera_up_vector;
 }
 
+void SetCameraUpVector(glm::vec4 new_up){
+    camera_up_vector = new_up;
+}
+
 CameraMode GetCameraMode(){
     return currentMode;
 }
@@ -91,6 +95,14 @@ glm::vec4 GetLookAtCameraPosition(){
     }
 }
 
+void SetCameraOrtho(){
+    usePerspectiveProjection = false;
+}
+
+void SetCameraPerspective(){
+    usePerspectiveProjection = true;
+}
+
 void SetCameraToDraw(GLuint program_id, float screen_ratio){
 
     GLint view_matrix_index = glGetUniformLocation(program_id, "view"); // Variável da matriz "view" em shader_vertex.glsl
@@ -98,8 +110,11 @@ void SetCameraToDraw(GLuint program_id, float screen_ratio){
 
     glm::mat4 view;
 
-    if(currentMode == CameraMode::FREE)
+    if(currentMode == CameraMode::FREE){
+
         view = Matrix_Camera_View(camera_position_point, camera_view_vector, camera_up_vector);
+    }
+
     else{
         float r = g_CameraDistance;
         float y = r*sin(g_CameraPhi);
@@ -124,12 +139,15 @@ void SetCameraToDraw(GLuint program_id, float screen_ratio){
         }
         else
         {
+
+            float nearplane = -0.1f;  // Posição do "near plane"
+            float farplane  = -20.0f; // Posição do "far plane"
             // Projeção Ortográfica.
             // Para definição dos valores l, r, b, t ("left", "right", "bottom", "top"),
             // PARA PROJEÇÃO ORTOGRÁFICA veja slide 236 do documento "Aula_09_Projecoes.pdf".
             // Para simular um "zoom" ortográfico, computamos o valor de "t"
             // utilizando a variável g_CameraDistance.
-            float t = 1.5f*g_CameraDistance/2.5f;
+            float t = 3.0f*g_CameraDistance/2.5f;
             float b = -t;
             float r = t*screen_ratio;
             float l = -r;
@@ -160,8 +178,8 @@ void RotateCamera(float dx, float dy){
 
         float new_phi_angle = (phi_angle + dy*delta*camera_rotation_speed);
 
-        if(new_phi_angle < -PI/3) new_phi_angle = -PI/3;
-        if(new_phi_angle > PI/3) new_phi_angle = PI/3;
+        if(new_phi_angle < -PI/4) new_phi_angle = -PI/4;
+        if(new_phi_angle > PI/4) new_phi_angle = PI/4;
 
         phi_angle = new_phi_angle;
 
@@ -199,8 +217,12 @@ void UpdateCameraPositionAndRotation(float deltaTime){
 
     normalizedValue = std::min(1.0f, timeMoving/totalAccelerationTime);
 
-    if(currentMode == CameraMode::FREE)
+    if(currentMode == CameraMode::FREE){
         camera_position_point = camera_position_point + camera_velocity*camera_movement_speed*normalizedValue*deltaTime;
+        camera_position_point = glm::vec4(camera_position_point.x, 0.0f, camera_position_point.z, camera_position_point.w);
+    }
+
+
 
     RotateCamera(rotationX*deltaTime, rotationY*deltaTime);
 

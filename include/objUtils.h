@@ -30,8 +30,7 @@
 #include "SceneLoadSaveUtils.h"
 #include "CollisionUtils.h"
 #include "BezierCurvesUtils.h"
-
-enum class MirrorReflectiveFace{TOP, BOTTOM, LEFT, RIGHT, FRONT, BACK};
+#include "LightUtils.h"
 
 void UpdateScreenRatio(float newScreenRatio);
 void UpdateFramebufferSize(int newHeight, int newWidth);
@@ -65,8 +64,14 @@ void ResetRotation(SceneObject& obj);
 float GetDeltaTime();
 void FinishFrame();
 void SetObjectPosition(glm::vec4 newPosition, SceneObject& obj);
-void DrawMirror(SceneObject& mirrorObj, glm::vec4 mirrorColor, MirrorReflectiveFace reflectiveFace);
 void CallUpdateFuntions();
 int GetHeight();
 int GetWidth();
+void ReloadScene();
+void ReloadScene(std::string filename);
+int FindObjectIndexByName(std::string name);
+void TextRendering_PrintString(const std::string &str, float x, float y, float scale=1.0f);
+void SetLightPosition(glm::vec4 newPos);
+void SetLightDirection(glm::vec4 newDir);
+void SetLightColor(glm::vec4 newColor);
 #endif// OBJUTILS

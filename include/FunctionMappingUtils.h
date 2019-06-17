@@ -1,3 +1,6 @@
+#ifndef FUNCTIONMAPPINGUITLS
+#define FUNCTIONMAPPINGUITLS
+
 #include <cmath>
 #include <cstdio>
 #include <cstdlib>
@@ -17,3 +20,4 @@
 
 std::function<void(std::vector<SceneObject>&, int callerIndex)> FunctionMapping(std::string functionName);
 std::function<void(std::vector<SceneObject>&, int, int)> CollisionFunctionMapping(std::string functionName);
+#endif // FUNCTIONMAPPINGUITLS

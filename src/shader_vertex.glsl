@@ -41,7 +41,5 @@ void main()
     normal = (inverse(transpose(model)) * normal_coefficients);
     normal.w = 0.0;
 
-    //cor_interpolada_pelo_rasterizador = color_coefficients;
-
     Texcoord = texcoord;
 }

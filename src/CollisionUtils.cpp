@@ -125,6 +125,24 @@ bool TestRayIntersection(SceneObject obj){
     else return false;
 }
 
+void CallOnMouseOverFunction(SceneObject& obj, std::vector<SceneObject>& currentScene, int objIndex){
+    if(obj.parentIndex != -1){
+        CallOnMouseOverFunction(currentScene[obj.parentIndex], currentScene, obj.parentIndex);
+    }
+    else{
+        if(obj.onMouseOver != NULL) obj.onMouseOver(currentScene, objIndex);
+    }
+}
+
+void CallOnClickFunction(SceneObject& obj, std::vector<SceneObject>& currentScene, int objIndex){
+    if(obj.parentIndex != -1){
+        CallOnClickFunction(currentScene[obj.parentIndex], currentScene, obj.parentIndex);
+    }
+    else{
+        if(obj.onClick != NULL) obj.onClick(currentScene, objIndex);
+    }
+}
+
 void TestMouseCollision(MouseCollisionType colType, std::vector<SceneObject>& currentScene){
 
     std::vector<SceneObject> mouseOverCandidates;
@@ -156,10 +174,10 @@ void TestMouseCollision(MouseCollisionType colType, std::vector<SceneObject>& cu
 
     if(chosenObjectDistance == -1.0f) return;
 
-    if(colType == MouseCollisionType::MOUSE_OVER && chosenObject.onMouseOver != NULL)
-        chosenObject.onMouseOver(currentScene, chosenObjectIndex);
-    else if(colType == MouseCollisionType::CLICK && chosenObject.onClick != NULL)
-        chosenObject.onClick(currentScene, chosenObjectIndex);
+    if(colType == MouseCollisionType::MOUSE_OVER)
+        CallOnMouseOverFunction(chosenObject,currentScene, chosenObjectIndex);
+    else if(colType == MouseCollisionType::CLICK)
+        CallOnClickFunction(chosenObject,currentScene, chosenObjectIndex);
 }
 
 std::vector<float> CheckCollision(SceneObject& objA, SceneObject& objB){
@@ -255,6 +273,7 @@ void InelasticCollisionWithWall(SceneObject& obj, SceneObject& wall, glm::vec4 c
 
 void ElasticCollisionWithWall(SceneObject& obj, SceneObject& wall, glm::vec4 collisionPoint){
 
+
     std::vector<glm::vec4> components = GetParallelAndPerpendicularComponentsAndNormal(obj.velocity, wall, collisionPoint);
 
     glm::vec4 parallelComponent = components[0];
@@ -294,6 +313,7 @@ void ApplyCollisionPhysics(SceneObject& objA, SceneObject& objB, glm::vec4 colli
     glm::vec4 velocityA = objA.velocity;
     glm::vec4 velocityB = objB.velocity;
 
+
     if(objA.parentIndex == -1 && objB.parentIndex == -1){
         if(!wasAlreadyColliding) {
             if(objB.thisCollisionType == (int)CollisionType::WALL){
@@ -303,26 +323,28 @@ void ApplyCollisionPhysics(SceneObject& objA, SceneObject& objB, glm::vec4 colli
                 else{
                     InelasticCollisionWithWall(objA, objB, collisionPoint);
                 }
-            } else if(objA.thisCollisionType == (int)CollisionType::WALL){
+            }else if(objA.thisCollisionType == (int)CollisionType::WALL){
                 if(objB.thisCollisionType == (int)CollisionType::ELASTIC){
                     ElasticCollisionWithWall(objB, objA, collisionPoint);
                 }
                 else{
                     InelasticCollisionWithWall(objB, objA, collisionPoint);
                 }
-            }else if(objA.thisCollisionType == (int)CollisionType::ELASTIC){
-                    ElasticCollision(objA, velocityB);
-            }
-            else if(objA.thisCollisionType == (int)CollisionType::INELASTIC){
-                    InelasticCollision(objA, velocityB);
-            }
+            }else {
+                if(objA.thisCollisionType == (int)CollisionType::ELASTIC){
+                        ElasticCollision(objA, velocityB);
+                }
+                else if(objA.thisCollisionType == (int)CollisionType::INELASTIC){
+                        InelasticCollision(objA, velocityB);
+                }
 
 
-            if(objB.thisCollisionType == (int)CollisionType::ELASTIC){
-                    ElasticCollision(objB, velocityA);
-            }
-            else if(objB.thisCollisionType == (int)CollisionType::INELASTIC){
-                    InelasticCollision(objB, velocityA);
+                if(objB.thisCollisionType == (int)CollisionType::ELASTIC){
+                        ElasticCollision(objB, velocityA);
+                }
+                else if(objB.thisCollisionType == (int)CollisionType::INELASTIC){
+                        InelasticCollision(objB, velocityA);
+                }
             }
         } else{
             if(objB.thisCollisionType == (int)CollisionType::WALL){
@@ -338,6 +360,9 @@ void ApplyCollisionPhysics(SceneObject& objA, SceneObject& objB, glm::vec4 colli
     } else if(objB.parentIndex != -1){
         ApplyCollisionPhysics(objA, currentScene[objB.parentIndex], collisionPoint, wasAlreadyColliding, currentScene);
     }
+
+
+
 }
 
 bool IsNameInCollisionsList(std::vector<std::string> _collisionsList, std::string _name){
@@ -473,61 +498,58 @@ std::vector<float> CheckCollisionWithCamera(SceneObject& obj){
 }
 
 void TestCollisions(std::vector<SceneObject>& currentScene){
-    std::vector<SceneObject> colliders;
+    std::vector<int> collidersIndices;
 
     for(unsigned int i = 0; i < currentScene.size(); i++){
         if(currentScene[i].active
            && currentScene[i].thisColliderType != (int)ColliderType::NONE){
-                colliders.push_back(currentScene[i]);
+                collidersIndices.push_back(i);
            }
     }
 
-    if(colliders.size() == 0) return;
+    if(collidersIndices.size() == 0) return;
 
     bool alreadyColliding = false;
 
 
-    for(unsigned int i = 0; i < colliders.size(); i++){
+    for(unsigned int i = 0; i < collidersIndices.size(); i++){
         std::vector<std::string> newCollisionsList;
-        for(unsigned int j = i+1; j < colliders.size(); j++){
-              if(!IsNameInCollisionsList(currentScene[i].childrenNames, currentScene[j].name)){
-                std::vector<float> collisionPoint = CheckCollision(currentScene[i], currentScene[j]);
+        for(unsigned int j = i+1; j < collidersIndices.size(); j++){
+              if(!IsNameInCollisionsList(currentScene[collidersIndices[i]].childrenNames, currentScene[collidersIndices[j]].name)
+                 && !(currentScene[collidersIndices[i]].thisCollisionType == (int)CollisionType::WALL && currentScene[collidersIndices[j]].thisCollisionType == (int)CollisionType::WALL)){
+                std::vector<float> collisionPoint = CheckCollision(currentScene[collidersIndices[i]], currentScene[collidersIndices[j]]);
 
                 if(collisionPoint.size() == 4){ //houve colisão
                         glm::vec4 vec4CollisionPoint = glm::vec4(collisionPoint[0], collisionPoint[1], collisionPoint[2], collisionPoint[3]);
 
-                        newCollisionsList.push_back(currentScene[j].name);
+                        newCollisionsList.push_back(currentScene[collidersIndices[j]].name);
 
-                        alreadyColliding = IsNameInCollisionsList(currentScene[i].collisionsList, currentScene[j].name);
+                        alreadyColliding = IsNameInCollisionsList(currentScene[collidersIndices[i]].collisionsList, currentScene[collidersIndices[j]].name);
 
                         if(!alreadyColliding){
-                            if(currentScene[i].onCollision != NULL)currentScene[i].onCollision(currentScene, i, j);
-                            if(currentScene[j].onCollision != NULL)currentScene[j].onCollision(currentScene, j, i);
+                            if(currentScene[collidersIndices[i]].onCollision != NULL)currentScene[collidersIndices[i]].onCollision(currentScene, collidersIndices[i], collidersIndices[j]);
+                            if(currentScene[collidersIndices[j]].onCollision != NULL)currentScene[collidersIndices[j]].onCollision(currentScene, collidersIndices[j], collidersIndices[i]);
                         }
-
-                            ApplyCollisionPhysics(currentScene[i], currentScene[j], vec4CollisionPoint, alreadyColliding, currentScene);
+                            ApplyCollisionPhysics(currentScene[collidersIndices[i]], currentScene[collidersIndices[j]], vec4CollisionPoint, alreadyColliding, currentScene);
                 }
             }
         }
-        currentScene[i].collisionsList = newCollisionsList;
+        currentScene[collidersIndices[i]].collisionsList = newCollisionsList;
         newCollisionsList.clear();
-    }
+   }
 
     std::vector<std::string> newCameraCollisionsList;
 
     if(GetCameraMode() == CameraMode::FREE){
-        for(unsigned int i = 0; i < colliders.size(); i++){
-            if(GetDistanceFromCamera(currentScene[i]) < MAX_DISTANCE_FROM_CAMERA){
-                std::vector<float> collisionWithCameraPoint = CheckCollisionWithCamera(currentScene[i]);
+        for(unsigned int i = 0; i < collidersIndices.size(); i++){
+                std::vector<float> collisionWithCameraPoint = CheckCollisionWithCamera(currentScene[collidersIndices[i]]);
+
                 if(collisionWithCameraPoint.size() == 4){ //houve colisão com a câmera
                     glm::vec4 vec4CollisionPoint = glm::vec4(collisionWithCameraPoint[0], collisionWithCameraPoint[1], collisionWithCameraPoint[2], collisionWithCameraPoint[3]);
-                    newCameraCollisionsList.push_back(currentScene[i].name);
-                   // if(!IsNameInCollisionsList(cameraCollisionsList, currentScene[i].name)){
-                        if(currentScene[i].onCollision != NULL)currentScene[i].onCollision(currentScene, i, COLLISION_WITH_CAMERA_CODE);
-                        ApplyCollisionWithCameraPhysics(currentScene[i], vec4CollisionPoint, IsNameInCollisionsList(cameraCollisionsList, currentScene[i].name), currentScene);
-                   // }
+                    newCameraCollisionsList.push_back(currentScene[collidersIndices[i]].name);
+                        if(currentScene[collidersIndices[i]].onCollision != NULL)currentScene[collidersIndices[i]].onCollision(currentScene, collidersIndices[i], COLLISION_WITH_CAMERA_CODE);
+                        ApplyCollisionWithCameraPhysics(currentScene[collidersIndices[i]], vec4CollisionPoint, IsNameInCollisionsList(cameraCollisionsList, currentScene[collidersIndices[i]].name), currentScene);
                 }
-            }
         }
         cameraCollisionsList = newCameraCollisionsList;
         wallCollisionsList.clear();

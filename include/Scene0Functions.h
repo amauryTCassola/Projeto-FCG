@@ -1,3 +1,6 @@
+#ifndef SCENE0FUNTIONS
+#define SCENE0FUNTIONS
+
 #include <cmath>
 #include <cstdio>
 #include <cstdlib>
@@ -26,6 +29,7 @@
 #include "objUtils.h"
 #include "cameraUtils.h"
 #include "BezierCurvesUtils.h"
+#include "MirrorUtils.h"
 #define PI 3.14159265359f
 
 void SphereOnClick(std::vector<SceneObject>& currentScene, int callerIndex);
@@ -35,3 +39,15 @@ void SphereChildOnMove(std::vector<SceneObject>& _currentScene, int callerIndex)
 void RabbitOnClick(std::vector<SceneObject>& _currentScene, int callerIndex);
 void SphereChildUpdate(std::vector<SceneObject>& _currentScene, int callerIndex);
 void MirrorUpdate(std::vector<SceneObject>& _currentScene, int callerIndex);
+void DescricaoDummy(std::vector<SceneObject>& _currentScene, int callerIndex);
+void GavetaOnClick(std::vector<SceneObject>& _currentScene, int callerIndex);
+void GavetaUpdate(std::vector<SceneObject>& _currentScene, int callerIndex);
+void GavetaOnMouseOver(std::vector<SceneObject>& _currentScene, int callerIndex);
+void VidroDummyOnMouseOver(std::vector<SceneObject>& _currentScene, int callerIndex);
+void VidroDummyOnClick(std::vector<SceneObject>& _currentScene, int callerIndex);
+void AbstrataDummyOnMouseOver(std::vector<SceneObject>& _currentScene, int callerIndex);
+void DescricaoVenus(std::vector<SceneObject>& _currentScene, int callerIndex);
+void DescricaoGourard(std::vector<SceneObject>& _currentScene, int callerIndex);
+void DescricaoBunny(std::vector<SceneObject>& _currentScene, int callerIndex);
+void DescricaoChest(std::vector<SceneObject>& _currentScene, int callerIndex);
+#endif // SCENE0FUNTIONS

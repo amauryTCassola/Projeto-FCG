@@ -1,1386 +1,8 @@
 # depslib dependency file v1.0
-1557922190 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\src\glad.c
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	<glad/glad.h>
-	<windows.h>
-	<dlfcn.h>
+1560130196 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\beziercurvesutils.cpp
+	"BezierCurvesUtils.h"
 
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glad\glad.h
-	<windows.h>
-	<stddef.h>
-	<KHR/khrplatform.h>
-	<inttypes.h>
-	<inttypes.h>
-	<inttypes.h>
-	<stdint.h>
-	<stdint.h>
-	<inttypes.h>
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\khr\khrplatform.h
-	<sys/cdefs.h>
-	<stdint.h>
-	<inttypes.h>
-	<stdint.h>
-
-1559279425 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\src\main.cpp
-	<cmath>
-	<cstdio>
-	<cstdlib>
-	<map>
-	<stack>
-	<string>
-	<vector>
-	<limits>
-	<fstream>
-	<sstream>
-	<stdexcept>
-	<algorithm>
-	<glad/glad.h>
-	<GLFW/glfw3.h>
-	<glm/mat4x4.hpp>
-	<glm/vec4.hpp>
-	<glm/gtc/type_ptr.hpp>
-	<tiny_obj_loader.h>
-	"objUtils.h"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glfw\glfw3.h
-	<stddef.h>
-	<stdint.h>
-	<OpenGL/gl3.h>
-	<OpenGL/gl3ext.h>
-	<OpenGL/gl.h>
-	<OpenGL/glu.h>
-	<GL/glcorearb.h>
-	<GLES/gl.h>
-	<GLES/glext.h>
-	<GLES2/gl2.h>
-	<GLES2/gl2ext.h>
-	<GLES3/gl3.h>
-	<GLES2/gl2ext.h>
-	<GLES3/gl31.h>
-	<GLES2/gl2ext.h>
-	<vulkan/vulkan.h>
-	<GL/gl.h>
-	<GL/glext.h>
-	<GL/glu.h>
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\mat4x4.hpp
-	"./ext/matrix_double4x4.hpp"
-	"./ext/matrix_double4x4_precision.hpp"
-	"./ext/matrix_float4x4.hpp"
-	"./ext/matrix_float4x4_precision.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\matrix_double4x4.hpp
-	"../detail/type_mat4x4.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\type_mat4x4.hpp
-	"type_vec4.hpp"
-	<limits>
-	<cstddef>
-	"type_mat4x4.inl"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\type_vec4.hpp
-	"qualifier.hpp"
-	"_swizzle.hpp"
-	"_swizzle_func.hpp"
-	<cstddef>
-	"type_vec4.inl"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\qualifier.hpp
-	"setup.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\setup.hpp
-	<cassert>
-	<cstddef>
-	"../simd/platform.h"
-	<cstdint>
-	<type_traits>
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\simd\platform.h
-	<cuda.h>
-	<immintrin.h>
-	<immintrin.h>
-	<popcntintrin.h>
-	<nmmintrin.h>
-	<smmintrin.h>
-	<tmmintrin.h>
-	<pmmintrin.h>
-	<emmintrin.h>
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\_swizzle.hpp
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\_swizzle_func.hpp
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\type_vec4.inl
-	"compute_vector_relational.hpp"
-	"type_vec4_simd.inl"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\compute_vector_relational.hpp
-	"setup.hpp"
-	<limits>
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\type_vec4_simd.inl
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\type_mat4x4.inl
-	"../matrix.hpp"
-	"type_mat4x4_simd.inl"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\matrix.hpp
-	"detail/qualifier.hpp"
-	"detail/setup.hpp"
-	"vec2.hpp"
-	"vec3.hpp"
-	"vec4.hpp"
-	"mat2x2.hpp"
-	"mat2x3.hpp"
-	"mat2x4.hpp"
-	"mat3x2.hpp"
-	"mat3x3.hpp"
-	"mat3x4.hpp"
-	"mat4x2.hpp"
-	"mat4x3.hpp"
-	"mat4x4.hpp"
-	"detail/func_matrix.inl"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\vec2.hpp
-	"./ext/vector_bool2.hpp"
-	"./ext/vector_bool2_precision.hpp"
-	"./ext/vector_float2.hpp"
-	"./ext/vector_float2_precision.hpp"
-	"./ext/vector_double2.hpp"
-	"./ext/vector_double2_precision.hpp"
-	"./ext/vector_int2.hpp"
-	"./ext/vector_int2_precision.hpp"
-	"./ext/vector_uint2.hpp"
-	"./ext/vector_uint2_precision.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\vector_bool2.hpp
-	"../detail/type_vec2.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\type_vec2.hpp
-	"qualifier.hpp"
-	"_swizzle.hpp"
-	"_swizzle_func.hpp"
-	<cstddef>
-	"type_vec2.inl"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\type_vec2.inl
-	"./compute_vector_relational.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\vector_bool2_precision.hpp
-	"../detail/type_vec2.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\vector_float2.hpp
-	"../detail/type_vec2.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\vector_float2_precision.hpp
-	"../detail/type_vec2.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\vector_double2.hpp
-	"../detail/type_vec2.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\vector_double2_precision.hpp
-	"../detail/type_vec2.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\vector_int2.hpp
-	"../detail/type_vec2.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\vector_int2_precision.hpp
-	"../detail/type_vec2.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\vector_uint2.hpp
-	"../detail/type_vec2.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\vector_uint2_precision.hpp
-	"../detail/type_vec2.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\vec3.hpp
-	"./ext/vector_bool3.hpp"
-	"./ext/vector_bool3_precision.hpp"
-	"./ext/vector_float3.hpp"
-	"./ext/vector_float3_precision.hpp"
-	"./ext/vector_double3.hpp"
-	"./ext/vector_double3_precision.hpp"
-	"./ext/vector_int3.hpp"
-	"./ext/vector_int3_precision.hpp"
-	"./ext/vector_uint3.hpp"
-	"./ext/vector_uint3_precision.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\vector_bool3.hpp
-	"../detail/type_vec3.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\type_vec3.hpp
-	"qualifier.hpp"
-	"_swizzle.hpp"
-	"_swizzle_func.hpp"
-	<cstddef>
-	"type_vec3.inl"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\type_vec3.inl
-	"compute_vector_relational.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\vector_bool3_precision.hpp
-	"../detail/type_vec3.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\vector_float3.hpp
-	"../detail/type_vec3.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\vector_float3_precision.hpp
-	"../detail/type_vec3.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\vector_double3.hpp
-	"../detail/type_vec3.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\vector_double3_precision.hpp
-	"../detail/type_vec3.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\vector_int3.hpp
-	"../detail/type_vec3.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\vector_int3_precision.hpp
-	"../detail/type_vec3.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\vector_uint3.hpp
-	"../detail/type_vec3.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\vector_uint3_precision.hpp
-	"../detail/type_vec3.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\vec4.hpp
-	"./ext/vector_bool4.hpp"
-	"./ext/vector_bool4_precision.hpp"
-	"./ext/vector_float4.hpp"
-	"./ext/vector_float4_precision.hpp"
-	"./ext/vector_double4.hpp"
-	"./ext/vector_double4_precision.hpp"
-	"./ext/vector_int4.hpp"
-	"./ext/vector_int4_precision.hpp"
-	"./ext/vector_uint4.hpp"
-	"./ext/vector_uint4_precision.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\vector_bool4.hpp
-	"../detail/type_vec4.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\vector_bool4_precision.hpp
-	"../detail/type_vec4.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\vector_float4.hpp
-	"../detail/type_vec4.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\vector_float4_precision.hpp
-	"../detail/type_vec4.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\vector_double4.hpp
-	"../detail/type_vec4.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\vector_double4_precision.hpp
-	"../detail/setup.hpp"
-	"../detail/type_vec4.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\vector_int4.hpp
-	"../detail/type_vec4.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\vector_int4_precision.hpp
-	"../detail/type_vec4.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\vector_uint4.hpp
-	"../detail/type_vec4.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\vector_uint4_precision.hpp
-	"../detail/type_vec4.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\mat2x2.hpp
-	"./ext/matrix_double2x2.hpp"
-	"./ext/matrix_double2x2_precision.hpp"
-	"./ext/matrix_float2x2.hpp"
-	"./ext/matrix_float2x2_precision.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\matrix_double2x2.hpp
-	"../detail/type_mat2x2.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\type_mat2x2.hpp
-	"type_vec2.hpp"
-	<limits>
-	<cstddef>
-	"type_mat2x2.inl"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\type_mat2x2.inl
-	"../matrix.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\matrix_double2x2_precision.hpp
-	"../detail/type_mat2x2.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\matrix_float2x2.hpp
-	"../detail/type_mat2x2.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\matrix_float2x2_precision.hpp
-	"../detail/type_mat2x2.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\mat2x3.hpp
-	"./ext/matrix_double2x3.hpp"
-	"./ext/matrix_double2x3_precision.hpp"
-	"./ext/matrix_float2x3.hpp"
-	"./ext/matrix_float2x3_precision.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\matrix_double2x3.hpp
-	"../detail/type_mat2x3.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\type_mat2x3.hpp
-	"type_vec2.hpp"
-	"type_vec3.hpp"
-	<limits>
-	<cstddef>
-	"type_mat2x3.inl"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\type_mat2x3.inl
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\matrix_double2x3_precision.hpp
-	"../detail/type_mat2x3.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\matrix_float2x3.hpp
-	"../detail/type_mat2x3.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\matrix_float2x3_precision.hpp
-	"../detail/type_mat2x3.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\mat2x4.hpp
-	"./ext/matrix_double2x4.hpp"
-	"./ext/matrix_double2x4_precision.hpp"
-	"./ext/matrix_float2x4.hpp"
-	"./ext/matrix_float2x4_precision.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\matrix_double2x4.hpp
-	"../detail/type_mat2x4.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\type_mat2x4.hpp
-	"type_vec2.hpp"
-	"type_vec4.hpp"
-	<limits>
-	<cstddef>
-	"type_mat2x4.inl"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\type_mat2x4.inl
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\matrix_double2x4_precision.hpp
-	"../detail/type_mat2x4.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\matrix_float2x4.hpp
-	"../detail/type_mat2x4.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\matrix_float2x4_precision.hpp
-	"../detail/type_mat2x4.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\mat3x2.hpp
-	"./ext/matrix_double3x2.hpp"
-	"./ext/matrix_double3x2_precision.hpp"
-	"./ext/matrix_float3x2.hpp"
-	"./ext/matrix_float3x2_precision.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\matrix_double3x2.hpp
-	"../detail/type_mat3x2.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\type_mat3x2.hpp
-	"type_vec2.hpp"
-	"type_vec3.hpp"
-	<limits>
-	<cstddef>
-	"type_mat3x2.inl"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\type_mat3x2.inl
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\matrix_double3x2_precision.hpp
-	"../detail/type_mat3x2.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\matrix_float3x2.hpp
-	"../detail/type_mat3x2.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\matrix_float3x2_precision.hpp
-	"../detail/type_mat3x2.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\mat3x3.hpp
-	"./ext/matrix_double3x3.hpp"
-	"./ext/matrix_double3x3_precision.hpp"
-	"./ext/matrix_float3x3.hpp"
-	"./ext/matrix_float3x3_precision.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\matrix_double3x3.hpp
-	"../detail/type_mat3x3.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\type_mat3x3.hpp
-	"type_vec3.hpp"
-	<limits>
-	<cstddef>
-	"type_mat3x3.inl"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\type_mat3x3.inl
-	"../matrix.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\matrix_double3x3_precision.hpp
-	"../detail/type_mat3x3.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\matrix_float3x3.hpp
-	"../detail/type_mat3x3.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\matrix_float3x3_precision.hpp
-	"../detail/type_mat3x3.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\mat3x4.hpp
-	"./ext/matrix_double3x4.hpp"
-	"./ext/matrix_double3x4_precision.hpp"
-	"./ext/matrix_float3x4.hpp"
-	"./ext/matrix_float3x4_precision.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\matrix_double3x4.hpp
-	"../detail/type_mat3x4.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\type_mat3x4.hpp
-	"type_vec3.hpp"
-	"type_vec4.hpp"
-	<limits>
-	<cstddef>
-	"type_mat3x4.inl"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\type_mat3x4.inl
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\matrix_double3x4_precision.hpp
-	"../detail/type_mat3x4.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\matrix_float3x4.hpp
-	"../detail/type_mat3x4.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\matrix_float3x4_precision.hpp
-	"../detail/type_mat3x4.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\mat4x2.hpp
-	"./ext/matrix_double4x2.hpp"
-	"./ext/matrix_double4x2_precision.hpp"
-	"./ext/matrix_float4x2.hpp"
-	"./ext/matrix_float4x2_precision.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\matrix_double4x2.hpp
-	"../detail/type_mat4x2.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\type_mat4x2.hpp
-	"type_vec2.hpp"
-	"type_vec4.hpp"
-	<limits>
-	<cstddef>
-	"type_mat4x2.inl"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\type_mat4x2.inl
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\matrix_double4x2_precision.hpp
-	"../detail/type_mat4x2.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\matrix_float4x2.hpp
-	"../detail/type_mat4x2.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\matrix_float4x2_precision.hpp
-	"../detail/type_mat2x2.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\mat4x3.hpp
-	"./ext/matrix_double4x3.hpp"
-	"./ext/matrix_double4x3_precision.hpp"
-	"./ext/matrix_float4x3.hpp"
-	"./ext/matrix_float4x3_precision.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\matrix_double4x3.hpp
-	"../detail/type_mat4x3.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\type_mat4x3.hpp
-	"type_vec3.hpp"
-	"type_vec4.hpp"
-	<limits>
-	<cstddef>
-	"type_mat4x3.inl"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\type_mat4x3.inl
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\matrix_double4x3_precision.hpp
-	"../detail/type_mat4x3.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\matrix_float4x3.hpp
-	"../detail/type_mat4x3.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\matrix_float4x3_precision.hpp
-	"../detail/type_mat4x3.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\func_matrix.inl
-	"../geometric.hpp"
-	<limits>
-	"func_matrix_simd.inl"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\geometric.hpp
-	"detail/type_vec3.hpp"
-	"detail/func_geometric.inl"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\func_geometric.inl
-	"../exponential.hpp"
-	"../common.hpp"
-	"func_geometric_simd.inl"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\exponential.hpp
-	"detail/type_vec1.hpp"
-	"detail/type_vec2.hpp"
-	"detail/type_vec3.hpp"
-	"detail/type_vec4.hpp"
-	<cmath>
-	"detail/func_exponential.inl"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\type_vec1.hpp
-	"qualifier.hpp"
-	"_swizzle.hpp"
-	"_swizzle_func.hpp"
-	<cstddef>
-	"type_vec1.inl"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\type_vec1.inl
-	"./compute_vector_relational.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\func_exponential.inl
-	"../vector_relational.hpp"
-	"_vectorize.hpp"
-	<limits>
-	<cmath>
-	<cassert>
-	"func_exponential_simd.inl"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\vector_relational.hpp
-	"detail/qualifier.hpp"
-	"detail/setup.hpp"
-	"detail/func_vector_relational.inl"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\func_vector_relational.inl
-	"func_vector_relational_simd.inl"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\func_vector_relational_simd.inl
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\_vectorize.hpp
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\func_exponential_simd.inl
-	"../simd/exponential.h"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\simd\exponential.h
-	"platform.h"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\common.hpp
-	"detail/qualifier.hpp"
-	"detail/_fixes.hpp"
-	"detail/func_common.inl"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\_fixes.hpp
-	<cmath>
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\func_common.inl
-	"../vector_relational.hpp"
-	"compute_common.hpp"
-	"type_vec1.hpp"
-	"type_vec2.hpp"
-	"type_vec3.hpp"
-	"type_vec4.hpp"
-	"_vectorize.hpp"
-	<limits>
-	"func_common_simd.inl"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\compute_common.hpp
-	"setup.hpp"
-	<limits>
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\func_common_simd.inl
-	"../simd/common.h"
-	<immintrin.h>
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\simd\common.h
-	"platform.h"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\func_geometric_simd.inl
-	"../simd/geometric.h"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\simd\geometric.h
-	"common.h"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\func_matrix_simd.inl
-	"type_mat4x4.hpp"
-	"../geometric.hpp"
-	"../simd/matrix.h"
-	<cstring>
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\simd\matrix.h
-	"geometric.h"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\type_mat4x4_simd.inl
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\matrix_double4x4_precision.hpp
-	"../detail/type_mat4x4.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\matrix_float4x4.hpp
-	"../detail/type_mat4x4.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\matrix_float4x4_precision.hpp
-	"../detail/type_mat4x4.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\gtc\type_ptr.hpp
-	"../gtc/quaternion.hpp"
-	"../gtc/vec1.hpp"
-	"../vec2.hpp"
-	"../vec3.hpp"
-	"../vec4.hpp"
-	"../mat2x2.hpp"
-	"../mat2x3.hpp"
-	"../mat2x4.hpp"
-	"../mat3x2.hpp"
-	"../mat3x3.hpp"
-	"../mat3x4.hpp"
-	"../mat4x2.hpp"
-	"../mat4x3.hpp"
-	"../mat4x4.hpp"
-	<cstring>
-	"type_ptr.inl"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\gtc\quaternion.hpp
-	"../gtc/constants.hpp"
-	"../gtc/matrix_transform.hpp"
-	"../ext/vector_relational.hpp"
-	"../ext/quaternion_common.hpp"
-	"../ext/quaternion_float.hpp"
-	"../ext/quaternion_float_precision.hpp"
-	"../ext/quaternion_double.hpp"
-	"../ext/quaternion_double_precision.hpp"
-	"../ext/quaternion_relational.hpp"
-	"../ext/quaternion_geometric.hpp"
-	"../ext/quaternion_trigonometric.hpp"
-	"../ext/quaternion_transform.hpp"
-	"../detail/type_mat3x3.hpp"
-	"../detail/type_mat4x4.hpp"
-	"../detail/type_vec3.hpp"
-	"../detail/type_vec4.hpp"
-	"quaternion.inl"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\gtc\constants.hpp
-	"../ext/scalar_constants.hpp"
-	"constants.inl"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\scalar_constants.hpp
-	"../detail/setup.hpp"
-	"scalar_constants.inl"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\scalar_constants.inl
-	<limits>
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\gtc\constants.inl
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\gtc\matrix_transform.hpp
-	"../mat4x4.hpp"
-	"../vec2.hpp"
-	"../vec3.hpp"
-	"../vec4.hpp"
-	"../ext/matrix_projection.hpp"
-	"../ext/matrix_clip_space.hpp"
-	"../ext/matrix_transform.hpp"
-	"matrix_transform.inl"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\matrix_projection.hpp
-	"../gtc/constants.hpp"
-	"../geometric.hpp"
-	"../trigonometric.hpp"
-	"../matrix.hpp"
-	"matrix_projection.inl"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\trigonometric.hpp
-	"detail/setup.hpp"
-	"detail/qualifier.hpp"
-	"detail/func_trigonometric.inl"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\func_trigonometric.inl
-	"_vectorize.hpp"
-	<cmath>
-	<limits>
-	"func_trigonometric_simd.inl"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\func_trigonometric_simd.inl
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\matrix_projection.inl
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\matrix_clip_space.hpp
-	"../ext/scalar_constants.hpp"
-	"../geometric.hpp"
-	"../trigonometric.hpp"
-	"matrix_clip_space.inl"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\matrix_clip_space.inl
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\matrix_transform.hpp
-	"../gtc/constants.hpp"
-	"../geometric.hpp"
-	"../trigonometric.hpp"
-	"../matrix.hpp"
-	"matrix_transform.inl"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\matrix_transform.inl
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\gtc\matrix_transform.inl
-	"../geometric.hpp"
-	"../trigonometric.hpp"
-	"../matrix.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\vector_relational.hpp
-	"../detail/qualifier.hpp"
-	"vector_relational.inl"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\vector_relational.inl
-	"../vector_relational.hpp"
-	"../common.hpp"
-	"../detail/qualifier.hpp"
-	"../detail/type_float.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\type_float.hpp
-	"setup.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\quaternion_common.hpp
-	"../ext/scalar_constants.hpp"
-	"../ext/quaternion_geometric.hpp"
-	"../common.hpp"
-	"../trigonometric.hpp"
-	"../exponential.hpp"
-	<limits>
-	"quaternion_common.inl"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\quaternion_geometric.hpp
-	"../geometric.hpp"
-	"../exponential.hpp"
-	"../ext/vector_relational.hpp"
-	"quaternion_geometric.inl"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\quaternion_geometric.inl
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\quaternion_common.inl
-	"quaternion_common_simd.inl"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\quaternion_common_simd.inl
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\quaternion_float.hpp
-	"../detail/type_quat.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\type_quat.hpp
-	"../detail/type_mat3x3.hpp"
-	"../detail/type_mat4x4.hpp"
-	"../detail/type_vec3.hpp"
-	"../detail/type_vec4.hpp"
-	"../ext/vector_relational.hpp"
-	"../ext/quaternion_relational.hpp"
-	"../gtc/constants.hpp"
-	"../gtc/matrix_transform.hpp"
-	"type_quat.inl"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\quaternion_relational.hpp
-	"../vector_relational.hpp"
-	"quaternion_relational.inl"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\quaternion_relational.inl
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\type_quat.inl
-	"../trigonometric.hpp"
-	"../exponential.hpp"
-	"../ext/quaternion_geometric.hpp"
-	<limits>
-	"type_quat_simd.inl"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\detail\type_quat_simd.inl
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\quaternion_float_precision.hpp
-	"../detail/type_quat.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\quaternion_double.hpp
-	"../detail/type_quat.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\quaternion_double_precision.hpp
-	"../detail/type_quat.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\quaternion_trigonometric.hpp
-	"../trigonometric.hpp"
-	"../exponential.hpp"
-	"scalar_constants.hpp"
-	"vector_relational.hpp"
-	<limits>
-	"quaternion_trigonometric.inl"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\quaternion_trigonometric.inl
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\quaternion_transform.hpp
-	"../common.hpp"
-	"../trigonometric.hpp"
-	"../geometric.hpp"
-	"quaternion_transform.inl"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\quaternion_transform.inl
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\gtc\quaternion.inl
-	"../trigonometric.hpp"
-	"../geometric.hpp"
-	"../exponential.hpp"
-	"epsilon.hpp"
-	<limits>
-	"quaternion_simd.inl"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\gtc\epsilon.hpp
-	"../detail/setup.hpp"
-	"../detail/qualifier.hpp"
-	"epsilon.inl"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\gtc\epsilon.inl
-	"../vector_relational.hpp"
-	"../common.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\gtc\quaternion_simd.inl
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\gtc\vec1.hpp
-	"../ext/vector_bool1.hpp"
-	"../ext/vector_bool1_precision.hpp"
-	"../ext/vector_float1.hpp"
-	"../ext/vector_float1_precision.hpp"
-	"../ext/vector_double1.hpp"
-	"../ext/vector_double1_precision.hpp"
-	"../ext/vector_int1.hpp"
-	"../ext/vector_int1_precision.hpp"
-	"../ext/vector_uint1.hpp"
-	"../ext/vector_uint1_precision.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\vector_bool1.hpp
-	"../detail/type_vec1.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\vector_bool1_precision.hpp
-	"../detail/type_vec1.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\vector_float1.hpp
-	"../detail/type_vec1.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\vector_float1_precision.hpp
-	"../detail/type_vec1.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\vector_double1.hpp
-	"../detail/type_vec1.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\vector_double1_precision.hpp
-	"../detail/type_vec1.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\vector_int1.hpp
-	"../detail/type_vec1.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\vector_int1_precision.hpp
-	"../detail/type_vec1.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\vector_uint1.hpp
-	"../detail/type_vec1.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\ext\vector_uint1_precision.hpp
-	"../detail/type_vec1.hpp"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\glm\gtc\type_ptr.inl
-	<cstring>
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\tiny_obj_loader.h
-	<map>
-	<string>
-	<vector>
-	<cassert>
-	<cctype>
-	<cmath>
-	<cstddef>
-	<cstdlib>
-	<cstring>
-	<utility>
-	<fstream>
-	<sstream>
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\utils.h
-	<cstdio>
-
-1559101558 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\matrices.h
-	<cstdio>
-	<cstdlib>
-	<glm/mat4x4.hpp>
-	<glm/vec4.hpp>
-	<glm/gtc/matrix_transform.hpp>
-
-1559095115 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\src\textrendering.cpp
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\dejavufont.h
-	<stddef.h>
-	<stdint.h>
-
-1557922190 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\src\tiny_obj_loader.cpp
-	"tiny_obj_loader.h"
-
-1559095944 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\src\main - copia.cpp
-
-1559095729 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\src\callbacks.cpp
-	<cmath>
-	<cstdio>
-	<cstdlib>
-	<map>
-	<stack>
-	<string>
-	<vector>
-	<limits>
-	<fstream>
-	<sstream>
-	<stdexcept>
-	<algorithm>
-	<glad/glad.h>
-	<GLFW/glfw3.h>
-	<glm/mat4x4.hpp>
-	<glm/vec4.hpp>
-	<glm/gtc/type_ptr.hpp>
-	"callbacks.h"
-
-1559095771 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\callbacks.h
-
-1559265139 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\shaderutil.h
-	<cmath>
-	<cstdio>
-	<cstdlib>
-	<map>
-	<stack>
-	<string>
-	<vector>
-	<limits>
-	<fstream>
-	<sstream>
-	<stdexcept>
-	<algorithm>
-	<glad/glad.h>
-	<GLFW/glfw3.h>
-	<glm/mat4x4.hpp>
-	<glm/vec4.hpp>
-	<glm/gtc/type_ptr.hpp>
-
-1559096784 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\src\shaderutil.cpp
-	<cmath>
-	<cstdio>
-	<cstdlib>
-	<map>
-	<stack>
-	<string>
-	<vector>
-	<limits>
-	<fstream>
-	<sstream>
-	<stdexcept>
-	<algorithm>
-	<glad/glad.h>
-	<GLFW/glfw3.h>
-	<glm/mat4x4.hpp>
-	<glm/vec4.hpp>
-	<glm/gtc/type_ptr.hpp>
-	"shaderUtil.h"
-
-1559279509 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\objutils.h
-	<cmath>
-	<cstdio>
-	<cstdlib>
-	<map>
-	<stack>
-	<string>
-	<vector>
-	<limits>
-	<fstream>
-	<sstream>
-	<stdexcept>
-	<algorithm>
-	<sys/stat.h>
-	<glad/glad.h>
-	<GLFW/glfw3.h>
-	<glm/mat4x4.hpp>
-	<glm/vec4.hpp>
-	<glm/gtc/type_ptr.hpp>
-	<tiny_obj_loader.h>
-	<nlohmann/json.hpp>
-	"matrices.h"
-	"stb_imageUtils.h"
-	"cameraUtils.h"
-	"shaderUtil.h"
-
-1559279597 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\src\objutils.cpp
-	"objUtils.h"
-
-1559101556 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\src\matrices.cpp
-	"matrices.h"
-
-1559279949 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\src\camerautils.cpp
-	"cameraUtils.h"
-
-1559279975 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\camerautils.h
-	<cmath>
-	<cstdio>
-	<cstdlib>
-	<map>
-	<stack>
-	<string>
-	<vector>
-	<limits>
-	<fstream>
-	<sstream>
-	<stdexcept>
-	<algorithm>
-	<glad/glad.h>
-	<GLFW/glfw3.h>
-	<glm/mat4x4.hpp>
-	<glm/vec4.hpp>
-	<glm/gtc/type_ptr.hpp>
-	"matrices.h"
-
-1559183047 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\stb_imageutils.h
-	<cmath>
-	<cstdio>
-	<cstdlib>
-	<map>
-	<stack>
-	<string>
-	<vector>
-	<limits>
-	<fstream>
-	<sstream>
-	<stdexcept>
-	<algorithm>
-	<glad/glad.h>
-	<GLFW/glfw3.h>
-	<glm/mat4x4.hpp>
-	<glm/vec4.hpp>
-	<glm/gtc/type_ptr.hpp>
-
-1559044482 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\stb_image.h
-	"stb_image.h"
-	<stdio.h>
-	<stdarg.h>
-	<stddef.h>
-	<stdlib.h>
-	<string.h>
-	<limits.h>
-	<math.h>
-	<stdio.h>
-	<assert.h>
-	<stdint.h>
-	<emmintrin.h>
-	<intrin.h>
-	<arm_neon.h>
-
-1559183051 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\src\stb_imageutils.cpp
-	"stb_imageUtils.h"
-	"stb_image.h"
-
-1488818172 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\nlohmann\json.hpp
-	<algorithm>
-	<array>
-	<cassert>
-	<cctype>
-	<ciso646>
-	<cmath>
-	<cstddef>
-	<cstdint>
-	<cstdlib>
-	<cstring>
-	<forward_list>
-	<functional>
-	<initializer_list>
-	<iomanip>
-	<iostream>
-	<iterator>
-	<limits>
-	<locale>
-	<map>
-	<memory>
-	<numeric>
-	<sstream>
-	<stdexcept>
-	<string>
-	<type_traits>
-	<utility>
-	<vector>
-	<cstdio>
-
-1553121722 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\nlohmann\adl_serializer.hpp
-	<utility>
-	<nlohmann/detail/conversions/from_json.hpp>
-	<nlohmann/detail/conversions/to_json.hpp>
-
-1553121722 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\nlohmann\detail\conversions\from_json.hpp
-	<algorithm>
-	<array>
-	<ciso646>
-	<forward_list>
-	<iterator>
-	<map>
-	<string>
-	<tuple>
-	<type_traits>
-	<unordered_map>
-	<utility>
-	<valarray>
-	<nlohmann/detail/exceptions.hpp>
-	<nlohmann/detail/macro_scope.hpp>
-	<nlohmann/detail/meta/cpp_future.hpp>
-	<nlohmann/detail/meta/type_traits.hpp>
-	<nlohmann/detail/value_t.hpp>
-
-1553121722 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\nlohmann\detail\exceptions.hpp
-	<exception>
-	<stdexcept>
-	<string>
-	<nlohmann/detail/input/position_t.hpp>
-
-1553121722 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\nlohmann\detail\input\position_t.hpp
-	<cstddef>
-
-1553121722 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\nlohmann\detail\macro_scope.hpp
-	<utility>
-	<cstdlib>
-
-1553121722 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\nlohmann\detail\meta\cpp_future.hpp
-	<ciso646>
-	<cstddef>
-	<type_traits>
-
-1553121722 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\nlohmann\detail\meta\type_traits.hpp
-	<ciso646>
-	<limits>
-	<type_traits>
-	<utility>
-	<nlohmann/detail/iterators/iterator_traits.hpp>
-	<nlohmann/detail/macro_scope.hpp>
-	<nlohmann/detail/meta/cpp_future.hpp>
-	<nlohmann/detail/meta/detected.hpp>
-	<nlohmann/json_fwd.hpp>
-
-1553121722 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\nlohmann\detail\iterators\iterator_traits.hpp
-	<iterator>
-	<nlohmann/detail/meta/void_t.hpp>
-	<nlohmann/detail/meta/cpp_future.hpp>
-
-1553121722 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\nlohmann\detail\meta\void_t.hpp
-
-1553121722 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\nlohmann\detail\meta\detected.hpp
-	<type_traits>
-	<nlohmann/detail/meta/void_t.hpp>
-
-1553121722 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\nlohmann\json_fwd.hpp
-	<cstdint>
-	<map>
-	<memory>
-	<string>
-	<vector>
-
-1553121722 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\nlohmann\detail\value_t.hpp
-	<array>
-	<ciso646>
-	<cstddef>
-	<cstdint>
-	<string>
-
-1553121722 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\nlohmann\detail\conversions\to_json.hpp
-	<algorithm>
-	<ciso646>
-	<iterator>
-	<string>
-	<tuple>
-	<type_traits>
-	<utility>
-	<valarray>
-	<vector>
-	<nlohmann/detail/iterators/iteration_proxy.hpp>
-	<nlohmann/detail/meta/cpp_future.hpp>
-	<nlohmann/detail/meta/type_traits.hpp>
-	<nlohmann/detail/value_t.hpp>
-
-1553121722 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\nlohmann\detail\iterators\iteration_proxy.hpp
-	<cstddef>
-	<iterator>
-	<string>
-	<tuple>
-	<nlohmann/detail/meta/type_traits.hpp>
-	<nlohmann/detail/value_t.hpp>
-
-1553121724 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\nlohmann\detail\input\binary_reader.hpp
-	<algorithm>
-	<array>
-	<cassert>
-	<cmath>
-	<cstddef>
-	<cstdint>
-	<cstdio>
-	<cstring>
-	<iterator>
-	<limits>
-	<string>
-	<utility>
-	<nlohmann/detail/exceptions.hpp>
-	<nlohmann/detail/input/input_adapters.hpp>
-	<nlohmann/detail/input/json_sax.hpp>
-	<nlohmann/detail/macro_scope.hpp>
-	<nlohmann/detail/meta/is_sax.hpp>
-	<nlohmann/detail/value_t.hpp>
-
-1553121722 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\nlohmann\detail\input\input_adapters.hpp
-	<array>
-	<cassert>
-	<cstddef>
-	<cstdio>
-	<cstring>
-	<istream>
-	<iterator>
-	<memory>
-	<numeric>
-	<string>
-	<type_traits>
-	<utility>
-	<nlohmann/detail/iterators/iterator_traits.hpp>
-	<nlohmann/detail/macro_scope.hpp>
-
-1553121722 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\nlohmann\detail\input\json_sax.hpp
-	<cassert>
-	<cstddef>
-	<string>
-	<utility>
-	<vector>
-	<nlohmann/detail/exceptions.hpp>
-	<nlohmann/detail/macro_scope.hpp>
-
-1553121722 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\nlohmann\detail\meta\is_sax.hpp
-	<cstdint>
-	<utility>
-	<string>
-	<nlohmann/detail/meta/detected.hpp>
-	<nlohmann/detail/meta/type_traits.hpp>
-
-1553121724 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\nlohmann\detail\input\lexer.hpp
-	<array>
-	<clocale>
-	<cstddef>
-	<cstdio>
-	<cstdlib>
-	<initializer_list>
-	<string>
-	<utility>
-	<vector>
-	<nlohmann/detail/input/input_adapters.hpp>
-	<nlohmann/detail/input/position_t.hpp>
-	<nlohmann/detail/macro_scope.hpp>
-
-1553121722 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\nlohmann\detail\input\parser.hpp
-	<cassert>
-	<cmath>
-	<cstdint>
-	<functional>
-	<string>
-	<utility>
-	<vector>
-	<nlohmann/detail/exceptions.hpp>
-	<nlohmann/detail/input/input_adapters.hpp>
-	<nlohmann/detail/input/json_sax.hpp>
-	<nlohmann/detail/input/lexer.hpp>
-	<nlohmann/detail/macro_scope.hpp>
-	<nlohmann/detail/meta/is_sax.hpp>
-	<nlohmann/detail/value_t.hpp>
-
-1553121722 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\nlohmann\detail\iterators\internal_iterator.hpp
-	<nlohmann/detail/iterators/primitive_iterator.hpp>
-
-1553121722 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\nlohmann\detail\iterators\primitive_iterator.hpp
-	<cstddef>
-	<limits>
-
-1553121722 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\nlohmann\detail\iterators\iter_impl.hpp
-	<ciso646>
-	<iterator>
-	<type_traits>
-	<nlohmann/detail/exceptions.hpp>
-	<nlohmann/detail/iterators/internal_iterator.hpp>
-	<nlohmann/detail/iterators/primitive_iterator.hpp>
-	<nlohmann/detail/macro_scope.hpp>
-	<nlohmann/detail/meta/cpp_future.hpp>
-	<nlohmann/detail/meta/type_traits.hpp>
-	<nlohmann/detail/value_t.hpp>
-
-1553121722 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\nlohmann\detail\iterators\json_reverse_iterator.hpp
-	<cstddef>
-	<iterator>
-	<utility>
-
-1553121722 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\nlohmann\detail\json_pointer.hpp
-	<algorithm>
-	<cassert>
-	<numeric>
-	<string>
-	<utility>
-	<vector>
-	<nlohmann/detail/exceptions.hpp>
-	<nlohmann/detail/macro_scope.hpp>
-	<nlohmann/detail/value_t.hpp>
-
-1553121722 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\nlohmann\detail\json_ref.hpp
-	<initializer_list>
-	<utility>
-	<nlohmann/detail/meta/type_traits.hpp>
-
-1553121722 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\nlohmann\detail\output\binary_writer.hpp
-	<algorithm>
-	<array>
-	<cstdint>
-	<cstring>
-	<limits>
-	<string>
-	<nlohmann/detail/input/binary_reader.hpp>
-	<nlohmann/detail/output/output_adapters.hpp>
-
-1553121722 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\nlohmann\detail\output\output_adapters.hpp
-	<algorithm>
-	<cstddef>
-	<ios>
-	<iterator>
-	<memory>
-	<ostream>
-	<string>
-	<vector>
-
-1553121722 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\nlohmann\detail\output\serializer.hpp
-	<algorithm>
-	<array>
-	<cassert>
-	<ciso646>
-	<clocale>
-	<cmath>
-	<cstddef>
-	<cstdint>
-	<cstdio>
-	<limits>
-	<string>
-	<type_traits>
-	<utility>
-	<nlohmann/detail/conversions/to_chars.hpp>
-	<nlohmann/detail/exceptions.hpp>
-	<nlohmann/detail/macro_scope.hpp>
-	<nlohmann/detail/meta/cpp_future.hpp>
-	<nlohmann/detail/output/binary_writer.hpp>
-	<nlohmann/detail/output/output_adapters.hpp>
-	<nlohmann/detail/value_t.hpp>
-
-1553121724 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\nlohmann\detail\conversions\to_chars.hpp
-	<array>
-	<cassert>
-	<ciso646>
-	<cmath>
-	<cstdint>
-	<cstring>
-	<limits>
-	<type_traits>
-
-1553121722 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\laboratorio_4_codigo_fonte\include\nlohmann\detail\macro_unscope.hpp
-
-1560218898 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\camerautils.cpp
-	"cameraUtils.h"
-
-1560225285 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\camerautils.h
+1560132865 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\beziercurvesutils.h
 	<cmath>
 	<cstdio>
 	<cstdlib>
@@ -2259,139 +881,34 @@
 	<glm/vec4.hpp>
 	<glm/gtc/matrix_transform.hpp>
 
-1557922190 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\glad.c
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
+1560722639 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\camerautils.cpp
+	"cameraUtils.h"
+
+1560709113 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\camerautils.h
+	<cmath>
+	<cstdio>
+	<cstdlib>
+	<map>
+	<stack>
+	<string>
+	<vector>
+	<limits>
+	<fstream>
+	<sstream>
+	<stdexcept>
+	<algorithm>
 	<glad/glad.h>
-	<windows.h>
-	<dlfcn.h>
-
-1559095944 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\main - copia.cpp
-
-1559772935 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\matrices.cpp
+	<GLFW/glfw3.h>
+	<glm/mat4x4.hpp>
+	<glm/vec4.hpp>
+	<glm/gtc/type_ptr.hpp>
 	"matrices.h"
 
-1559096784 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\shaderutil.cpp
-	<cmath>
-	<cstdio>
-	<cstdlib>
-	<map>
-	<stack>
-	<string>
-	<vector>
-	<limits>
-	<fstream>
-	<sstream>
-	<stdexcept>
-	<algorithm>
-	<glad/glad.h>
-	<GLFW/glfw3.h>
-	<glm/mat4x4.hpp>
-	<glm/vec4.hpp>
-	<glm/gtc/type_ptr.hpp>
-	"shaderUtil.h"
-
-1559265139 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\shaderutil.h
-	<cmath>
-	<cstdio>
-	<cstdlib>
-	<map>
-	<stack>
-	<string>
-	<vector>
-	<limits>
-	<fstream>
-	<sstream>
-	<stdexcept>
-	<algorithm>
-	<glad/glad.h>
-	<GLFW/glfw3.h>
-	<glm/mat4x4.hpp>
-	<glm/vec4.hpp>
-	<glm/gtc/type_ptr.hpp>
-
-1559183051 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\stb_imageutils.cpp
-	"stb_imageUtils.h"
-	"stb_image.h"
-
-1559183047 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\stb_imageutils.h
-	<cmath>
-	<cstdio>
-	<cstdlib>
-	<map>
-	<stack>
-	<string>
-	<vector>
-	<limits>
-	<fstream>
-	<sstream>
-	<stdexcept>
-	<algorithm>
-	<glad/glad.h>
-	<GLFW/glfw3.h>
-	<glm/mat4x4.hpp>
-	<glm/vec4.hpp>
-	<glm/gtc/type_ptr.hpp>
-
-1559044482 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\stb_image.h
-	"stb_image.h"
-	<stdio.h>
-	<stdarg.h>
-	<stddef.h>
-	<stdlib.h>
-	<string.h>
-	<limits.h>
-	<math.h>
-	<stdio.h>
-	<assert.h>
-	<stdint.h>
-	<emmintrin.h>
-	<intrin.h>
-	<arm_neon.h>
-
-1559095115 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\textrendering.cpp
-
-1557922190 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\tiny_obj_loader.cpp
-	"tiny_obj_loader.h"
-
-1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\tiny_obj_loader.h
-	<map>
-	<string>
-	<vector>
-	<cassert>
-	<cctype>
-	<cmath>
-	<cstddef>
-	<cstdlib>
-	<cstring>
-	<utility>
-	<fstream>
-	<sstream>
-
-1559502974 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\intersectionfunctions.c
-
-1560394698 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\main.cpp
-	<cmath>
-	<cstdio>
-	<cstdlib>
-	<map>
-	<stack>
-	<string>
-	<vector>
-	<limits>
-	<fstream>
-	<sstream>
-	<stdexcept>
-	<algorithm>
-	<glad/glad.h>
-	<GLFW/glfw3.h>
-	<glm/mat4x4.hpp>
-	<glm/vec4.hpp>
-	<glm/gtc/type_ptr.hpp>
+1560737768 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\collisionutils.cpp
+	"CollisionUtils.h"
 	"objUtils.h"
 
-1560385515 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\objutils.h
+1560637538 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\collisionutils.h
 	<cmath>
 	<cstdio>
 	<cstdlib>
@@ -2410,10 +927,33 @@
 	<glm/mat4x4.hpp>
 	<glm/vec4.hpp>
 	<glm/gtc/type_ptr.hpp>
-	"cameraUtils.h"
 	"SceneLoadSaveUtils.h"
-	"CollisionUtils.h"
-	"BezierCurvesUtils.h"
+	"matrices.h"
+	"cameraUtils.h"
+	"IntersectionFunctions.h"
+
+1560295153 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\sceneloadsaveutils.h
+	<cmath>
+	<cstdio>
+	<cstdlib>
+	<map>
+	<stack>
+	<string>
+	<vector>
+	<limits>
+	<fstream>
+	<sstream>
+	<stdexcept>
+	<algorithm>
+	<glad/glad.h>
+	<GLFW/glfw3.h>
+	<glm/mat4x4.hpp>
+	<glm/vec4.hpp>
+	<glm/gtc/type_ptr.hpp>
+	<nlohmann/json.hpp>
+	<tiny_obj_loader.h>
+	"matrices.h"
+	"shaderUtil.h"
 
 1488818172 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\nlohmann\json.hpp
 	<algorithm>
@@ -2445,6 +985,39 @@
 	<vector>
 	<cstdio>
 
+1557922190 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\tiny_obj_loader.h
+	<map>
+	<string>
+	<vector>
+	<cassert>
+	<cctype>
+	<cmath>
+	<cstddef>
+	<cstdlib>
+	<cstring>
+	<utility>
+	<fstream>
+	<sstream>
+
+1559265139 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\shaderutil.h
+	<cmath>
+	<cstdio>
+	<cstdlib>
+	<map>
+	<stack>
+	<string>
+	<vector>
+	<limits>
+	<fstream>
+	<sstream>
+	<stdexcept>
+	<algorithm>
+	<glad/glad.h>
+	<GLFW/glfw3.h>
+	<glm/mat4x4.hpp>
+	<glm/vec4.hpp>
+	<glm/gtc/type_ptr.hpp>
+
 1560131679 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\intersectionfunctions.h
 	<cmath>
 	<cstdio>
@@ -2464,67 +1037,7 @@
 	"matrices.h"
 	"cameraUtils.h"
 
-1560394110 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\objutils.cpp
-	"objUtils.h"
-
-1560229440 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\intersectionfunctions.cpp
-	"IntersectionFunctions.h"
-
-1560227599 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\scene0functions.h
-	<cmath>
-	<cstdio>
-	<cstdlib>
-	<map>
-	<stack>
-	<string>
-	<vector>
-	<limits>
-	<fstream>
-	<sstream>
-	<stdexcept>
-	<algorithm>
-	<glad/glad.h>
-	<GLFW/glfw3.h>
-	<glm/mat4x4.hpp>
-	<glm/vec4.hpp>
-	<glm/gtc/type_ptr.hpp>
-	"SceneLoadSaveUtils.h"
-	"objUtils.h"
-	"cameraUtils.h"
-	"BezierCurvesUtils.h"
-
-1560387077 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\scene0functions.cpp
-	"Scene0Functions.h"
-
-1560295153 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\sceneloadsaveutils.h
-	<cmath>
-	<cstdio>
-	<cstdlib>
-	<map>
-	<stack>
-	<string>
-	<vector>
-	<limits>
-	<fstream>
-	<sstream>
-	<stdexcept>
-	<algorithm>
-	<glad/glad.h>
-	<GLFW/glfw3.h>
-	<glm/mat4x4.hpp>
-	<glm/vec4.hpp>
-	<glm/gtc/type_ptr.hpp>
-	<nlohmann/json.hpp>
-	<tiny_obj_loader.h>
-	"matrices.h"
-	"shaderUtil.h"
-
-1560395028 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\sceneloadsaveutils.cpp
-	"SceneLoadSaveUtils.h"
-	"stb_image.h"
-	"FunctionMappingUtils.h"
-
-1560097794 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\collisionutils.h
+1560717220 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\objutils.h
 	<cmath>
 	<cstdio>
 	<cstdlib>
@@ -2543,19 +1056,37 @@
 	<glm/mat4x4.hpp>
 	<glm/vec4.hpp>
 	<glm/gtc/type_ptr.hpp>
-	"SceneLoadSaveUtils.h"
-	"matrices.h"
 	"cameraUtils.h"
-	"IntersectionFunctions.h"
-
-1560227939 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\collisionutils.cpp
+	"SceneLoadSaveUtils.h"
 	"CollisionUtils.h"
+	"BezierCurvesUtils.h"
+	"LightUtils.h"
+
+1560704902 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\lightutils.h
+	<cmath>
+	<cstdio>
+	<cstdlib>
+	<map>
+	<stack>
+	<string>
+	<vector>
+	<limits>
+	<fstream>
+	<sstream>
+	<stdexcept>
+	<algorithm>
+	<sys/stat.h>
+	<glad/glad.h>
+	<GLFW/glfw3.h>
+	<glm/mat4x4.hpp>
+	<glm/vec4.hpp>
+	<glm/gtc/type_ptr.hpp>
 	"objUtils.h"
 
-1560130196 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\beziercurvesutils.cpp
-	"BezierCurvesUtils.h"
+1560759217 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\functionmappingutils.cpp
+	"Scene0Functions.h"
 
-1560132865 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\beziercurvesutils.h
+1560759206 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\scene0functions.h
 	<cmath>
 	<cstdio>
 	<cstdlib>
@@ -2573,12 +1104,142 @@
 	<glm/mat4x4.hpp>
 	<glm/vec4.hpp>
 	<glm/gtc/type_ptr.hpp>
+	"SceneLoadSaveUtils.h"
+	"objUtils.h"
+	"cameraUtils.h"
+	"BezierCurvesUtils.h"
+	"MirrorUtils.h"
+
+1560621362 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\mirrorutils.h
+	<cmath>
+	<cstdio>
+	<cstdlib>
+	<map>
+	<stack>
+	<string>
+	<vector>
+	<limits>
+	<fstream>
+	<sstream>
+	<stdexcept>
+	<algorithm>
+	<sys/stat.h>
+	<glad/glad.h>
+	<GLFW/glfw3.h>
+	<glm/mat4x4.hpp>
+	<glm/vec4.hpp>
+	<glm/gtc/type_ptr.hpp>
+	"objUtils.h"
+
+1557922190 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\glad.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<glad/glad.h>
+	<windows.h>
+	<dlfcn.h>
+
+1560736752 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\intersectionfunctions.cpp
+	"IntersectionFunctions.h"
+
+1560759595 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\main.cpp
+	<cmath>
+	<cstdio>
+	<cstdlib>
+	<map>
+	<stack>
+	<string>
+	<vector>
+	<limits>
+	<fstream>
+	<sstream>
+	<stdexcept>
+	<algorithm>
+	<glad/glad.h>
+	<GLFW/glfw3.h>
+	<glm/mat4x4.hpp>
+	<glm/vec4.hpp>
+	<glm/gtc/type_ptr.hpp>
+	"objUtils.h"
+	"TextRenderingUtils.h"
+	"SFXUtils.h"
+
+1560636292 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\textrenderingutils.h
+	<cmath>
+	<cstdio>
+	<cstdlib>
+	<map>
+	<stack>
+	<string>
+	<vector>
+	<limits>
+	<fstream>
+	<sstream>
+	<stdexcept>
+	<algorithm>
+	<sys/stat.h>
+	<glad/glad.h>
+	<GLFW/glfw3.h>
+	<glm/mat4x4.hpp>
+	<glm/vec4.hpp>
+	<glm/gtc/type_ptr.hpp>
+
+1560647719 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\sfxutils.h
+	<cmath>
+	<cstdio>
+	<cstdlib>
+	<map>
+	<stack>
+	<string>
+	<vector>
+	<limits>
+	<fstream>
+	<sstream>
+	<stdexcept>
+	<algorithm>
+	<sys/stat.h>
+	<glad/glad.h>
+	<GLFW/glfw3.h>
+	<glm/mat4x4.hpp>
+	<glm/vec4.hpp>
+	<glm/gtc/type_ptr.hpp>
+
+1560709851 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\matrices.cpp
 	"matrices.h"
 
-1560227624 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\functionmappingutils.cpp
-	"Scene0Functions.h"
+1560653629 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\mirrorutils.cpp
+	"MirrorUtils.h"
 
-1560216624 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\functionmappingutils.h
+1560759603 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\objutils.cpp
+	"objUtils.h"
+
+1560759198 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\scene0functions.cpp
+	"Scene0Functions.h"
+	"TextRenderingUtils.h"
+	"SFXUtils.h"
+
+1560759763 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\sceneloadsaveutils.cpp
+	"SceneLoadSaveUtils.h"
+	"stb_image.h"
+	"FunctionMappingUtils.h"
+
+1559044482 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\stb_image.h
+	"stb_image.h"
+	<stdio.h>
+	<stdarg.h>
+	<stddef.h>
+	<stdlib.h>
+	<string.h>
+	<limits.h>
+	<math.h>
+	<stdio.h>
+	<assert.h>
+	<stdint.h>
+	<emmintrin.h>
+	<intrin.h>
+	<arm_neon.h>
+
+1560623858 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\functionmappingutils.h
 	<cmath>
 	<cstdio>
 	<cstdlib>
@@ -2592,4 +1253,138 @@
 	<stdexcept>
 	<algorithm>
 	"SceneLoadSaveUtils.h"
+
+1560647768 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\sfxutils.cpp
+	"SFXUtils.h"
+	<irrKlang.h>
+
+1517310246 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\irrklang.h
+	"ik_irrKlangTypes.h"
+	"ik_vec3d.h"
+	"ik_IRefCounted.h"
+	"ik_IVirtualRefCounted.h"
+	"ik_ESoundOutputDrivers.h"
+	"ik_ESoundEngineOptions.h"
+	"ik_EStreamModes.h"
+	"ik_SAudioStreamFormat.h"
+	"ik_ISoundEngine.h"
+	"ik_ISoundSource.h"
+	"ik_ISound.h"
+	"ik_IAudioStream.h"
+	"ik_IAudioStreamLoader.h"
+	"ik_ISoundEffectControl.h"
+	"ik_ISoundStopEventReceiver.h"
+	"ik_IFileFactory.h"
+	"ik_IFileReader.h"
+	"ik_ISoundDeviceList.h"
+	"ik_IAudioRecorder.h"
+	"ik_ISoundMixedOutputReceiver.h"
+
+1517230808 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\ik_irrklangtypes.h
+	<wchar.h>
+
+1517230808 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\ik_vec3d.h
+	<math.h>
+	"ik_irrKlangTypes.h"
+
+1517230808 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\ik_irefcounted.h
+	"ik_irrKlangTypes.h"
+
+1517230808 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\ik_ivirtualrefcounted.h
+	"ik_irrKlangTypes.h"
+
+1517230808 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\ik_esoundoutputdrivers.h
+
+1517230808 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\ik_esoundengineoptions.h
+
+1517230808 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\ik_estreammodes.h
+
+1517230808 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\ik_saudiostreamformat.h
+	"ik_IRefCounted.h"
+
+1517230808 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\ik_isoundengine.h
+	"ik_IRefCounted.h"
+	"ik_vec3d.h"
+	"ik_ISoundSource.h"
+	"ik_ISound.h"
+	"ik_EStreamModes.h"
+	"ik_IFileFactory.h"
+	"ik_ISoundMixedOutputReceiver.h"
+
+1517230832 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\ik_isoundsource.h
+	"ik_IVirtualRefCounted.h"
+	"ik_vec3d.h"
+	"ik_EStreamModes.h"
+	"ik_SAudioStreamFormat.h"
+
+1517230808 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\ik_isound.h
+	"ik_IVirtualRefCounted.h"
+	"ik_ISoundEffectControl.h"
+	"ik_vec3d.h"
+
+1517230808 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\ik_isoundeffectcontrol.h
+	"ik_IVirtualRefCounted.h"
+	"ik_vec3d.h"
+
+1517230808 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\ik_ifilefactory.h
+	"ik_IRefCounted.h"
+
+1517230808 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\ik_isoundmixedoutputreceiver.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1517230808 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\ik_iaudiostream.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1517230808 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\ik_iaudiostreamloader.h
+	"ik_IRefCounted.h"
+	"ik_IFileReader.h"
+
+1517230808 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\ik_ifilereader.h
+	"ik_IRefCounted.h"
+
+1517230808 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\ik_isoundstopeventreceiver.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1517230808 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\ik_isounddevicelist.h
+	"ik_IRefCounted.h"
+
+1517230824 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\ik_iaudiorecorder.h
+	"ik_IRefCounted.h"
+	"ik_ISoundSource.h"
+
+1559096784 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\shaderutil.cpp
+	<cmath>
+	<cstdio>
+	<cstdlib>
+	<map>
+	<stack>
+	<string>
+	<vector>
+	<limits>
+	<fstream>
+	<sstream>
+	<stdexcept>
+	<algorithm>
+	<glad/glad.h>
+	<GLFW/glfw3.h>
+	<glm/mat4x4.hpp>
+	<glm/vec4.hpp>
+	<glm/gtc/type_ptr.hpp>
+	"shaderUtil.h"
+
+1560646532 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\textrenderingutils.cpp
+	"TextRenderingUtils.h"
+	"ft2build.h"
+	"shaderUtil.h"
+
+1524390096 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\ft2build.h
+	<freetype/config/ftheader.h>
+
+1524390096 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\freetype\config\ftheader.h
+
+1557922190 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\tiny_obj_loader.cpp
+	"tiny_obj_loader.h"
 

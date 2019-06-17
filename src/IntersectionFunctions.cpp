@@ -5,6 +5,7 @@ bool IntersectionRay_Sphere(glm::vec4 ray_origin, glm::vec4 ray_direction,Sphere
     glm::vec4 vector_origin_center = ray_origin - thisSphere.centro;
 
     float b = dotproduct(vector_origin_center, ray_direction);
+    if(b > 0.0f) return false;  //para garantir que não serão detectadas colisões "atrás" da origem do raio
     float c = dotproduct(vector_origin_center, vector_origin_center) - thisSphere.raio*thisSphere.raio;
     float h = b*b - c;
     if(h < 0.0f)

@@ -28,6 +28,8 @@
 
 // Headers locais, definidos na pasta "include/"
 #include "objUtils.h"
+#include "TextRenderingUtils.h"
+#include "SFXUtils.h"
 
 //{ callbacks
 
@@ -60,18 +62,6 @@ void CursorPosCallback(GLFWwindow* window, double xpos, double ypos)
     float dy = ypos - midPointY;
 
     if(dx != 0 || dy != 0){
-
-       /* if(dx > 0.2){
-            if(dx < -0.2)
-                dx = -0.2;
-            else dx = 0.2;
-        }
-
-        if(dy > 0.2){
-            if(dy < -0.2)
-                dy = -0.2;
-            else dy = 0.2;
-        }*/
 
         SetMousePosToMiddle(window);
         RotateCameraX(dx);
@@ -166,6 +156,11 @@ void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mod)
     if(key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
 
+    if(key == GLFW_KEY_R && action == GLFW_PRESS)
+        ReloadScene("../../Scenes/Dummy.json");
+
+    if(key == GLFW_KEY_F1 && action == GLFW_PRESS)
+        SaveCurrentScene("../../Scenes/Dummy.json");
 }
 //}
 
@@ -214,6 +209,9 @@ GLFWwindow* initGL(){
 
     FramebufferSizeCallback(window, 800, 600); // Forçamos a chamada do callback acima, para definir g_ScreenRatio.
 
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
     return window;
 }
 
@@ -221,11 +219,20 @@ GLFWwindow* initGL(){
 int main(){
     GLFWwindow* window = initGL();
 
+    LoadToCurrentScene("../../Scenes/Dummy.json");
     Debug_CreateNewObjectSphere();
 
     //CARREGAMENTO DE UMA CENA DO DISCO
     //currentScene = LoadScene("aaaaaaa.json");
 
+    DrawText("", TextPosition::CENTER);
+
+    SetLightPosition(glm::vec4(0.0f, 10.0f, 0.0f, 1.0f));
+    SetLightDirection(glm::vec4(0.0f, -1.0f, 0.0f, 0.0f));
+    SetLightColor(glm::vec4(0.293f, 0.0f, 1.0f, 1.0f));
+    //SetLightColor(glm::vec4(0.8f, 0.8f, 0.8f, 1.0f));
+
+    //PlaySound("../../sfx/Rain-sound-loop.mp3", true, 0.5f);
 
     while (!glfwWindowShouldClose(window)){
 
@@ -243,11 +250,11 @@ int main(){
 
         TestPhysicalCollisions();
 
-        TestOnMouseOver();
-
         CallUpdateFuntions();
 
         DrawCurrentScene();
+
+        TestOnMouseOver();
 
         FinishFrame();
 

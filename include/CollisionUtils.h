@@ -31,7 +31,7 @@
 #include "IntersectionFunctions.h"
 
 #define COEFFICIENT_OF_RESTITUTION 0.8f
-#define MAX_DISTANCE_FROM_CAMERA 5.0f
+#define MAX_DISTANCE_FROM_CAMERA 2.0f
 #define COLLISION_WITH_CAMERA_CODE -1
 
 #define CAMERA_OBB_SIZE_U 0.5f

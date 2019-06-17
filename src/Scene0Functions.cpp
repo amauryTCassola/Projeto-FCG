@@ -1,5 +1,6 @@
 #include "Scene0Functions.h"
-
+#include "TextRenderingUtils.h"
+#include "SFXUtils.h"
 
 bool sphereActive = false;
 bool loadedTex = false;
@@ -20,7 +21,7 @@ void SphereOnClick(std::vector<SceneObject>& _currentScene, int callerIndex){
 }
 
 void SphereOnMouseOver(std::vector<SceneObject>& _currentScene, int callerIndex){
-    //printf("A");
+    DrawText("Uma bola", TextPosition::CENTER);
 }
 
 glm::vec4 lastVelocityNorm(0.0f, 0.0f, 1.0f, 0.0f);
@@ -55,9 +56,52 @@ void RabbitOnClick(std::vector<SceneObject>& _currentScene, int callerIndex){
     glm::vec4 rabbitCenter = rabbit.model*((rabbit.bbox_min_min_min+rabbit.bbox_max_max_max)*0.5f);
 
     if(GetCameraMode() == CameraMode::FREE){
-        ActivateLookAtCamera(rabbitCenter, 3.0f);
+        ActivateLookAtCamera(rabbitCenter, 2.0f);
     }
     else ActivateFreeCamera();
+}
+
+bool isGavetaOpen = false;
+bool isOpening = false;
+bool isClosing =false;
+void GavetaOnClick(std::vector<SceneObject>& _currentScene, int callerIndex){
+
+    if(!isOpening && !isClosing){
+         if(!isGavetaOpen){
+            isOpening = true;
+            isClosing = false;
+            PlaySound("../../sfx/Desk Drawer Open 01.wav", false, 1.0f);
+        } else{
+            isOpening = false;
+            isClosing = true;
+            PlaySound("../../sfx/Desk Drawer Close 01.wav", false, 1.0f);
+        }
+    }
+}
+
+void GavetaUpdate(std::vector<SceneObject>& _currentScene, int callerIndex){
+    if(isOpening){
+
+        if(_currentScene[callerIndex].translationMatrix[3][0] > -1250.0f){
+            _currentScene[callerIndex].translationMatrix = Matrix_Translate(-400*GetDeltaTime(), 0.0f, 0.0f)*_currentScene[callerIndex].translationMatrix;
+        }
+        else{
+                isOpening = false;
+                isGavetaOpen = true;
+        }
+    } else if(isClosing){
+        if(_currentScene[callerIndex].translationMatrix[3][0] < -1000){
+            _currentScene[callerIndex].translationMatrix = Matrix_Translate(400*GetDeltaTime(), 0.0f, 0.0f)*_currentScene[callerIndex].translationMatrix;
+        }
+        else{
+                isClosing = false;
+                isGavetaOpen = false;
+        }
+    }
+}
+
+void GavetaOnMouseOver(std::vector<SceneObject>& _currentScene, int callerIndex){
+    DrawText("Uma gaveta", TextPosition::CENTER);
 }
 
 glm::vec4 p1 = glm::vec4(2.0f, 4.0, 0.0f, 1.0f);
@@ -84,4 +128,59 @@ glm::vec4 magenta = glm::vec4(255.0f, 0.0f, 255.0f, 1.0f);
 
 void MirrorUpdate(std::vector<SceneObject>& _currentScene, int callerIndex){
     DrawMirror(_currentScene[callerIndex], magenta, MirrorReflectiveFace::BACK);
+}
+
+void DescricaoDummy(std::vector<SceneObject>& _currentScene, int callerIndex){
+
+    DrawText("'Culpa'", TextPosition::CENTER);
+
+}
+
+void DescricaoVenus(std::vector<SceneObject>& _currentScene, int callerIndex){
+
+    DrawText("'Aesthetic'", TextPosition::CENTER);
+
+}
+
+void DescricaoGourard(std::vector<SceneObject>& _currentScene, int callerIndex){
+    DrawText("'Gouraud'", TextPosition::CENTER);
+}
+
+void DescricaoBunny(std::vector<SceneObject>& _currentScene, int callerIndex){
+    DrawText("'Placeholder'", TextPosition::CENTER);
+}
+
+bool isExaminando = false;
+
+void VidroDummyOnMouseOver(std::vector<SceneObject>& _currentScene, int callerIndex){
+
+    if(!isExaminando)
+    DrawText("Clique para examinar", TextPosition::CENTER);
+
+}
+
+void VidroDummyOnClick(std::vector<SceneObject>& _currentScene, int callerIndex){
+    SceneObject vidro = _currentScene[callerIndex];
+    glm::vec4 vidroCenter = vidro.model*((vidro.bbox_min_min_min+vidro.bbox_max_max_max)*0.5f);
+
+    if(GetCameraMode() == CameraMode::FREE){
+        isExaminando = true;
+        ActivateLookAtCamera(vidroCenter, 2.0f);
+    }
+    else{
+        ActivateFreeCamera();
+        isExaminando = false;
+    }
+}
+
+void AbstrataDummyOnMouseOver(std::vector<SceneObject>& _currentScene, int callerIndex){
+
+    DrawText("Alguma pintura abstrata", TextPosition::CENTER);
+
+}
+
+void DescricaoChest(std::vector<SceneObject>& _currentScene, int callerIndex){
+
+    DrawText("Um bau", TextPosition::CENTER);
+
 }
