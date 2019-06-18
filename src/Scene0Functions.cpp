@@ -80,18 +80,24 @@ void GavetaOnClick(std::vector<SceneObject>& _currentScene, int callerIndex){
 }
 
 void GavetaUpdate(std::vector<SceneObject>& _currentScene, int callerIndex){
+
     if(isOpening){
 
-        if(_currentScene[callerIndex].translationMatrix[3][0] > -1250.0f){
-            _currentScene[callerIndex].translationMatrix = Matrix_Translate(-400*GetDeltaTime(), 0.0f, 0.0f)*_currentScene[callerIndex].translationMatrix;
+            int chave1Index = FindObjectIndexByName("chave1");
+
+        if(_currentScene[callerIndex].translationMatrix[3][2] < 200.0f){
+            _currentScene[callerIndex].translationMatrix = Matrix_Translate(0.0f, 0.0f, 600*GetDeltaTime())*_currentScene[callerIndex].translationMatrix;
+            _currentScene[chave1Index].translationMatrix = Matrix_Translate(-10*GetDeltaTime(), 0.0f, 0.0f)*_currentScene[chave1Index].translationMatrix;
         }
         else{
                 isOpening = false;
                 isGavetaOpen = true;
         }
     } else if(isClosing){
-        if(_currentScene[callerIndex].translationMatrix[3][0] < -1000){
-            _currentScene[callerIndex].translationMatrix = Matrix_Translate(400*GetDeltaTime(), 0.0f, 0.0f)*_currentScene[callerIndex].translationMatrix;
+        int chave1Index = FindObjectIndexByName("chave1");
+        if(_currentScene[callerIndex].translationMatrix[3][2] > 0){
+            _currentScene[callerIndex].translationMatrix = Matrix_Translate(0.0f, 0.0f, -600*GetDeltaTime())*_currentScene[callerIndex].translationMatrix;
+            _currentScene[chave1Index].translationMatrix = Matrix_Translate(10*GetDeltaTime(), 0.0f, 0.0f)*_currentScene[chave1Index].translationMatrix;
         }
         else{
                 isClosing = false;
@@ -150,6 +156,10 @@ void DescricaoBunny(std::vector<SceneObject>& _currentScene, int callerIndex){
     DrawText("'Placeholder'", TextPosition::CENTER);
 }
 
+void ChaveOnMouseOver(std::vector<SceneObject>& _currentScene, int callerIndex){
+    DrawText("Uma chave", TextPosition::CENTER);
+}
+
 bool isExaminando = false;
 
 void VidroDummyOnMouseOver(std::vector<SceneObject>& _currentScene, int callerIndex){
@@ -182,5 +192,104 @@ void AbstrataDummyOnMouseOver(std::vector<SceneObject>& _currentScene, int calle
 void DescricaoChest(std::vector<SceneObject>& _currentScene, int callerIndex){
 
     DrawText("Um bau", TextPosition::CENTER);
+
+}
+
+void DescricaoBau(std::vector<SceneObject>& _currentScene, int callerIndex){
+
+    DrawText("'Absolutamente vazio'", TextPosition::CENTER);
+
+}
+
+void DescricaoStarryNight(std::vector<SceneObject>& _currentScene, int callerIndex){
+    DrawText("'Starry Night' - Van Gogh", TextPosition::CENTER);
+}
+
+bool isBauAberto = false;
+bool isAnimandoBau = false;
+float currentAngleZ = 0;
+
+void AbreBau(std::vector<SceneObject>& _currentScene, int callerIndex){
+
+    if(!isAnimandoBau){
+        isAnimandoBau = true;
+        if(isBauAberto){
+            currentAngleZ = -3*PI/4;
+            PlaySound("../../sfx/chest_close.mp3", false, 1.0f);
+        } else {
+            currentAngleZ = 0;
+            PlaySound("../../sfx/chest_open.mp3", false, 1.0f);
+        }
+    }
+}
+
+void AnimacaoBau(std::vector<SceneObject>& _currentScene, int callerIndex){
+
+
+    if(isAnimandoBau){
+            int tampaBau = _currentScene[callerIndex].childrenIndices[0];
+        if(!isBauAberto){
+            if(currentAngleZ > -3*PI/4){
+                currentAngleZ -= 5*GetDeltaTime();
+                _currentScene[tampaBau].rotationMatrix *= Matrix_Rotate_Z(-5*GetDeltaTime());
+            }
+            else{
+                isAnimandoBau = false;
+                isBauAberto = true;
+                _currentScene[tampaBau].rotationMatrix = Matrix_Rotate_Z(-3*PI/4);
+            }
+        } else {
+            if(currentAngleZ < 0){
+                currentAngleZ += 5*GetDeltaTime();
+                _currentScene[tampaBau].rotationMatrix *= Matrix_Rotate_Z(5*GetDeltaTime());
+            }
+            else{
+                isAnimandoBau = false;
+                isBauAberto = false;
+                _currentScene[tampaBau].rotationMatrix = Matrix_Rotate_Z(0);
+            }
+        }
+    }
+}
+
+
+float timePassed = 0;
+float waitTime = 0;
+float lightningTime = 1;
+bool isLightning = false;
+bool isWaiting = false;
+LightMode originalLightMode;
+int thunderSound;
+
+void LightningGeneratorUpdate(std::vector<SceneObject>& _currentScene, int callerIndex){
+    if(!isLightning){
+        if(!isWaiting){
+            waitTime = (rand() % 90) + 15;
+            isWaiting = true;
+        }
+        else{
+            timePassed += GetDeltaTime();
+            if(timePassed >= waitTime){
+                isWaiting= false;
+                isLightning= true;
+                timePassed = 0;
+                originalLightMode = GetLightMode();
+                SetLightMode(LightMode::LIGHTNING);
+                thunderSound = (rand() % 2) + 1;
+
+                if(thunderSound == 1)
+                    PlaySound("../../sfx/thunder1.mp3", false, 1.0f);
+                else if(thunderSound == 2)
+                    PlaySound("../../sfx/thunder2.mp3", false, 1.0f);
+            }
+        }
+    } else{
+        timePassed += GetDeltaTime();
+        if(timePassed >= lightningTime){
+            isLightning = false;
+            timePassed = 0;
+            SetLightMode(originalLightMode);
+        }
+    }
 
 }

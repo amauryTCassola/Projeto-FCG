@@ -62,7 +62,8 @@
 		</Compiler>
 		<Linker>
 			<Add option="lib\libglfw3.a -lgdi32 -lopengl32" />
-			<Add library="C:/MinGW/lib/libfreetype.a" />
+			<Add library="lib/libfreetype.a" />
+			<Add library="lib/libirrKlang.a" />
 			<Add directory="lib" />
 		</Linker>
 		<Unit filename="include/BezierCurvesUtils.h" />

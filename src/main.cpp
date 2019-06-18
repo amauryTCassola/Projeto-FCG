@@ -112,6 +112,8 @@ void MouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
 
 bool isPressingW = false, isPressingS = false, isPressingA = false, isPressingD = false;
 
+bool f = false;
+
 void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mod){
     if(key == GLFW_KEY_W && action == GLFW_PRESS){
 
@@ -161,6 +163,16 @@ void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mod)
 
     if(key == GLFW_KEY_F1 && action == GLFW_PRESS)
         SaveCurrentScene("../../Scenes/Dummy.json");
+
+    if(key == GLFW_KEY_F && action == GLFW_PRESS){
+        f = !f;
+        if(f){
+            SetLightMode(LightMode::FLASHLIGHT);
+        } else {
+            SetLightMode(LightMode::DARK);
+        }
+    }
+
 }
 //}
 
@@ -212,6 +224,8 @@ GLFWwindow* initGL(){
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+
     return window;
 }
 
@@ -227,12 +241,12 @@ int main(){
 
     DrawText("", TextPosition::CENTER);
 
-    SetLightPosition(glm::vec4(0.0f, 10.0f, 0.0f, 1.0f));
-    SetLightDirection(glm::vec4(0.0f, -1.0f, 0.0f, 0.0f));
-    SetLightColor(glm::vec4(0.293f, 0.0f, 1.0f, 1.0f));
+    SetLightMode(LightMode::DARK);
+
+    //SetLightColor(glm::vec4(0.293f, 0.0f, 1.0f, 1.0f));
     //SetLightColor(glm::vec4(0.8f, 0.8f, 0.8f, 1.0f));
 
-    //PlaySound("../../sfx/Rain-sound-loop.mp3", true, 0.5f);
+    PlaySound("../../sfx/Rain-sound-loop.mp3", true, 0.3f);
 
     while (!glfwWindowShouldClose(window)){
 

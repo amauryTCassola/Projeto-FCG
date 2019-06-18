@@ -109,6 +109,7 @@ void main()
 	
 	if(!isFlashlight){
 		corRGB = Kd0*light_specter*lambert + ambient_term + blinn_phong_term;
+		color = vec4(corRGB, texture(tex, vec2(U,V)).a);
 	} else{
 		ambient_term = ambient_term*0.1;
 		float cosBeta = dot( normalize(fragment_position-light_position), normalize(lightDir) );
@@ -117,12 +118,13 @@ void main()
 			float cos_inner_minus_outer_angle = cos_inner_cone_angle - cos_outer_cone_angle;
 			float spot = 0.0;
 			spot = clamp((cosBeta - cos_outer_cone_angle)/cos_inner_minus_outer_angle, 0.0, 1.0);
-			corRGB = ((Kd0*(1 - lambert) + Kd1*(lambert))*light_specter + blinn_phong_term)*spot + (1-spot)*ambient_term;
+			corRGB = ((Kd0*(1 - lambert)*light_specter + Kd1*(lambert)*vec4(1.0,1.0,1.0,1.0)) + blinn_phong_term)*spot + (1-spot)*ambient_term;
+			color = vec4(corRGB, texture(secondaryTex, vec2(U,V)).a);
 		}
-		else
+		else{
 			corRGB = ambient_term;
+			color = vec4(corRGB, texture(tex, vec2(U,V)).a);
+			}
 	
 	}
-	
-	color = vec4(corRGB, texture(tex, vec2(U,V)).a);
     }

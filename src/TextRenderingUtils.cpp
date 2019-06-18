@@ -171,6 +171,6 @@ void DrawText(std::string text, TextPosition position){
 
     float fontSize = 0.5f;
 
-    RenderText(text.c_str(), x, y, fontSize, glm::vec3(0.0f, 0.0f, 0.0f));
+    RenderText(text.c_str(), x, y, fontSize, glm::vec3(1.0f, 1.0f, 1.0f));
 
 }

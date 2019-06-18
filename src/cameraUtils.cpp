@@ -178,8 +178,8 @@ void RotateCamera(float dx, float dy){
 
         float new_phi_angle = (phi_angle + dy*delta*camera_rotation_speed);
 
-        if(new_phi_angle < -PI/4) new_phi_angle = -PI/4;
-        if(new_phi_angle > PI/4) new_phi_angle = PI/4;
+        if(new_phi_angle < -PI/3) new_phi_angle = -PI/3;
+        if(new_phi_angle > PI/3) new_phi_angle = PI/3;
 
         phi_angle = new_phi_angle;
 

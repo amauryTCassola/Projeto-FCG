@@ -50,4 +50,10 @@ void DescricaoVenus(std::vector<SceneObject>& _currentScene, int callerIndex);
 void DescricaoGourard(std::vector<SceneObject>& _currentScene, int callerIndex);
 void DescricaoBunny(std::vector<SceneObject>& _currentScene, int callerIndex);
 void DescricaoChest(std::vector<SceneObject>& _currentScene, int callerIndex);
+void LightningGeneratorUpdate(std::vector<SceneObject>& _currentScene, int callerIndex);
+void DescricaoBau(std::vector<SceneObject>& _currentScene, int callerIndex);
+void DescricaoStarryNight(std::vector<SceneObject>& _currentScene, int callerIndex);
+void AbreBau(std::vector<SceneObject>& _currentScene, int callerIndex);
+void AnimacaoBau(std::vector<SceneObject>& _currentScene, int callerIndex);
+void ChaveOnMouseOver(std::vector<SceneObject>& _currentScene, int callerIndex);
 #endif // SCENE0FUNTIONS

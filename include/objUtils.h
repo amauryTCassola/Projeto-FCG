@@ -32,29 +32,23 @@
 #include "BezierCurvesUtils.h"
 #include "LightUtils.h"
 
+enum class LightMode{DARK, FLASHLIGHT, LIGHTNING, NOLIGHT};
+
 void UpdateScreenRatio(float newScreenRatio);
 void UpdateFramebufferSize(int newHeight, int newWidth);
 void DrawCurrentScene();
-
 void SaveCurrentScene(std::string filename);
 void LoadToCurrentScene(std::string filename);
 void LoadToCurrentSceneAdditive(std::string filename);
-
 void Debug_CreateNewObjectSphere();
-
 void TestPhysicalCollisions();
 void TestOnMouseOver();
 void TestOnClick();
-
 void RotateCameraX(float x);
 void RotateCameraY(float y);
-
 void MoveCamera(bool W, bool A, bool S, bool D);
-
 void MoveCurrentSceneObjects();
-
 void ChangeTexture(int index, std::string filename);
-
 void ScaleObject(glm::vec4 scaleVector, SceneObject& obj);
 void ResetScale(SceneObject& obj);
 void MoveObject(glm::vec4 movementVector, SceneObject& obj);
@@ -74,4 +68,6 @@ void TextRendering_PrintString(const std::string &str, float x, float y, float s
 void SetLightPosition(glm::vec4 newPos);
 void SetLightDirection(glm::vec4 newDir);
 void SetLightColor(glm::vec4 newColor);
+void SetLightMode(LightMode mode);
+LightMode GetLightMode();
 #endif// OBJUTILS

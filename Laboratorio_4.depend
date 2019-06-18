@@ -881,7 +881,7 @@
 	<glm/vec4.hpp>
 	<glm/gtc/matrix_transform.hpp>
 
-1560722639 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\camerautils.cpp
+1560832956 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\camerautils.cpp
 	"cameraUtils.h"
 
 1560709113 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\camerautils.h
@@ -1037,7 +1037,7 @@
 	"matrices.h"
 	"cameraUtils.h"
 
-1560717220 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\objutils.h
+1560808598 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\objutils.h
 	<cmath>
 	<cstdio>
 	<cstdlib>
@@ -1083,10 +1083,10 @@
 	<glm/gtc/type_ptr.hpp>
 	"objUtils.h"
 
-1560759217 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\functionmappingutils.cpp
+1560830224 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\functionmappingutils.cpp
 	"Scene0Functions.h"
 
-1560759206 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\scene0functions.h
+1560830320 c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\include\scene0functions.h
 	<cmath>
 	<cstdio>
 	<cstdlib>
@@ -1142,7 +1142,7 @@
 1560736752 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\intersectionfunctions.cpp
 	"IntersectionFunctions.h"
 
-1560759595 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\main.cpp
+1560808392 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\main.cpp
 	<cmath>
 	<cstdio>
 	<cstdlib>
@@ -1210,15 +1210,15 @@
 1560653629 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\mirrorutils.cpp
 	"MirrorUtils.h"
 
-1560759603 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\objutils.cpp
+1560808628 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\objutils.cpp
 	"objUtils.h"
 
-1560759198 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\scene0functions.cpp
+1560830973 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\scene0functions.cpp
 	"Scene0Functions.h"
 	"TextRenderingUtils.h"
 	"SFXUtils.h"
 
-1560759763 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\sceneloadsaveutils.cpp
+1560832883 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\sceneloadsaveutils.cpp
 	"SceneLoadSaveUtils.h"
 	"stb_image.h"
 	"FunctionMappingUtils.h"
@@ -1254,7 +1254,7 @@
 	<algorithm>
 	"SceneLoadSaveUtils.h"
 
-1560647768 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\sfxutils.cpp
+1560809918 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\sfxutils.cpp
 	"SFXUtils.h"
 	<irrKlang.h>
 
@@ -1375,7 +1375,7 @@
 	<glm/gtc/type_ptr.hpp>
 	"shaderUtil.h"
 
-1560646532 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\textrenderingutils.cpp
+1560808761 source:c:\users\usuario\desktop\laboratorio_4_codigo_fonte\projeto-fcg\src\textrenderingutils.cpp
 	"TextRenderingUtils.h"
 	"ft2build.h"
 	"shaderUtil.h"

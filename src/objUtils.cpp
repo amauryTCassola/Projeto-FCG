@@ -104,12 +104,42 @@ void SetLightColor(glm::vec4 newColor){
     lightColor = newColor;
 }
 
-void DrawCurrentScene(){
-    SetLightPosition(GetCameraPosition());
-    SetLightDirection(GetCameraViewVector());
-    isFlashlight = true;
+LightMode currentLightMode;
 
-    glEnable(GL_BLEND);
+void SetLightMode(LightMode mode){
+
+    currentLightMode = mode;
+
+    if(mode == LightMode::FLASHLIGHT){
+        isFlashlight = true;
+        SetLightColor(glm::vec4(0.293f, 0.0f, 1.0f, 1.0f));
+    } else if(mode == LightMode::DARK){
+        isFlashlight = false;
+        SetLightPosition(glm::vec4(0.0f, 10.0f, 0.0f, 1.0f));
+        SetLightDirection(glm::vec4(0.0f, -1.0f, 0.0f, 0.0f));
+        SetLightColor(glm::vec4(0.25f, 0.25f, 0.25f, 1.0f));
+    } else if(mode == LightMode::LIGHTNING){
+        isFlashlight = false;
+        SetLightPosition(glm::vec4(0.0f, 10.0f, 0.0f, 1.0f));
+        SetLightDirection(glm::vec4(0.0f, -1.0f, 0.0f, 0.0f));
+        SetLightColor(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
+    } else if(mode == LightMode::NOLIGHT){
+        isFlashlight = false;
+        SetLightPosition(glm::vec4(0.0f, 10.0f, 0.0f, 1.0f));
+        SetLightDirection(glm::vec4(0.0f, -1.0f, 0.0f, 0.0f));
+        SetLightColor(glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
+    }
+}
+
+LightMode GetLightMode(){
+    return currentLightMode;
+}
+
+void DrawCurrentScene(){
+    if(isFlashlight){
+         SetLightPosition(GetCameraPosition());
+        SetLightDirection(GetCameraViewVector());
+    }
 
     for(unsigned int i = 0; i<currentScene.size(); i++){
             if(currentScene[i].active)DrawVirtualObject(currentScene[i]);

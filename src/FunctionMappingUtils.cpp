@@ -19,6 +19,13 @@ std::function<void(std::vector<SceneObject>&, int callerIndex)> FunctionMapping(
     if(functionName.compare("DescricaoGourard") == 0) return DescricaoGourard;
     if(functionName.compare("DescricaoBunny") == 0) return DescricaoBunny;
     if(functionName.compare("DescricaoChest") == 0) return DescricaoChest;
+    if(functionName.compare("LightningGeneratorUpdate") == 0) return LightningGeneratorUpdate;
+    if(functionName.compare("DescricaoBau") == 0) return DescricaoBau;
+    if(functionName.compare("DescricaoStarryNight") == 0) return DescricaoStarryNight;
+    if(functionName.compare("AbreBau") == 0) return AbreBau;
+    if(functionName.compare("AnimacaoBau") == 0) return AnimacaoBau;
+    if(functionName.compare("ChaveOnMouseOver") == 0) return ChaveOnMouseOver;
+
 
 
     return NULL;
