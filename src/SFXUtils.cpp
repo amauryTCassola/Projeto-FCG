@@ -1,5 +1,5 @@
 #include "SFXUtils.h"
-#include <irrKlang.h>
+#include "irrKlang.h"
 
 irrklang::ISoundEngine* engine;
 bool isEngineStarted = false;

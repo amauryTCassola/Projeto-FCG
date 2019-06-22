@@ -18,8 +18,8 @@
 					<Add option="-g" />
 				</Compiler>
 				<Linker>
-					<Add library="C:/Users/Usuario/Desktop/Laboratorio_4_Codigo_Fonte/Projeto-FCG/lib/libfreetype.a" />
-					<Add library="C:/MinGW/lib/libirrKlang.a" />
+					<Add library="lib/libfreetype.a" />
+					<Add library="lib/libirrKlang.a" />
 					<Add directory="../../lib" />
 				</Linker>
 			</Target>
