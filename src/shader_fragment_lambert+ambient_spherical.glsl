@@ -48,8 +48,8 @@ void main()
     vec4 camera_position = inverse(view) * origin;
 
     vec4 light_position = lightPos;
-    vec4 light_specter = lightColor; //RGB
-    vec4 ambient_light_specter = lightColor;
+    vec3 light_specter = lightColor.rgb; //RGB
+    vec3 ambient_light_specter = lightColor.rgb;
 
     // O fragmento atual é coberto por um ponto que pertence à superfície de um
     // dos objetos virtuais da cena. Este ponto, p, possui uma posição no
@@ -110,7 +110,7 @@ void main()
 			float cos_inner_minus_outer_angle = cos_inner_cone_angle - cos_outer_cone_angle;
 			float spot = 0.0;
 			spot = clamp((cosBeta - cos_outer_cone_angle)/cos_inner_minus_outer_angle, 0.0, 1.0);
-			corRGB = ((Kd0*(1-lambert)*light_specter + Kd1*lambert*vec4(1.0, 1.0, 1.0, 1.0)))*spot + (1-spot)*ambient_term;
+			corRGB = ((Kd0*(1-lambert)*light_specter + Kd1*lambert*vec3(1.0, 1.0, 1.0)))*spot + (1-spot)*ambient_term;
 		}
 		else
 			corRGB = ambient_term;

@@ -48,7 +48,7 @@ void main()
     vec4 camera_position = inverse(view) * origin;
 
     vec4 light_position = lightPos;
-    vec4 light_specter = lightColor; //RGBA
+    vec3 light_specter = lightColor.rgb; //RGBA
 
     // O fragmento atual é coberto por um ponto que pertence à superfície de um
     // dos objetos virtuais da cena. Este ponto, p, possui uma posição no

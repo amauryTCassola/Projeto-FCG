@@ -117,7 +117,7 @@ void main()
 			float cos_inner_minus_outer_angle = cos_inner_cone_angle - cos_outer_cone_angle;
 			float spot = 0.0;
 			spot = clamp((cosBeta - cos_outer_cone_angle)/cos_inner_minus_outer_angle, 0.0, 1.0);
-			corRGB = ((Kd0*(1 - lambert)*light_specter + Kd1*(lambert)*vec4(1.0, 1.0, 1.0, 1.0)) + blinn_phong_term)*spot + (1-spot)*ambient_term;
+			corRGB = ((Kd0*(1 - lambert)*light_specter + Kd1*(lambert)*vec3(1.0, 1.0, 1.0)) + blinn_phong_term)*spot + (1-spot)*ambient_term;
 		}
 		else
 			corRGB = ambient_term;
