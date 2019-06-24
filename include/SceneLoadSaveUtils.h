@@ -160,7 +160,6 @@ struct SceneObject
 void OpenScene(std::string filename, std::vector<SceneObject>& currentScene);
 void SaveScene(std::string filename, std::vector<SceneObject> currentScene);
 void UnloadScene(std::vector<SceneObject>& currentScene);
-void Debug_NewObjectSphere(std::vector<SceneObject>& currentScene);
 void OpenSceneAdditive(std::string filename, std::vector<SceneObject>& currentScene);
 
 

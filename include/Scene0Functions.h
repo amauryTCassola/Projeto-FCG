@@ -56,4 +56,9 @@ void DescricaoStarryNight(std::vector<SceneObject>& _currentScene, int callerInd
 void AbreBau(std::vector<SceneObject>& _currentScene, int callerIndex);
 void AnimacaoBau(std::vector<SceneObject>& _currentScene, int callerIndex);
 void ChaveOnMouseOver(std::vector<SceneObject>& _currentScene, int callerIndex);
+void PortaOnClick(std::vector<SceneObject>& _currentScene, int callerIndex);
+void PortaOnMouseOver(std::vector<SceneObject>& _currentScene, int callerIndex);
+void ChaveOnClick(std::vector<SceneObject>& _currentScene, int callerIndex);
+void DummyHeadUpdate(std::vector<SceneObject>& _currentScene, int callerIndex);
+void RotateSphereUpdate(std::vector<SceneObject>& _currentScene, int callerIndex);
 #endif // SCENE0FUNTIONS

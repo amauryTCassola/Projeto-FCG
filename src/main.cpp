@@ -99,14 +99,6 @@ void MouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
     {
         TestOnClick();
     }
-
-    #ifdef ISDEBUG
-
-    if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS)
-    {
-        SaveCurrentScene("aaaaaaa.json");
-    }
-    #endif // ISDEBUG
 }
 
 
@@ -157,12 +149,6 @@ void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mod)
 
     if(key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
-
-    if(key == GLFW_KEY_R && action == GLFW_PRESS)
-        ReloadScene("../../Scenes/Dummy.json");
-
-    if(key == GLFW_KEY_F1 && action == GLFW_PRESS)
-        SaveCurrentScene("../../Scenes/Dummy.json");
 
     if(key == GLFW_KEY_F && action == GLFW_PRESS){
         f = !f;
@@ -233,18 +219,11 @@ GLFWwindow* initGL(){
 int main(){
     GLFWwindow* window = initGL();
 
-    LoadToCurrentScene("../../Scenes/Dummy.json");
-    Debug_CreateNewObjectSphere();
-
-    //CARREGAMENTO DE UMA CENA DO DISCO
-    //currentScene = LoadScene("aaaaaaa.json");
+    LoadToCurrentScene("../../Scenes/Scene1.json");
 
     DrawText("", TextPosition::CENTER);
 
     SetLightMode(LightMode::DARK);
-
-    //SetLightColor(glm::vec4(0.293f, 0.0f, 1.0f, 1.0f));
-    //SetLightColor(glm::vec4(0.8f, 0.8f, 0.8f, 1.0f));
 
     PlaySound("../../sfx/Rain-sound-loop.mp3", true, 0.3f);
 

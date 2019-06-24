@@ -270,11 +270,6 @@ void MoveCamera(bool W, bool A, bool S, bool D){
     if(D) MoveCameraRight(deltaTime);
 }
 
-
-void Debug_CreateNewObjectSphere(){
-    Debug_NewObjectSphere(currentScene);
-}
-
 void FinishFrame(){
     UpdateCameraPositionAndRotation(deltaTime);
     lastFrameTime = currentTime;

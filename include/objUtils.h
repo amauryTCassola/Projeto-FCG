@@ -40,7 +40,6 @@ void DrawCurrentScene();
 void SaveCurrentScene(std::string filename);
 void LoadToCurrentScene(std::string filename);
 void LoadToCurrentSceneAdditive(std::string filename);
-void Debug_CreateNewObjectSphere();
 void TestPhysicalCollisions();
 void TestOnMouseOver();
 void TestOnClick();

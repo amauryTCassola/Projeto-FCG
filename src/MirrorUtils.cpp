@@ -193,7 +193,6 @@ void DrawMirror(SceneObject& mirrorObj, glm::vec4 mirrorColor, MirrorReflectiveF
     glm::vec4 face_center_point_normal = GetPointInOBBNormal(mirrorOBB, reflective_face_center_point);
     glm::vec4 intersection_point_normal = GetPointInOBBNormal(mirrorOBB, intersection_point);
 
-    if(face_center_point_normal == intersection_point_normal){ //face reflexiva está no campo de visão do jogador
         glm::vec4 reflection_vector = incidenceVector - 2*dot(incidenceVector, intersection_point_normal)*intersection_point_normal;
         reflection_vector = glm::vec4(reflection_vector.x, reflection_vector.y, reflection_vector.z, 0.0f);
 
@@ -201,8 +200,8 @@ void DrawMirror(SceneObject& mirrorObj, glm::vec4 mirrorColor, MirrorReflectiveF
             fboId = CreateFrameBuffer();
             textureId = CreateTextureAttachment(fboId, fbo_width, fbo_height);
             depthId = CreateDepthAttachment(fboId, fbo_width, fbo_height);
-            mirrorObj.textureIds.push_back(textureId);
-            mirrorObj.activeTexture = 1;
+            mirrorObj.textureIds[0]=textureId;
+            mirrorObj.textureIds[1]=textureId;
             hasGeneratedFBO = true;
         }
 
@@ -210,19 +209,17 @@ void DrawMirror(SceneObject& mirrorObj, glm::vec4 mirrorColor, MirrorReflectiveF
             exit(0);
         }
 
-        SetCameraPosition(intersection_point-(reflection_vector*incidenceVectorNorm));
+        SetCameraPosition(intersection_point);
         SetCameraMode(CameraMode::FREE);
         SetCameraViewVector(reflection_vector);
 
         mirrorObj.active = false;
         BindFrameBuffer(fboId, fbo_width, fbo_height);
-            glClearColor(0.25f, 0.25f, 0.25f, 1);
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             DrawCurrentScene();
         UnbindFrameBuffer();
 
         mirrorObj.active = true;
-    }
 
 
     SetCameraPosition(originalFreeCameraPosition);
